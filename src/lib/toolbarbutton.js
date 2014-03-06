@@ -77,13 +77,6 @@ var Unloader = exports.Unloader = function Unloader() {
 
 const unload = (Unloader()).unload;
 
-
-
-
-
-
-
-
 exports.ToolbarButton = function ToolbarButton(options) {
   var unloaders = [],
       toolbarID = "",
@@ -106,6 +99,7 @@ exports.ToolbarButton = function ToolbarButton(options) {
       tbb.setAttribute("class", "toolbarbutton-1 chromeclass-toolbar-additional");
       tbb.setAttribute("label", options.label);
       tbb.setAttribute("tooltiptext", options.tooltiptext);
+      if (options.image) tbb.setAttribute("image", options.image);
       tbb.addEventListener("command", function(e) {
         if (e.ctrlKey) return;
         if (e.originalTarget.localName == "menu" || e.originalTarget.localName == "menuitem") return;
@@ -144,7 +138,7 @@ exports.ToolbarButton = function ToolbarButton(options) {
       }
 
       // found a toolbar to use?
-      if (tb) {
+      if (tb && options.insert) {
         let b4;
 
         // find the toolbarbutton to insert before

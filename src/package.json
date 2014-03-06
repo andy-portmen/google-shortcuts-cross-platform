@@ -8,7 +8,259 @@
   "version": "0.1.8",
   "main": "common",
   
-  "permissions": {"private-browsing": true}
+  "permissions": {"private-browsing": true},
   
-  
+  "preferences": [
+    {
+      "name": "alerts",
+      "title": "Google Alerts toolbar icon:",
+      "description": "Get email updates on the topics of your choice.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "analytics",
+      "title": "Google Analytics toolbar icon:",
+      "description": "Google Analytics lets you measure your advertising ROI as well as track your Flash, video and social networking sites and applications.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "blog",
+      "title": "Blog Search toolbar icon:",
+      "description": "Find blogs on your favorite topics.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "blogger",
+      "title": "Blogger toolbar icon:",
+      "description": "Share your life online with a blog - its quick, easy and free.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "books",
+      "title": "Google Books toolbar icon:",
+      "description": "Search the full text of books.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "calender",
+      "title": "Google Calendar toolbar icon:",
+      "description": "Organize your schedule and share events with friends.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "code",
+      "title": "Google Code toolbar icon:",
+      "description": "Developer tools, APIs and resources.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "dashboard",
+      "title": "Google Dashboard toolbar icon:",
+      "description": "Google Dashboard offers transparency and control over the data associated with your Google Account.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "drive",
+      "title": "Google Drive toolbar icon:",
+      "description": "Create, share and keep all your stuff in one place.",
+      "type": "bool",
+      "value": true
+    },    
+    {
+      "name": "earth",
+      "title": "Google Earth toolbar icon:",
+      "description": "Explore the world from your computer.",
+      "type": "bool",
+      "value": true
+    },  
+    {
+      "name": "finance",
+      "title": "Google Finance toolbar icon:",
+      "description": "Business info, news and interactive charts.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "gmail",
+      "title": "Gmail toolbar icon:",
+      "description": "Fast, searchable email with less spam.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "groups",
+      "title": "Google Groups toolbar icon:",
+      "description": "Create mailing lists and discussion groups.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "image",
+      "title": "Google Image Search toolbar icon:",
+      "description": "Search for images on the web.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "maps",
+      "title": "Google Maps toolbar icon:",
+      "description": "View maps and directions.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "mobile",
+      "title": "Google Mobile toolbar icon:",
+      "description": "Get Google products on your mobile phone.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "music",
+      "title": "Google Music toolbar icon:",
+      "description": "Google Play gives you one place to find, enjoy, & share Apps, Music, Movies & Books instantly anywhere across the web.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "news",
+      "title": "Google News toolbar icon:",
+      "description": "Search thousands of news stories.",
+      "type": "bool",
+      "value": true
+    }, 
+    {
+      "name": "note",
+      "title": "Google Keep (notes) toolbar icon:",
+      "description": "Quickly capture what's on your mind and recall it easily wherever you are.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "panoramio",
+      "title": "Google Panoramio toolbar icon:",
+      "description": "Explore and share photos of the world.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "picasa",
+      "title": "Google Picasa toolbar icon:",
+      "description": "Find, edit and share your photos.",
+      "type": "bool",
+      "value": true
+    },  
+    {
+      "name": "play",
+      "title": "Google Play toolbar icon:",
+      "description": "Shop Google Play on the web.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "plus",
+      "title": "Google Plus toolbar icon:",
+      "description": "Meet new people and stay in touch with friends.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "print",
+      "title": "Google Cloud Print toolbar icon:",
+      "description": "Print anywhere, from any device.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "scholar",
+      "title": "Google Scholar Search toolbar icon:",
+      "description": "Search scholarly papers.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "serach",
+      "title": "Google Web Search toolbar icon:",
+      "description": "Search billions of web pages.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "sites",
+      "title": "Google Sites toolbar icon:",
+      "description": "A free and easy way to create and share webpages.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "sketchup",
+      "title": "Google SketchUp toolbar icon:",
+      "description": "Build 3D models quickly and easily.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "hangouts",
+      "title": "Google Hangouts toolbar icon:",
+      "description": "Hangouts bring conversations to life with photos, emoji, and even group video calls for free.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "translate",
+      "title": "Google Translate toolbar icon:",
+      "description": "Instantly translate text, web pages, and files between over 50 languages.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "trends",
+      "title": "Google Trends toolbar icon:",
+      "description": "Explore past and present search trends.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "wallet",
+      "title": "Google Wallet toolbar icon:",
+      "description": "a smart, virtual wallet that saves you time and money. With the Google Wallet mobile app, you can make your phone your wallet.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "youtube",
+      "title": "YouTube toolbar icon:",
+      "description": "Watch, upload and share videos.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "hotel",
+      "title": "YouTube Hotel Search icon:",
+      "description": "Browse hotel photo galleries, read visitor reviews, and discover the popular areas of the city with Google Hotel Finder.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "patent",
+      "title": "Google Patent Search:",
+      "description": "Search more than seven million U.S. patents.",
+      "type": "bool",
+      "value": true
+    },
+    {
+      "name": "shopping",
+      "title": "Google Shopping:",
+      "description": "Google Shopping helps shoppers find and buy products across online and brick and mortar retailers.",
+      "type": "bool",
+      "value": true
+    }]
 }
