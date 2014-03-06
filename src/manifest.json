@@ -2,7 +2,7 @@
   "name": "Google Shortcuts",
   "version": "0.1.8",
   "manifest_version": 2,
-  "short_name": "gshort",
+  "short_name": "igshortcuts",
   "description": "Shortcuts of Google Products",
   "author": "Andy Portmen",
   "permissions": [

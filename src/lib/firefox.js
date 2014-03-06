@@ -11,14 +11,14 @@ var self          = require("sdk/self"),
     {Cc, Ci, Cu}  = require('chrome');
     
 Cu.import("resource://gre/modules/Promise.jsm");
-    
+ 
 // Load overlay styles
 require("./userstyles").load(data.url("overlay.css"));
 //Install toolbar button
 var button = require("./toolbarbutton").ToolbarButton({
-  id: "simple-translate",
-  label: "Simple Translate",
-  tooltiptext: "Simple Translate",
+  id: "igshortcuts",
+  label: "Google Shortcuts",
+  tooltiptext: "Shortcuts of Google Products",
   onCommand: function () {
     popup.show(button.object);
   },
@@ -100,7 +100,6 @@ exports.content_script = {
 
 exports.tab = {
   open: function (url) {
-    console.error(url);
     tabs.open(url);
   }
 }
