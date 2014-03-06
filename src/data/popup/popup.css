@@ -5,9 +5,13 @@ body {
   font-size: 16px;
   padding: 5px 5px 0px 5px;
   margin: 0;
+  background-color: #fff;
+  overflow: hidden;
+  -moz-user-select: none;
 }
 
 table {
+  empty-cells: show;
 }
 tr td {
   width: 40px;
@@ -67,15 +71,3 @@ tr td[type='hotel'] {background: url(./icons/hotel.png) no-repeat center center;
   text-align: center;
   vertical-align: middle;
 }
-
-
-
-
-
-
-
-
-
-
-
-

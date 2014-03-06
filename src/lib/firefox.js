@@ -1,7 +1,8 @@
-/** version 2 **/
+/** version 4 **/
 
 // Load Firefox based resources
-var data          = require("sdk/self").data,
+var self          = require("sdk/self"),
+    data          = self.data,
     sp            = require("sdk/simple-prefs"),
     Request       = require("sdk/request").Request,
     prefs         = sp.prefs,
@@ -40,18 +41,27 @@ pageMod.PageMod({
 });
 
 var popup = require("sdk/panel").Panel({
-  width: 318,
-  height: 205,
+  width: 260,
+  height: 302,
   contentURL: data.url("./popup/popup.html"),
   contentScriptFile: [data.url("./popup/popup.js")]
 });
 
 exports.storage = {
   read: function (id) {
-    return prefs[id] || null;
+    return (prefs[id] + "") || null;
   },
   write: function (id, data) {
-    prefs[id] = data + "";
+    data = data + "";
+    if (data === "true" || data === "false") {
+      prefs[id] = data === "true" ? true : false;
+    }
+    else if (parseInt(data) === data) {
+      prefs[id] = parseInt(data);
+    }
+    else {
+      prefs[id] = data + "";
+    }
   }
 }
 
@@ -90,8 +100,14 @@ exports.content_script = {
 
 exports.tab = {
   open: function (url) {
+    console.error(url);
     tabs.open(url);
   }
 }
+
+exports.version = function () {
+  return self.version;
+}
+
 exports.window = require('sdk/window/utils').getMostRecentBrowserWindow();
 exports.Promise = Promise;
