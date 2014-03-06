@@ -1,0 +1,10 @@
+{
+  "name": "gshort",
+  "title": "Google Shortcuts",
+  "id": "ec8030f7-c20a-464f-9b0e-13a3a9e97384",
+  "description": "Shortcuts of Google Products",
+  "author": "Andy Portmen",
+  "license": "MPL 2.0",
+  "version": "0.1.8",
+  "main": "common"
+}

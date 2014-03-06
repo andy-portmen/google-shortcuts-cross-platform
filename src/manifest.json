@@ -1,0 +1,25 @@
+{
+  "name": "Google Shortcuts",
+  "version": "0.1.8",
+  "manifest_version": 2,
+  "short_name": "gshort",
+  "description": "Shortcuts of Google Products",
+  "author": "Andy Portmen",
+  "permissions": [
+    "tabs", 
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": "data/icon16.png",
+    "default_popup": "data/popup/popup.html",
+    "default_title": "Google Shortcuts"
+  },
+  "background": {
+    "scripts": ["lib/task.js", "lib/chrome.js", "lib/common.js"]
+  },
+  "icons": {
+    "16": "data/icon16.png",
+    "48": "data/icon48.png",
+    "128": "data/icon128.png" 
+  }
+}

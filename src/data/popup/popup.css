@@ -1,0 +1,81 @@
+body {
+  width: 250px;
+  height: 290px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 5px 5px 0px 5px;
+  margin: 0;
+}
+
+table {
+}
+tr td {
+  width: 40px;
+  height: 40px;
+  -webkit-transition: 200ms all; 
+  -moz-transition: 200ms all;
+  border-bottom: 1px solid transparent;
+}
+tr td:hover {
+  background-color: white;
+  border-bottom: 1px solid #d14836;
+  cursor: pointer;
+  -webkit-transition: 0s; 
+  -moz-transition: 0s;  
+}
+/*  */
+tr td[type='alerts'] {background: url(./icons/alerts.png) no-repeat center center;}
+tr td[type='analytics'] {background: url(./icons/analytics.png) no-repeat center center;}
+tr td[type='blog'] {background: url(./icons/blog.png) no-repeat center center;}
+tr td[type='blogger'] {background: url(./icons/blogger.png) no-repeat center center;}
+tr td[type='book'] {background: url(./icons/book.png) no-repeat center center;}
+tr td[type='calender'] {background: url(./icons/calender.png) no-repeat center center;}
+tr td[type='code'] {background: url(./icons/code.png) no-repeat center center;}
+tr td[type='dashboard'] {background: url(./icons/dashboard.png) no-repeat center center;}
+tr td[type='drive'] {background: url(./icons/drive.png) no-repeat center center;}
+tr td[type='earth'] {background: url(./icons/earth.png) no-repeat center center;}
+tr td[type='finance'] {background: url(./icons/finance.png) no-repeat center center;}
+tr td[type='gmail'] {background: url(./icons/gmail.png) no-repeat center center;}
+tr td[type='groups'] {background: url(./icons/groups.png) no-repeat center center;}
+tr td[type='image'] {background: url(./icons/image.png) no-repeat center center;}
+tr td[type='maps'] {background: url(./icons/maps.png) no-repeat center center;}
+tr td[type='mobile'] {background: url(./icons/mobile.png) no-repeat center center;}
+tr td[type='music'] {background: url(./icons/music.png) no-repeat center center;}
+tr td[type='news'] {background: url(./icons/news.png) no-repeat center center;}
+tr td[type='note'] {background: url(./icons/note.png) no-repeat center center;}
+tr td[type='panoramio'] {background: url(./icons/panoramio.png) no-repeat center center;}
+tr td[type='picasa'] {background: url(./icons/picasa.png) no-repeat center center;}
+tr td[type='play'] {background: url(./icons/play.png) no-repeat center center;}
+tr td[type='plus'] {background: url(./icons/plus.png) no-repeat center center;}
+tr td[type='print'] {background: url(./icons/print.png) no-repeat center center;}
+tr td[type='scholar'] {background: url(./icons/scholar.png) no-repeat center center;}
+tr td[type='search'] {background: url(./icons/search.png) no-repeat center center;}
+tr td[type='site'] {background: url(./icons/site.png) no-repeat center center;}
+tr td[type='sketchup'] {background: url(./icons/sketchup.png) no-repeat center center;}
+tr td[type='hangouts'] {background: url(./icons/hangouts.png) no-repeat center center;}
+tr td[type='translate'] {background: url(./icons/translate.png) no-repeat center center;}
+tr td[type='trends'] {background: url(./icons/trends.png) no-repeat center center;}
+tr td[type='wallet'] {background: url(./icons/wallet.png) no-repeat center center;}
+tr td[type='youtube'] {background: url(./icons/youtube.png) no-repeat center center;}
+tr td[type='shopping'] {background: url(./icons/shopping.png) no-repeat center center;}
+tr td[type='patent'] {background: url(./icons/patent.png) no-repeat center center;}
+tr td[type='hotel'] {background: url(./icons/hotel.png) no-repeat center center;}
+#status-div {
+  height: 40px;
+  line-height: 40px;
+  background-color: #F5F5F5;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
+
+
