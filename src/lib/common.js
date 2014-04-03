@@ -33,8 +33,25 @@ else {
 /********/
 if (storage.read("version") != version()) {
   storage.write("version", version());
-  tab.open("http://add0n.com/shortcuts.html");
+  tab.open("http://add0n.com/google-shortcuts.html");
 }
+
+Types = ['search', 'youtube', 'maps', 'play', 'gmail', 'calender', 'plus', 'drive', 'shopping', 
+         'wallet', 'note', 'translate', 'picasa', 'image', 'blogger', 'mobile', 'music', 'news',
+         'earth', 'book', 'panoramio', 'groups', 'blog', 'print', 'alerts', 'analytics', 'site',
+         'sketchup', 'hangouts', 'hotel', 'trends', 'finance', 'patent', 'scholar', 'code', 'dashboard'];
+
+if (!storage.read("Types")) {storage.write("Types", JSON.stringify(Types));}
+
+popup.receive('request-inits', function () {
+  var lStorage = storage.read("Types");
+  var lStorage_arr = JSON.parse(lStorage);
+  popup.send('request-inits', lStorage_arr);
+});
+
+popup.receive('store-types', function (data) {
+  storage.write("Types", JSON.stringify(data));
+});
 
 popup.receive('open-tab-request', function (type) {
   switch (type) {
@@ -149,5 +166,5 @@ popup.receive('open-tab-request', function (type) {
   default:
     tab.open('https://www.google.com/about/products/');
     break;
-}
+  }
 });

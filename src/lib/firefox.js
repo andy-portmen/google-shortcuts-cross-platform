@@ -58,7 +58,7 @@ var popup = require("sdk/panel").Panel({
 
 exports.storage = {
   read: function (id) {
-    return (prefs[id] + "") || null;
+    return (prefs[id] || prefs[id] + "" == "false") ? (prefs[id] + "") : null;
   },
   write: function (id, data) {
     data = data + "";
