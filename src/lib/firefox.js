@@ -108,8 +108,16 @@ exports.content_script = {
 }
 
 exports.tab = {
-  open: function (url) {
-    tabs.open(url);
+  open: function (url, inBackground, inCurrent) {
+    if (inCurrent) {
+      tabs.activeTab.url = url;
+    }
+    else {
+      tabs.open({
+        url: url,
+        inBackground: typeof inBackground == 'undefined' ? false : inBackground
+      });
+    }
   }
 }
 

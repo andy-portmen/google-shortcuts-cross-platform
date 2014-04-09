@@ -55,8 +55,16 @@ var _chrome = {
     }
   },
   tab: {
-    open: function (url) {
-      chrome.tabs.create({url: url});
+    open: function (url, inBackground, inCurrent) {
+      if (inCurrent) {   
+        chrome.tabs.update(null, {url: url});
+      }
+      else {
+        chrome.tabs.create({
+          url: url,
+          active: typeof inBackground == 'undefined' ? true : !inBackground
+        });
+      }
     }
   },
   version: function () {

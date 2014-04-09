@@ -64,8 +64,14 @@ function handleDrop(e) {
   var endType = target.getAttribute('type');
   var endId = parseInt(target.getAttribute('id'));
   if (startId >=0 && endId >=0 && startId != endId) {
-    Types[startId] = endType; 
-    Types[endId] = startType;   
+    if (startId < endId) {
+      Types.splice(endId + 1, 0, startType);
+      Types.splice(startId, 1);
+    }
+    else {
+      Types.splice(startId, 1);
+      Types.splice(endId, 0, startType);
+    }  
     background.send('store-types', Types);
   }
 }
@@ -135,5 +141,8 @@ $('shortcuts-table').addEventListener('click', function (e) {
   if (drag) return;
   var target = e.target || e.originalTarget;
   var type = target.getAttribute('type');
-  if (type) {background.send('open-tab-request', type);} 
+  if (type) {background.send('open-tab-request', {
+    type: type, 
+    inBackground: e.button == 1 || (e.ctrlKey && e.button == 0)
+  });} 
 }, false);
