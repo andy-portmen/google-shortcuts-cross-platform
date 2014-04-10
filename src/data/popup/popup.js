@@ -137,7 +137,7 @@ $('shortcuts-table').addEventListener('mouseover', function (e) {
   $('status-div').textContent = target.getAttribute('title') || 'Google Shortcuts';
 }, false);
 
-$('shortcuts-table').addEventListener('click', function (e) {
+$('shortcuts-table').addEventListener('mouseup', function (e) {
   if (drag) return;
   var target = e.target || e.originalTarget;
   var type = target.getAttribute('type');
@@ -145,4 +145,4 @@ $('shortcuts-table').addEventListener('click', function (e) {
     type: type, 
     inBackground: e.button == 1 || (e.ctrlKey && e.button == 0)
   });} 
-}, false);
+})

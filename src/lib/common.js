@@ -13,19 +13,15 @@ Storage Items:
 if (typeof require !== 'undefined') {
   var firefox = require("./firefox.js");
   storage = firefox.storage;
-  get = firefox.get;
   popup = firefox.popup;
   window = firefox.window;
-  content_script = firefox.content_script;
   tab = firefox.tab;
   version = firefox.version;
   Deferred = firefox.Promise.defer;
 }
 else {
   storage = _chrome.storage;
-  get = _chrome.get;
   popup = _chrome.popup;
-  content_script = _chrome.content_script;
   tab = _chrome.tab;
   version = _chrome.version;
   Deferred = task.Deferred;
@@ -33,7 +29,7 @@ else {
 /********/
 if (storage.read("version") != version()) {
   storage.write("version", version());
-  tab.open("http://add0n.com/google-shortcuts.html");
+  tab.open("http://add0n.com/google-shortcuts.html?version=" + version());
 }
 
 Types = ['search', 'youtube', 'maps', 'play', 'gmail', 'calender', 'plus', 'drive', 'shopping', 
@@ -54,8 +50,6 @@ popup.receive('store-types', function (data) {
 });
 
 popup.receive('open-tab-request', function (obj) {
-
-  console.error(obj)
   switch (obj.type) {
   case 'alerts':
     tab.open('https://www.google.com/alerts/', obj.inBackground, !obj.inBackground);

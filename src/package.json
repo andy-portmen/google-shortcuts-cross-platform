@@ -1,11 +1,11 @@
 {
   "name": "igshortcuts",
-  "title": "Google Shortcuts",
+  "title": "Google™ Shortcuts",
   "id": "jid1-SVJwkBGCTt4PyQ@jetpack",
   "description": "Shortcuts of Google Products",
   "author": "Andy Portmen",
   "license": "MPL 2.0",
-  "version": "0.1.8",
+  "version": "0.2.1",
   "main": "common",
   
   "permissions": {"private-browsing": true},
@@ -13,231 +13,231 @@
   "preferences": [
     {
       "name": "alerts",
-      "title": "Google Alerts toolbar icon:",
+      "title": "Google Alerts individual toolbar icon:",
       "description": "Get email updates on the topics of your choice.",
       "type": "bool",
       "value": false
     },
     {
       "name": "analytics",
-      "title": "Google Analytics toolbar icon:",
+      "title": "Google Analytics individual toolbar icon:",
       "description": "Google Analytics lets you measure your advertising ROI as well as track your Flash, video and social networking sites and applications.",
       "type": "bool",
       "value": false
     },
     {
       "name": "blog",
-      "title": "Blog Search toolbar icon:",
+      "title": "Blog Search individual toolbar icon:",
       "description": "Find blogs on your favorite topics.",
       "type": "bool",
       "value": false
     },
     {
       "name": "blogger",
-      "title": "Blogger toolbar icon:",
+      "title": "Blogger individual toolbar icon:",
       "description": "Share your life online with a blog - its quick, easy and free.",
       "type": "bool",
       "value": false
     },
     {
       "name": "books",
-      "title": "Google Books toolbar icon:",
+      "title": "Google Books individual toolbar icon:",
       "description": "Search the full text of books.",
       "type": "bool",
       "value": false
     },
     {
       "name": "calender",
-      "title": "Google Calendar toolbar icon:",
+      "title": "Google Calendar individual toolbar icon:",
       "description": "Organize your schedule and share events with friends.",
       "type": "bool",
       "value": false
     },
     {
       "name": "code",
-      "title": "Google Code toolbar icon:",
+      "title": "Google Code individual toolbar icon:",
       "description": "Developer tools, APIs and resources.",
       "type": "bool",
       "value": false
     },
     {
       "name": "dashboard",
-      "title": "Google Dashboard toolbar icon:",
+      "title": "Google Dashboard individual toolbar icon:",
       "description": "Google Dashboard offers transparency and control over the data associated with your Google Account.",
       "type": "bool",
       "value": false
     },
     {
       "name": "drive",
-      "title": "Google Drive toolbar icon:",
+      "title": "Google Drive individual toolbar icon:",
       "description": "Create, share and keep all your stuff in one place.",
       "type": "bool",
       "value": false
     },    
     {
       "name": "earth",
-      "title": "Google Earth toolbar icon:",
+      "title": "Google Earth individual toolbar icon:",
       "description": "Explore the world from your computer.",
       "type": "bool",
       "value": false
     },  
     {
       "name": "finance",
-      "title": "Google Finance toolbar icon:",
+      "title": "Google Finance individual toolbar icon:",
       "description": "Business info, news and interactive charts.",
       "type": "bool",
       "value": false
     },
     {
       "name": "gmail",
-      "title": "Gmail toolbar icon:",
+      "title": "Gmail individual toolbar icon:",
       "description": "Fast, searchable email with less spam.",
       "type": "bool",
       "value": false
     },
     {
       "name": "groups",
-      "title": "Google Groups toolbar icon:",
+      "title": "Google Groups individual toolbar icon:",
       "description": "Create mailing lists and discussion groups.",
       "type": "bool",
       "value": false
     },
     {
       "name": "image",
-      "title": "Google Image Search toolbar icon:",
+      "title": "Google Image Search individual toolbar icon:",
       "description": "Search for images on the web.",
       "type": "bool",
       "value": false
     },
     {
       "name": "maps",
-      "title": "Google Maps toolbar icon:",
+      "title": "Google Maps individual toolbar icon:",
       "description": "View maps and directions.",
       "type": "bool",
       "value": false
     },
     {
       "name": "mobile",
-      "title": "Google Mobile toolbar icon:",
+      "title": "Google Mobile individual toolbar icon:",
       "description": "Get Google products on your mobile phone.",
       "type": "bool",
       "value": false
     },
     {
       "name": "music",
-      "title": "Google Music toolbar icon:",
+      "title": "Google Music individual toolbar icon:",
       "description": "Google Play gives you one place to find, enjoy, & share Apps, Music, Movies & Books instantly anywhere across the web.",
       "type": "bool",
       "value": false
     },
     {
       "name": "news",
-      "title": "Google News toolbar icon:",
+      "title": "Google News individual toolbar icon:",
       "description": "Search thousands of news stories.",
       "type": "bool",
       "value": false
     }, 
     {
       "name": "note",
-      "title": "Google Keep (notes) toolbar icon:",
+      "title": "Google Keep (notes) individual toolbar icon:",
       "description": "Quickly capture what's on your mind and recall it easily wherever you are.",
       "type": "bool",
       "value": false
     },
     {
       "name": "panoramio",
-      "title": "Google Panoramio toolbar icon:",
+      "title": "Google Panoramio individual toolbar icon:",
       "description": "Explore and share photos of the world.",
       "type": "bool",
       "value": false
     },
     {
       "name": "picasa",
-      "title": "Google Picasa toolbar icon:",
+      "title": "Google Picasa individual toolbar icon:",
       "description": "Find, edit and share your photos.",
       "type": "bool",
       "value": false
     },  
     {
       "name": "play",
-      "title": "Google Play toolbar icon:",
+      "title": "Google Play individual toolbar icon:",
       "description": "Shop Google Play on the web.",
       "type": "bool",
       "value": false
     },
     {
       "name": "plus",
-      "title": "Google Plus toolbar icon:",
+      "title": "Google Plus individual toolbar icon:",
       "description": "Meet new people and stay in touch with friends.",
       "type": "bool",
       "value": false
     },
     {
       "name": "print",
-      "title": "Google Cloud Print toolbar icon:",
+      "title": "Google Cloud Print individual toolbar icon:",
       "description": "Print anywhere, from any device.",
       "type": "bool",
       "value": false
     },
     {
       "name": "scholar",
-      "title": "Google Scholar Search toolbar icon:",
+      "title": "Google Scholar Search individual toolbar icon:",
       "description": "Search scholarly papers.",
       "type": "bool",
       "value": false
     },
     {
       "name": "serach",
-      "title": "Google Web Search toolbar icon:",
+      "title": "Google Web Search individual toolbar icon:",
       "description": "Search billions of web pages.",
       "type": "bool",
       "value": false
     },
     {
       "name": "sites",
-      "title": "Google Sites toolbar icon:",
+      "title": "Google Sites individual toolbar icon:",
       "description": "A free and easy way to create and share webpages.",
       "type": "bool",
       "value": false
     },
     {
       "name": "sketchup",
-      "title": "Google SketchUp toolbar icon:",
+      "title": "Google SketchUp individual toolbar icon:",
       "description": "Build 3D models quickly and easily.",
       "type": "bool",
       "value": false
     },
     {
       "name": "hangouts",
-      "title": "Google Hangouts toolbar icon:",
+      "title": "Google Hangouts individual toolbar icon:",
       "description": "Hangouts bring conversations to life with photos, emoji, and even group video calls for free.",
       "type": "bool",
       "value": false
     },
     {
       "name": "translate",
-      "title": "Google Translate toolbar icon:",
+      "title": "Google Translate individual toolbar icon:",
       "description": "Instantly translate text, web pages, and files between over 50 languages.",
       "type": "bool",
       "value": false
     },
     {
       "name": "trends",
-      "title": "Google Trends toolbar icon:",
+      "title": "Google Trends individual toolbar icon:",
       "description": "Explore past and present search trends.",
       "type": "bool",
       "value": false
     },
     {
       "name": "wallet",
-      "title": "Google Wallet toolbar icon:",
+      "title": "Google Wallet individual toolbar icon:",
       "description": "a smart, virtual wallet that saves you time and money. With the Google Wallet mobile app, you can make your phone your wallet.",
       "type": "bool",
       "value": false
     },
     {
       "name": "youtube",
-      "title": "YouTube toolbar icon:",
+      "title": "YouTube individual toolbar icon:",
       "description": "Watch, upload and share videos.",
       "type": "bool",
       "value": false
