@@ -35,20 +35,6 @@ if (self.loadReason == "install") {
   });
 }
 
-// Load overlay styles
-var workers = [], content_script_arr = [];
-pageMod.PageMod({
-  include: ["*"],
-  contentScriptFile: data.url("./content_script/inject.js"),
-  contentStyleFile : data.url("./content_script/inject.css"),
-  onAttach: function(worker) {
-    workers.push(worker);
-    content_script_arr.forEach(function (arr) {
-      worker.port.on(arr[0], arr[1]);
-    })
-  }
-});
-
 var popup = require("sdk/panel").Panel({
   width: 260,
   height: 302,
@@ -74,36 +60,12 @@ exports.storage = {
   }
 }
 
-exports.get = function (url) {
-  var d = new Promise.defer();
-  Request({
-    url: url,
-    onComplete: function (response) {
-      d.resolve(response.text);
-    }
-  }).get();
-  return d.promise;
-}
-
 exports.popup = {
   send: function (id, data) {
     popup.port.emit(id, data);
   },
   receive: function (id, callback) {
     popup.port.on(id, callback);
-  }
-}
-
-exports.content_script = {
-  send: function (id, data) {
-    workers.forEach(function (worker) {
-      if (worker.tab != tabs.activeTab) return;
-      if (!worker) return;
-      worker.port.emit(id, data);
-    });
-  },
-  receive: function (id, callback) {
-    content_script_arr.push([id, callback]);
   }
 }
 
