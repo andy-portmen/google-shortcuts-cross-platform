@@ -1,15 +1,22 @@
+html {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 body {
-  width: 250px;
-  height: 290px;
+  width: 266px;
   font-family: Arial, sans-serif;
   font-size: 16px;
-  padding: 5px 5px 0px 5px;
+  padding: 5px 5px 0 5px;
   margin: 0;
-  background-color: #fff;
   overflow: hidden;
+  background-color: #fff;
   -moz-user-select: none;
 }
-
+::-webkit-scrollbar { 
+  display: none; 
+}
 table {
   empty-cells: show;
 }
@@ -26,6 +33,13 @@ tr td:hover {
   cursor: pointer;
   -webkit-transition: 0s; 
   -moz-transition: 0s;  
+}
+tr td[status='empty'] {
+  border: 0;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
 }
 /*  */
 tr td[type='alerts'] {background: url(./icons/alerts.png) no-repeat center center;}
@@ -64,10 +78,74 @@ tr td[type='youtube'] {background: url(./icons/youtube.png) no-repeat center cen
 tr td[type='shopping'] {background: url(./icons/shopping.png) no-repeat center center;}
 tr td[type='patent'] {background: url(./icons/patent.png) no-repeat center center;}
 tr td[type='hotel'] {background: url(./icons/hotel.png) no-repeat center center;}
-#status-div {
+tr td[type='android'] {background: url(./icons/android.png) no-repeat center center;}
+tr td[type='bookmarks'] {background: url(./icons/bookmarks.png) no-repeat center center;}
+tr td[type='adwords'] {background: url(./icons/adwords.png) no-repeat center center;}
+tr td[type='adsense'] {background: url(./icons/adsense.png) no-repeat center center;}
+tr td[type='feedburner'] {background: url(./icons/feedburner.png) no-repeat center center;}
+tr td[type='fusion'] {background: url(./icons/fusion.png) no-repeat center center;}
+tr td[type='offer'] {background: url(./icons/offers.png) no-repeat center center;}
+tr td[type='urlshortner'] {background: url(./icons/urlshortner.png) no-repeat center center;}
+tr td[type='webhistory'] {background: url(./icons/webhistory.png) no-repeat center center;}
+tr td[type='webmaster'] {background: url(./icons/webmaster.png) no-repeat center center;}
+tr td[type='chromebook'] {background: url(./icons/chromebook.png) no-repeat center center;}
+tr td[type='chromium'] {background: url(./icons/chromium.png) no-repeat center center;}
+tr td[type='cloudeplatform'] {background: url(./icons/cloudeplatform.png) no-repeat center center;}
+tr td[type='contacts'] {background: url(./icons/contacts.png) no-repeat center center;}
+tr td[type='correlate'] {background: url(./icons/correlate.png) no-repeat center center;}
+tr td[type='currents'] {background: url(./icons/currents.png) no-repeat center center;}
+tr td[type='developersdashboard'] {background: url(./icons/developersdashboard.png) no-repeat center center;}
+tr td[type='inputtool'] {background: url(./icons/inputtool.png) no-repeat center center;}
+tr td[type='ideas'] {background: url(./icons/ideas.png) no-repeat center center;}
+tr td[type='mars'] {background: url(./icons/mars.png) no-repeat center center;}
+tr td[type='sky'] {background: url(./icons/sky.png) no-repeat center center;}
+tr td[type='transit'] {background: url(./icons/transit.png) no-repeat center center;}
+tr td[type='webpagetest'] {background: url(./icons/webpagetest.png) no-repeat center center;}
+tr td[type='wdyl'] {background: url(./icons/wdyl.png) no-repeat center center;}
+tr td[type=''] {background: url();}
+
+#separator-table {
+  display: none;
+  empty-cells: show;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+#separator1-td, #separator3-td {
+  border: 0;
+  width: 108px;
   height: 40px;
-  line-height: 40px;
+  text-align: center;
+  padding: 0 0 9px 0;
+  background: url(line.png) no-repeat center center;
+}
+#separator2-td {
+  border: 0;
+  height: 42px;
+  text-align: center;
+  white-space:nowrap;
+  background: url(updown.png) no-repeat center center;
+}
+#backup-table {
+  display: none;
+}
+#status-table tr td {
+  border: 0;
+}
+#status-td {
+  width: 216px;
+  height: 40px;
   background-color: #F5F5F5;
   text-align: center;
   vertical-align: middle;
+}
+#more-td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  background: #F5F5F5 url(more.png) no-repeat center center;
+}
+
+#more-td[status='active'] {
+  background: #F5F5F5 url(collapse.png) no-repeat center center;
 }

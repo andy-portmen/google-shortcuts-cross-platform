@@ -4,17 +4,53 @@
     <link rel="stylesheet" href="popup.css" type="text/css"/>  
   </head>
   <body>
-    <table id="shortcuts-table">
-      <tbody>
-        <tr><td id="0"></td><td id="1"></td><td id="2"></td><td id="3"></td><td id="4"></td><td id="5"></td></tr>
-        <tr><td id="6"></td><td id="7"></td><td id="8"></td><td id="9"></td><td id="10"></td><td id="11"></td></tr>
-        <tr><td id="12"></td><td id="13"></td><td id="14"></td><td id="15"></td><td id="16"></td><td id="17"></td></tr>
-        <tr><td id="18"></td><td id="19"></td><td id="20"></td><td id="21"></td><td id="22"></td><td id="23"></td></tr>
-        <tr><td id="24"></td><td id="25"></td><td id="26"></td><td id="27"></td><td id="28"></td><td id="29"></td></tr>
-        <tr><td id="30"></td><td id="31"></td><td id="32"></td><td id="33"></td><td id="34"></td><td id="35"></td></tr>
-      </tbody>
-    </table>
-    <div id="status-div">Google Shortcuts</div>
+    <div id="main-div">
+      <table id="shortcuts-table">
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <table id="separator-table" draggable="false">
+        <tr>
+          <td id="separator1-td"></td>
+          <td id="separator2-td"></td>
+          <td id="separator3-td"></td>
+        </tr>
+      </table>
+      <table id="backup-table">
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="status-div">
+      <table id="status-table">
+        <tbody>
+          <tr><td id="status-td"></td><td id="more-td"></td></tr>
+        </tbody>
+      </table>
+    </div>
     <script type="text/javascript" src="popup.js"></script>
+    <script type="text/javascript" src="main_drag.js"></script>
+    <script type="text/javascript" src="total_drag.js"></script>
   </body>
 </html>
+

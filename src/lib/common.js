@@ -32,21 +32,46 @@ if (storage.read("version") != version()) {
   tab.open("http://add0n.com/google-shortcuts.html?version=" + version());
 }
 
-Types = ['search', 'youtube', 'maps', 'play', 'gmail', 'calender', 'plus', 'drive', 'shopping', 
-         'wallet', 'note', 'translate', 'picasa', 'image', 'blogger', 'mobile', 'music', 'news',
-         'earth', 'book', 'panoramio', 'groups', 'blog', 'print', 'alerts', 'analytics', 'site',
-         'sketchup', 'hangouts', 'hotel', 'trends', 'finance', 'patent', 'scholar', 'code', 'dashboard'];
+mainTypes = ['search', 'youtube', 'maps', 'play', 'gmail', 'calender', 
+             'plus', 'drive', 'shopping', 'wallet', 'note', 'translate', 
+             'picasa', 'blogger', 'music', 'news', 'book', 'groups', 
+             'blog', 'print', 'alerts', 'analytics', 'hangouts', 'dashboard'];
 
-if (!storage.read("Types")) {storage.write("Types", JSON.stringify(Types));}
+backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offer', 'urlshortner', 
+               'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
+               'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
+               'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 
+               'image', 'mobile', 'earth', 'panoramio', 'site', 'hotel',
+               'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup'];
+               
+/* NEW ITEMS
+  'android', 'bookmarks', 'feedburner', 'fusion', 'offer', 'urlshortner', 
+  'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
+  'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
+  'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense'
+*/
+             
+if (!storage.read("mainTypes")) {storage.write("mainTypes", JSON.stringify(mainTypes));}
+if (!storage.read("backupTypes")) {storage.write("backupTypes", JSON.stringify(backupTypes));}
 
 popup.receive('request-inits', function () {
-  var lStorage = storage.read("Types");
+  var lStorage = storage.read("mainTypes");
   var lStorage_arr = JSON.parse(lStorage);
   popup.send('request-inits', lStorage_arr);
 });
 
-popup.receive('store-types', function (data) {
-  storage.write("Types", JSON.stringify(data));
+popup.receive('request-backup-inits', function () {
+  var lStorage = storage.read("backupTypes");
+  var lStorage_arr = JSON.parse(lStorage);
+  popup.send('request-backup-inits', lStorage_arr);
+});
+
+popup.receive('store-mainTypes', function (data) {
+  storage.write("mainTypes", JSON.stringify(data));
+});
+
+popup.receive('store-backupTypes', function (data) {
+  storage.write("backupTypes", JSON.stringify(data));
 });
 
 popup.receive('open-tab-request', function (obj) {
@@ -159,6 +184,78 @@ popup.receive('open-tab-request', function (obj) {
   case 'shopping':
     tab.open('https://www.google.com/shopping/', obj.inBackground, !obj.inBackground);
     break;
+  case 'android':
+    tab.open('http://www.android.com/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'bookmarks':
+    tab.open('https://www.google.com/bookmarks/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'feedburner':
+    tab.open('http://feedburner.google.com/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'fusion':
+    tab.open('https://www.google.com/fusiontables/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'offer':
+    tab.open('https://www.google.com/offers/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'urlshortner':
+    tab.open('http://goo.gl/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'webhistory':
+    tab.open('https://history.google.com/history/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'webmaster':
+    tab.open('https://www.google.com/webmasters/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'chromebook':
+    tab.open('https://www.google.com/intl/en/chrome/devices/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'chromium':
+    tab.open('http://www.chromium.org/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'cloudeplatform':
+    tab.open('https://cloud.google.com/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'contacts':
+    tab.open('https://www.google.com/contacts/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'correlate':
+    tab.open('https://www.google.com/trends/correlate/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'currents':
+    tab.open('http://www.google.com/producer/currents/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'developersdashboard':
+    tab.open('https://chrome.google.com/webstore/developer/dashboard/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'inputtool':
+    tab.open('http://www.google.com/inputtools/try/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'ideas':
+    tab.open('https://www.google.com/ideas/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'mars':
+    tab.open('https://www.google.com/mars/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'sky':
+    tab.open('https://www.google.com/sky/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'transit':
+    tab.open('https://www.google.com/intl/en/landing/transit/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'webpagetest':
+    tab.open('http://www.webpagetest.org/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'wdyl':
+    tab.open('http://www.wdyl.com/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'adwords':
+    tab.open('https://www.google.com/adwords/', obj.inBackground, !obj.inBackground);
+    break; 
+  case 'adsense':
+    tab.open('https://www.google.com/adsense/', obj.inBackground, !obj.inBackground);
+    break; 
   default:
     tab.open('https://www.google.com/about/products/', obj.inBackground, !obj.inBackground);
     break;

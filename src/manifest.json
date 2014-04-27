@@ -1,9 +1,9 @@
 {
-  "name": "Google™ Shortcuts",
-  "version": "0.2.1",
+  "name": "Shortcuts for Google™ Products",
+  "version": "0.2.2",
   "manifest_version": 2,
   "short_name": "igshortcuts",
-  "description": "Shortcuts of Google Products",
+  "description": "Display all Google services as a single space-saving dropdown panel.",
   "author": "Andy Portmen",
   "permissions": [
     "tabs", 
@@ -12,7 +12,7 @@
   "browser_action": {
     "default_icon": "data/icon16.png",
     "default_popup": "data/popup/popup.html",
-    "default_title": "Google Shortcuts"
+    "default_title": "Shortcuts for Google™ Products"
   },
   "background": {
     "scripts": ["lib/task.js", "lib/chrome.js", "lib/common.js"]
