@@ -63,8 +63,8 @@ function handleDrop(e, mainTypes, backupTypes) {
   var condition_4 = (startId.charAt(0) == 'b' && endId.charAt(0) == 'm'); // for total drag
 
   if (condition_1 || condition_2) {
-    startId = startId.substring(1);
-    endId = endId.substring(1);
+    startId = parseInt(startId.substring(1));
+    endId = parseInt(endId.substring(1));
     if (startId >= 0 && endId >= 0 && startId != endId) {
       if (startId < endId) {
         if (condition_1) {
@@ -92,14 +92,14 @@ function handleDrop(e, mainTypes, backupTypes) {
         var endId = parseInt(endId.substring(1));
         if (!endType) endId = backupTypes.length - 1;
         var startId = parseInt(startId.substring(1));
-        backupTypes.splice(endId + 1, 0, startType);   // insert
+        backupTypes.splice(endId, 0, startType);       // insert
         mainTypes.splice(startId, 1);                  // delete
       }
       else if (startId.charAt(0) == 'b' && endId.charAt(0) == 'm') {
         var endId = parseInt(endId.substring(1));
         if (!endType) endId = mainTypes.length - 1;
         var startId = parseInt(startId.substring(1));
-        mainTypes.splice(endId + 1, 0, startType);     // insert
+        mainTypes.splice(endId, 0, startType);         // insert
         backupTypes.splice(startId, 1);                // delete
       }
     }
