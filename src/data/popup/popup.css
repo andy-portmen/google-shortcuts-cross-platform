@@ -22,6 +22,7 @@ table {
 }
 tr td {
   width: 40px;
+  min-width: 40px; /* for single row */
   height: 40px;
   -webkit-transition: 200ms all; 
   -moz-transition: 200ms all;
@@ -123,7 +124,11 @@ tr td[type=''] {background: url();}
   color: #808080;
   font-size: 80%;
 }
+#shortcuts-table {
+  width: 100%;
+}
 #backup-table {
+  width: 100%;
   display: none;
 }
 #status-table tr td {

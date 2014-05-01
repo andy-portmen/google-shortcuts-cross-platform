@@ -88,14 +88,14 @@ function handleDrop(e, mainTypes, backupTypes) {
   }
   else if (condition_3 || condition_4) {
     if (startType && startId != endId) {
-      if (startId.charAt(0) == 'm' && endId.charAt(0) == 'b') {
+      if (startId.charAt(0) == 'm' && endId.charAt(0) == 'b' && mainTypes.length > 1) {
         var endId = parseInt(endId.substring(1));
         if (!endType) endId = backupTypes.length - 1;
         var startId = parseInt(startId.substring(1));
         backupTypes.splice(endId, 0, startType);       // insert
         mainTypes.splice(startId, 1);                  // delete
       }
-      else if (startId.charAt(0) == 'b' && endId.charAt(0) == 'm') {
+      else if (startId.charAt(0) == 'b' && endId.charAt(0) == 'm' && backupTypes.length > 1) {
         var endId = parseInt(endId.substring(1));
         if (!endType) endId = mainTypes.length - 1;
         var startId = parseInt(startId.substring(1));
