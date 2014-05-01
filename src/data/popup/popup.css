@@ -106,24 +106,22 @@ tr td[type=''] {background: url();}
 
 #separator-table {
   display: none;
-  empty-cells: show;
+  width: 100%;
   -moz-user-select: none;
   -webkit-user-select: none;
 }
-#separator1-td, #separator3-td {
+#separator-td {
   border: 0;
-  width: 108px;
-  height: 40px;
+  background: url('dotted.png') center repeat-x;
   text-align: center;
-  padding: 0 0 9px 0;
-  background: url(line.png) no-repeat center center;
+  cursor: default;
 }
-#separator2-td {
-  border: 0;
-  height: 42px;
-  text-align: center;
-  white-space:nowrap;
-  background: url(updown.png) no-repeat center center;
+#separator-td span {
+  display: inline-block;
+  background-color: #fff;
+  padding:0 4px;
+  color: #808080;
+  font-size: 80%;
 }
 #backup-table {
   display: none;

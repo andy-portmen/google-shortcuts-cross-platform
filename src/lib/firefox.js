@@ -36,10 +36,13 @@ if (self.loadReason == "install") {
 }
 
 var popup = require("sdk/panel").Panel({
-  width: 260,
-  height: 302,
+  width: 280,
+  height: 220,
   contentURL: data.url("./popup/popup.html"),
-  contentScriptFile: [data.url("./popup/popup.js")]
+  contentScriptFile: [data.url("./popup/popup.js"), data.url("./popup/drag.js")]
+});
+popup.port.on("resize", function(obj) {
+  popup.resize(obj.w, obj.h + 2);
 });
 
 exports.storage = {

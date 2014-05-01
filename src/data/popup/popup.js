@@ -1,4 +1,5 @@
 /********/
+var doResize;
 var background = {};
 if (typeof chrome !== 'undefined') {
   background.send = function (id, data) {
@@ -11,6 +12,7 @@ if (typeof chrome !== 'undefined') {
       }
     });
   }
+  doResize = function () {}
 }
 else {
   background.send = function (id, data) {
@@ -19,10 +21,18 @@ else {
   background.receive = function (id, callback) {
     self.port.on(id, callback);
   }
+  
+  doResize = function () {
+    self.port.emit("resize", {
+      w: document.body.getBoundingClientRect().width, 
+      h: document.body.getBoundingClientRect().height}
+    );
+  }
+  window.addEventListener("resize", doResize, false);
 }
 /********/
 function $ (id) {return document.getElementById(id);}
-var mainTypes, backupTypes, Titles = {}, main_drag = false, total_drag = false, toggle = true;
+var mainTypes, backupTypes, Titles = {}, total_drag = false, isDraging = false, toggle = true;
 var height_1 = 0, height_2 = 0;
 
 Titles['alerts'] = 'Google Alerts';                     Titles['analytics'] = 'Google Analytics';
@@ -86,13 +96,11 @@ function emptyTable(table) {
 } 
  
 function init(data, name) { 
-  var id_pref;
+  var id_pref, count = 0;;
   if (name == 'shortcuts-table') {mainTypes = data; id_pref = 'm';}
   if (name == 'backup-table')    {backupTypes = data; id_pref = 'b';}
-  var table = document.getElementById(name); 
-  emptyTable(table);
+  var table = document.getElementById(name); emptyTable(table);
   var trs = table.getElementsByTagName('tr');
-  var count = 0;
   for (var i = 0; i < trs.length; i++) {
     var tds = trs[i].getElementsByTagName('td');
     for (var j = 0; j < tds.length; j++) {
@@ -123,51 +131,7 @@ function init(data, name) {
     $('main-div').style.height = height_1 + 'px';
     document.body.style.height = height_1 + 45 + 'px';
   }
-}
-
-function handleDrop(e, types, name) {
-  if (total_drag) return;
-  var target = e.target || e.originalTarget;
-  var startId = e.dataTransfer.getData("text/plain");
-  var startType = $(startId).getAttribute('type');
-  startId = parseInt(startId.substring(1));
-  var endType = target.getAttribute('type');
-  var endId = parseInt(target.getAttribute('id').substring(1));
-  if (startId >= 0 && endId >= 0 && startId != endId) {
-    if (startId < endId) {
-      types.splice(endId + 1, 0, startType);
-      types.splice(startId, 1);
-    }
-    else {
-      types.splice(startId, 1);
-      types.splice(endId, 0, startType);
-    }  
-    background.send(name, types);
-  }
-}
-
-function handleDropTotal(e, mainTypes, backupTypes) {
-  var target = e.target || e.originalTarget;
-  var startId = e.dataTransfer.getData("text/plain");
-  var endId = target.getAttribute('id');
-  var startType = $(startId).getAttribute('type');
-  var endType = target.getAttribute('type');
-  if (startType && endType && startId != endId) {
-    if (startId.charAt(0) == 'm' && endId.charAt(0) == 'b') {
-      var endId = parseInt(endId.substring(1));
-      var startId = parseInt(startId.substring(1));
-      backupTypes.splice(endId + 1, 0, startType);   // insert
-      mainTypes.splice(startId, 1);                  // delete
-    }
-    else if (startId.charAt(0) == 'b' && endId.charAt(0) == 'm') {
-      var endId = parseInt(endId.substring(1));
-      var startId = parseInt(startId.substring(1));
-      mainTypes.splice(endId + 1, 0, startType);     // insert
-      backupTypes.splice(startId, 1);                // delete
-    }
-  }
-  background.send('store-mainTypes', mainTypes);
-  background.send('store-backupTypes', backupTypes);
+  doResize();
 }
 
 background.send('request-inits');
@@ -179,8 +143,8 @@ $('more-td').addEventListener('click', function (e) {
   var target = e.target || e.originalTarget;
   if (toggle) {
     total_drag = true;
-    $('backup-table').style.display = 'block';
-    $('separator-table').style.display = 'block';
+    $('backup-table').style.display = 'table';
+    $('separator-table').style.display = 'table';
     target.setAttribute('status', 'active');
     toggle = false;
   }
@@ -193,17 +157,28 @@ $('more-td').addEventListener('click', function (e) {
   }
   init(mainTypes, 'shortcuts-table');
   init(backupTypes, 'backup-table');
+  doResize();
 }, false);
 
 $('main-div').addEventListener('mouseover', function (e) {
   var target = e.target || e.originalTarget;
   var type = target.getAttribute('type');
-  $('status-td').textContent = target.getAttribute('title') || '';
+  $('status-td').textContent = target.getAttribute('title') || 'Google Shortcuts';
 }, false);
 
-$('shortcuts-table').addEventListener('mouseup', function (e) {
-  if (main_drag || total_drag) return;
-  var target = e.target || e.originalTarget;
+$('shortcuts-table').addEventListener('click', function (e) {
+  if (isDraging) return;
+  var target = e.target || e.originalTarget;  
+  var type = target.getAttribute('type');
+  if (type) {background.send('open-tab-request', {
+    type: type, 
+    inBackground: e.button == 1 || (e.ctrlKey && e.button == 0)
+  });} 
+})
+
+$('backup-table').addEventListener('click', function (e) {
+  if (isDraging) return;
+  var target = e.target || e.originalTarget;  
   var type = target.getAttribute('type');
   if (type) {background.send('open-tab-request', {
     type: type, 

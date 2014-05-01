@@ -20,10 +20,8 @@
         </tbody>
       </table>
       <table id="separator-table" draggable="false">
-        <tr>
-          <td id="separator1-td"></td>
-          <td id="separator2-td"></td>
-          <td id="separator3-td"></td>
+        <tr draggable="false">
+          <td id="separator-td" disabled="true" draggable="false"><span draggable="false">Hidden Items</span></td>
         </tr>
       </table>
       <table id="backup-table">
@@ -44,13 +42,15 @@
     <div id="status-div">
       <table id="status-table">
         <tbody>
-          <tr><td id="status-td"></td><td id="more-td"></td></tr>
+          <tr>
+            <td id="status-td">Google Shortcuts</td>
+            <td id="more-td"></td>
+          </tr>
         </tbody>
       </table>
     </div>
     <script type="text/javascript" src="popup.js"></script>
-    <script type="text/javascript" src="main_drag.js"></script>
-    <script type="text/javascript" src="total_drag.js"></script>
+    <script type="text/javascript" src="drag.js"></script>
   </body>
 </html>
 
