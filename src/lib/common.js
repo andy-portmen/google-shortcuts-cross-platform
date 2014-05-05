@@ -37,7 +37,7 @@ mainTypes = ['search', 'youtube', 'maps', 'play', 'gmail', 'calender',
              'picasa', 'blogger', 'music', 'news', 'book', 'groups', 
              'blog', 'print', 'alerts', 'analytics', 'hangouts', 'dashboard'];
 
-backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offer', 'urlshortner', 
+backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offers', 'urlshortner', 
                'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
                'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
                'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 
@@ -196,7 +196,7 @@ popup.receive('open-tab-request', function (obj) {
   case 'fusion':
     tab.open('https://www.google.com/fusiontables/', obj.inBackground, !obj.inBackground);
     break;
-  case 'offer':
+  case 'offers':
     tab.open('https://www.google.com/offers/', obj.inBackground, !obj.inBackground);
     break;
   case 'urlshortner':
