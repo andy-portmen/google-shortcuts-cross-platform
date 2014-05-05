@@ -20,11 +20,13 @@ $('main-div').addEventListener('mousedown', function (e) {
 
 function onDragStart(e) {
   isDraging = true;
+  var target = e.target || e.originalTarget;
+  
   MT = mainTypes.concat();
   BT = backupTypes.concat();
-  var target = e.target || e.originalTarget;
   e.dataTransfer.effectAllowed = 'move';
   startId_G = target.getAttribute('id');
+  
   startType_G = target.getAttribute('type');
   e.dataTransfer.setDragImage(dragIcon, 15, 15);  
   if (startId_G.charAt(0) == 'm') {

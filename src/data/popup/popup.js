@@ -93,18 +93,17 @@ function init(data, name) {
       var id = id_pref + count.toString();
       var td = tds[j];
       td.setAttribute('id', id);
-      td.draggable = true;
       td.removeAttribute('status');
       td.removeAttribute('type'); 
       td.removeAttribute('title');
       if (count < data.length && data[count]) {
+        td.draggable = true;
         td.setAttribute('type', data[count]); 
         td.setAttribute('title', Titles[data[count]]);
-        td.style.height = "40px";
       }
       else {
+        td.draggable = false;
         td.setAttribute('status', 'empty');
-        td.style.height = "0px";
       }
       count++;
     }

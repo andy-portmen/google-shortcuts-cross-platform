@@ -25,6 +25,7 @@ body {
 }
 #shortcuts-table  tr td,
 #backup-table tr td {
+  height: 40px;
   width: 40px;
   min-width: 40px; /* for single row */
   -webkit-transition: 200ms border; 
