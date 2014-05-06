@@ -74,6 +74,13 @@ popup.receive('store-backupTypes', function (data) {
   storage.write("backupTypes", JSON.stringify(data));
 });
 
+popup.receive('reset-history', function (data) {
+  storage.write("mainTypes", JSON.stringify(mainTypes));
+  storage.write("backupTypes", JSON.stringify(backupTypes));
+  popup.send('request-inits', mainTypes);
+  popup.send('request-backup-inits', backupTypes);
+});
+
 popup.receive('open-tab-request', function (obj) {
   switch (obj.type) {
   case 'alerts':

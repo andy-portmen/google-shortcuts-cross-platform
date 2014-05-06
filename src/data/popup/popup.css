@@ -15,6 +15,7 @@ body {
   background-color: #fff;
   -moz-user-select: none;
   -webkit-user-select: none;
+  border: solid 1px red;
 }
 ::-webkit-scrollbar { 
   display: none; 
@@ -152,20 +153,34 @@ tr td[type=''] {background-image: none;}
   border: 0;
 }
 #status-td {
-  width: 216px;
+  width: 193px;
   height: 40px;
   background-color: #F5F5F5;
   text-align: center;
   vertical-align: middle;
 }
 #more-td {
-  width: 40px;
+  width: 32px;
   height: 40px;
   text-align: center;
   vertical-align: middle;
   background: #F5F5F5 url(more.png) no-repeat center center;
+  opacity: 0.7;
 }
-
 #more-td[status='active'] {
   background: #F5F5F5 url(collapse.png) no-repeat center center;
+}
+#more-td:hover {
+  opacity: 1.0;
+}
+#reset-td {
+  width: 32px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  background: #F5F5F5 url(reset.png) no-repeat center center;
+  opacity: 0.7;
+}
+#reset-td:hover {
+  opacity: 1.0;
 }

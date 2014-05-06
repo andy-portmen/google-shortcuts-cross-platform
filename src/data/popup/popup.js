@@ -165,3 +165,12 @@ $('backup-table').addEventListener('click', function (e) {
     inBackground: e.button == 1 || (e.ctrlKey && e.button == 0)
   });} 
 })
+
+$('reset-td').addEventListener('click', function (e) {
+  background.send('reset-history');
+});
+
+$('status-div').addEventListener('mouseover', function (e) {
+  var target = e.target || e.originalTarget;
+  $('status-td').textContent = target.getAttribute('title') || 'Google Shortcuts';
+}, false);
