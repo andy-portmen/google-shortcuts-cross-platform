@@ -15,7 +15,6 @@ body {
   background-color: #fff;
   -moz-user-select: none;
   -webkit-user-select: none;
-  border: solid 1px red;
 }
 ::-webkit-scrollbar { 
   display: none; 
