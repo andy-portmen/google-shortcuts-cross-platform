@@ -65,8 +65,7 @@ Titles['webmaster'] = 'Google Webmaster';               Titles['currents'] = 'Go
 Titles['chromebook'] = 'Google Chromebook';             Titles['correlate'] = 'Google Correlate';
 Titles['chromium'] = 'Chromium';                        Titles['contacts'] = 'Google Contacts';
 Titles['adwords'] = 'Google Adwords';                   Titles['adsense'] = 'Google Adsense';
-Titles['emptyCell'] = '';
-Titles[''] = '';
+Titles['emptyCell'] = '';                               Titles[''] = '';
 
 function calculateHeight(name) {
   var nActiveTrs = 0;
@@ -133,6 +132,7 @@ $('more-td').addEventListener('click', function (e) {
     $('backup-table').style.display = 'table';
     $('separator-table').style.display = 'table';
     target.setAttribute('status', 'active');
+    target.setAttribute("title", "Click to hide more icons");
     toggle = false;
   }
   else {
@@ -140,6 +140,7 @@ $('more-td').addEventListener('click', function (e) {
     $('backup-table').style.display = 'none';
     $('separator-table').style.display = 'none';
     target.removeAttribute('status');
+    target.setAttribute("title", "Click to see hidden icons");
     toggle = true;
   }
   init(mainTypes, 'shortcuts-table');
