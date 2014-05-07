@@ -42,14 +42,7 @@ backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offer', 'urlshor
                'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
                'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 
                'image', 'mobile', 'earth', 'panoramio', 'site', 'hotel',
-               'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup'];
-               
-/* NEW ITEMS
-  'android', 'bookmarks', 'feedburner', 'fusion', 'offer', 'urlshortner', 
-  'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
-  'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
-  'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense'
-*/
+               'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup', 'video'];
              
 if (!storage.read("mainTypes")) {storage.write("mainTypes", JSON.stringify(mainTypes));}
 if (!storage.read("backupTypes")) {storage.write("backupTypes", JSON.stringify(backupTypes));}
@@ -230,7 +223,7 @@ popup.receive('open-tab-request', function (obj) {
     tab.open('https://chrome.google.com/webstore/developer/dashboard/', obj.inBackground, !obj.inBackground);
     break;
   case 'inputtool':
-    tab.open('http://www.google.com/inputtools/try/', obj.inBackground, !obj.inBackground);
+    tab.open('http://www.google.com/inputtools/', obj.inBackground, !obj.inBackground);
     break;
   case 'ideas':
     tab.open('https://www.google.com/ideas/', obj.inBackground, !obj.inBackground);
@@ -255,7 +248,10 @@ popup.receive('open-tab-request', function (obj) {
     break; 
   case 'adsense':
     tab.open('https://www.google.com/adsense/', obj.inBackground, !obj.inBackground);
-    break; 
+    break;
+  case 'video':
+    tab.open('https://www.google.com/videohp', obj.inBackground, !obj.inBackground);
+    break;
   default:
     tab.open('https://www.google.com/about/products/', obj.inBackground, !obj.inBackground);
     break;

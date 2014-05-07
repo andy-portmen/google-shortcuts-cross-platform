@@ -8,8 +8,14 @@ var self          = require("sdk/self"),
     prefs         = sp.prefs,
     pageMod       = require("sdk/page-mod"),
     tabs          = require("sdk/tabs"),
-    toolbarbutton = require("./toolbarbutton"),
-    {Cc, Ci, Cu}  = require('chrome');
+    {Cc, Ci, Cu}  = require('chrome'),
+    windows          = {
+      get active () { // Chrome window
+        return require('sdk/window/utils').getMostRecentBrowserWindow()
+      }
+    },
+    isAustralis   = "gCustomizeMode" in windows.active,
+    toolbarbutton = isAustralis ? require("./toolbarbutton/new") : require("./toolbarbutton/old");
     
 Cu.import("resource://gre/modules/Promise.jsm");
  
@@ -287,15 +293,156 @@ var icons = [
     label: "Google Shopping",
     icon: "shopping",
     url: 'https://www.google.com/shopping/'
+  },
+  {
+    label: "Android",
+    icon: "android",
+    url: 'http://www.android.com/'
+  },
+  {
+    label: "Google Bookmarks",
+    icon: "bookmarks",
+    url: 'https://www.google.com/bookmarks/'
+  },
+  {
+    label: "Google Feedburner",
+    icon: "feedburner",
+    url: 'http://feedburner.google.com/'
+  },
+  {
+    label: "Google Fusion Tables",
+    icon: "fusion",
+    url: 'https://www.google.com/fusiontables/'
+  },
+  {
+    label: "Google Offers",
+    icon: "offer",
+    url: 'https://www.google.com/offers/'
+  },
+  {
+    label: "Google URL Shortner",
+    icon: "urlshortner",
+    url: 'http://goo.gl/'
+  },
+  {
+    label: "Google Web History",
+    icon: "webhistory",
+    url: 'https://history.google.com/history/'
+  },
+  {
+    label: "Google Webmaster Tools",
+    icon: "webmaster",
+    url: 'https://www.google.com/webmasters/'
+  },
+  {
+    label: "Google Chromebook",
+    icon: "chromebook",
+    url: 'https://www.google.com/intl/en/chrome/devices/'
+  },
+  {
+    label: "Chromium",
+    icon: "chromium",
+    url: 'http://www.chromium.org/'
+  },
+  {
+    label: "Google Cloude Platform",
+    icon: "cloudeplatform",
+    url: 'https://cloud.google.com/'
+  },
+  {
+    label: "Google Contacts",
+    icon: "contacts",
+    url: 'https://www.google.com/contacts/'
+  },
+  {
+    label: "Google Correlate",
+    icon: "correlate",
+    url: 'https://www.google.com/trends/correlate/'
+  },
+  {
+    label: "Google Currents",
+    icon: "currents",
+    url: 'http://www.google.com/producer/currents/'
+  },
+  {
+    label: "Google Developement Dashboard",
+    icon: "developersdashboard",
+    url: 'https://chrome.google.com/webstore/developer/dashboard/'
+  },
+  {
+    label: "Google Input Tool",
+    icon: "inputtool",
+    url: 'http://www.google.com/inputtools/'
+  },
+  {
+    label: "Google Ideas",
+    icon: "ideas",
+    url: 'https://www.google.com/ideas/'
+  },
+  {
+    label: "Google Mars",
+    icon: "mars",
+    url: 'https://www.google.com/mars/'
+  },
+  {
+    label: "Google Sky",
+    icon: "sky",
+    url: 'https://www.google.com/sky/'
+  },
+  {
+    label: "Google Transit",
+    icon: "transit",
+    url: 'https://www.google.com/intl/en/landing/transit/'
+  },
+  {
+    label: "Google Webpage Test",
+    icon: "webpagetest",
+    url: 'http://www.webpagetest.org/'
+  },
+  {
+    label: "What Do You Love",
+    icon: "wdyl",
+    url: 'http://www.wdyl.com/'
+  },
+  {
+    label: "Google Adwords",
+    icon: "adwords",
+    url: 'https://www.google.com/adwords/'
+  },
+  {
+    label: "Google Adsense",
+    icon: "adsense",
+    url: 'https://www.google.com/adsense/'
+  },
+  {
+    label: "Google Videos",
+    icon: "video",
+    url: 'https://www.google.com/videohp'
   }
 ];
+
+
+/* NEW ITEMS
+  'android', 'bookmarks', 'feedburner', 'fusion', 'offer', 'urlshortner', 
+  'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
+  'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
+  'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 'video'
+*/
+
+
+
+
+
+
+
+
 icons.forEach(function (obj) {
   var button;
   if (prefs[obj.icon]) {
     button = toolbarbutton.ToolbarButton({
       id: "igshortcuts-" + obj.icon,
       label: obj.label,
-      image: data.url("toolbar/" + obj.icon + ".png"),
+      tooltiptext: obj.label,
       onCommand: new onCmd(obj.url),
       onClick: new onClk(obj.url)
     });

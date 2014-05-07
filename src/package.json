@@ -244,23 +244,212 @@
     },
     {
       "name": "hotel",
-      "title": "YouTube Hotel Search icon:",
+      "title": "YouTube Hotel Search individual toolbar icon:",
       "description": "Browse hotel photo galleries, read visitor reviews, and discover the popular areas of the city with Google Hotel Finder.",
       "type": "bool",
       "value": false
     },
     {
       "name": "patent",
-      "title": "Google Patent Search:",
+      "title": "Google Patent Search individual toolbar icon:",
       "description": "Search more than seven million U.S. patents.",
       "type": "bool",
       "value": false
     },
     {
       "name": "shopping",
-      "title": "Google Shopping:",
+      "title": "Google Shopping individual toolbar icon:",
       "description": "Google Shopping helps shoppers find and buy products across online and brick and mortar retailers.",
       "type": "bool",
       "value": false
-    }]
+    },
+    {
+      "name": "android",
+      "title": "Android individual toolbar icon:",
+      "description": "",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "bookmarks",
+      "title": "Google Bookmarks individual toolbar icon:",
+      "description": "With Google Bookmarks, you can save shortcuts to your favorite webpages and navigate to them in seconds from anywhere.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "feedburner",
+      "title": "Google Feedburner individual toolbar icon:",
+      "description": "",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "fusion",
+      "title": "Google Fusion individual toolbar icon:",
+      "description": "Bust your data out of its silo! Get more from data with Fusion Tables.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "offer",
+      "title": "Google Offer individual toolbar icon:",
+      "description": "",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "urlshortner",
+      "title": "Google urlshortner individual toolbar icon:",
+      "description": "All goo.gl URLs and click analytics are public and can be accessed by anyone.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "webhistory",
+      "title": "Google Web History individual toolbar icon:",
+      "description": "You get better search results and recommendations across Google's products when your Web History is turned on.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "webmaster",
+      "title": "Google Webmaster individual toolbar icon:",
+      "description": "Get data, tools and diagnostics for a healthy, Google-friendly site. Sign in to Webmaster Tools.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "chromebook",
+      "title": "Google Chromebook individual toolbar icon:",
+      "description": "The Chromebook is a new, faster computer.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "chromium",
+      "title": "Google Chromium individual toolbar icon:",
+      "description": "The Chromium projects include Chromium and Chromium OS, the open-source projects behind the Google Chrome browser and Google Chrome OS.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "cloudeplatform",
+      "title": "Google Cloude Platform individual toolbar icon:",
+      "description": "Google Cloud Platform lets you build and host applications and websites, store data, and analyze data on Google's scalable infrastructure.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "contacts",
+      "title": "Google Contacts individual toolbar icon:",
+      "description": "Google Contacts is your online address book, integrated with Gmail, Calendar, Drive, and other Google products.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "correlate",
+      "title": "Google Correlate individual toolbar icon:",
+      "description": "Google Correlate finds search patterns which correspond with real-world trends.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "currents",
+      "title": "Google Currents individual toolbar icon:",
+      "description": "Favorite publications, tuned for your tablet and smartphone.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "developersdashboard",
+      "title": "Google Developers Dashboard individual toolbar icon:",
+      "description": "",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "inputtool",
+      "title": "Google Input Tools individual toolbar icon:",
+      "description": "Online, offline, on the go. Whether at home, at work, or somewhere in between—communicate in the language you need, when you need it.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "ideas",
+      "title": "Google Ideas individual toolbar icon:",
+      "description": "Google Ideas explores how technology can enable people to confront threats in the face of conflict, instability or repression. ",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "mars",
+      "title": "Google Mars individual toolbar icon:",
+      "description": "Google Mars was at first an in-browser version of Google Maps which provides a visible imagery view, like Google Moon, as well as infrared imagery.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "sky",
+      "title": "Google Sky individual toolbar icon:",
+      "description": "Allows you to view celestial objects, including stars, constellations, galaxies, planets and the Earth's moon.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "transit",
+      "title": "Google Transit individual toolbar icon:",
+      "description": "",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "webpagetest",
+      "title": "Google Webpage Test individual toolbar icon:",
+      "description": "Evaluates the performance of web pages and get suggestions on how to improve them.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "wdyl",
+      "title": "Google What Do You Love individual toolbar icon:",
+      "description": "Get more of what you love by searching across numerous Google products with one click.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "adwords",
+      "title": "Google Adwords individual toolbar icon:",
+      "description": "Advertise with Google AdWords ads next to Google search results to boost website traffic and sales.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "adsense",
+      "title": "Google Adsense individual toolbar icon:",
+      "description": "With Google AdSense, you can earn money from your online content.",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "video",
+      "title": "Google video individual toolbar icon:",
+      "description": "Search and watch millions of videos. Includes forum and personalized recommendations.",
+      "type": "bool",
+      "value": false
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ]
 }

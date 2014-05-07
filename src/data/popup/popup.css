@@ -103,6 +103,7 @@ tr td[type='sky'] {background: url(./icons/sky.png) no-repeat center center;}
 tr td[type='transit'] {background: url(./icons/transit.png) no-repeat center center;}
 tr td[type='webpagetest'] {background: url(./icons/webpagetest.png) no-repeat center center;}
 tr td[type='wdyl'] {background: url(./icons/wdyl.png) no-repeat center center;}
+tr td[type='video'] {background: url(./icons/video.png) no-repeat center center;}
 tr td[type=''] {background: url();}
 
 #separator-table {

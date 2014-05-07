@@ -1,27 +1,13 @@
 const NS_XUL = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
-const winUtils = require("sdk/deprecated/window-utils");
+var prefs    = require("sdk/simple-prefs").prefs,
+    winUtils = require("sdk/deprecated/window-utils"),
+    utils    = require('sdk/window/utils');
+
 const browserURL = "chrome://browser/content/browser.xul";
 
-const listen = function listen(window, node, event, func, capture) {
-  // Default to use capture
-  if (capture == null)
-    capture = true;
-
-  node.addEventListener(event, func, capture);
-  function undoListen() {
-    node.removeEventListener(event, func, capture);
-  }
-
-  // Undo the listener on unload and provide a way to undo everything
-  let undoUnload = unload(undoListen, window);
-  return function() {
-    undoListen();
-    undoUnload();
-  };
-}
-
-var Unloader = exports.Unloader = function Unloader() {
+/** unload+.js [start] **/
+var unload = (function () {
   var unloaders = [];
 
   function unloadersUnlaod() {
@@ -73,14 +59,32 @@ var Unloader = exports.Unloader = function Unloader() {
       return remover;
     }
   };
-}
+})().unload;
+/** unload+.js [end] **/
+/** listen.js [start] **/
+var listen = function listen(window, node, event, func, capture) {
+  // Default to use capture
+  if (capture == null)
+    capture = true;
 
-const unload = (Unloader()).unload;
+  node.addEventListener(event, func, capture);
+  function undoListen() {
+    node.removeEventListener(event, func, capture);
+  }
+
+  // Undo the listener on unload and provide a way to undo everything
+  let undoUnload = unload(undoListen, window);
+  return function() {
+    undoListen();
+    undoUnload();
+  };
+}
+/** listen.js [end] **/
 
 exports.ToolbarButton = function ToolbarButton(options) {
   var unloaders = [],
-      toolbarID = "",
-      insertbefore = "",
+      toolbarID = prefs.toolbarID || "",
+      insertbefore = prefs.nextSibling || "",
       destroyed = false,
       destoryFuncs = [];
 
@@ -90,30 +94,55 @@ exports.ToolbarButton = function ToolbarButton(options) {
         return;
 
       let doc = window.document;
-      function $(id) doc.getElementById(id);
-      function xul(type) doc.createElementNS(NS_XUL, type);
-
+      let $ = function(id) doc.getElementById(id);
+      options.tooltiptext = options.tooltiptext || '';
       // create toolbar button
-      let tbb = xul("toolbarbutton");
+      let tbb = doc.createElementNS(NS_XUL, "toolbarbutton");
       tbb.setAttribute("id", options.id);
-      tbb.setAttribute("type", "button");
-      if (options.image) tbb.setAttribute("image", options.image);
-      if (options.context) tbb.setAttribute("context", options.context);
+      tbb.setAttribute("value", "");
       tbb.setAttribute("class", "toolbarbutton-1 chromeclass-toolbar-additional");
-      tbb.setAttribute("orient", "horizontal");
-      tbb.setAttribute("tooltiptext", options.label);
       tbb.setAttribute("label", options.label);
-      tbb.addEventListener("command", function() {
+      tbb.setAttribute('tooltiptext', options.tooltiptext);
+      tbb.addEventListener("command", function(e) {
+        if (e.ctrlKey) return;
+        if (e.originalTarget.localName == "menu" || e.originalTarget.localName == "menuitem") return;
+
         if (options.onCommand)
-          options.onCommand({}); // TODO: provide something?
+          options.onCommand(e, tbb);
 
         if (options.panel) {
           options.panel.show(tbb);
         }
       }, true);
-      if (options.onClick && options.type != "unsorted")
-          tbb.addEventListener("click", options.onClick, true);    
-
+      if (options.onClick) {
+        tbb.addEventListener("click", function (e) {
+          options.onClick(e, tbb);
+        }, true);
+      }
+      if (options.panel) {
+        tbb.addEventListener("contextmenu", function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+          try {
+            options.panel.show(tbb);
+          }
+          catch (e) {
+            options.panel.show(null, tbb);
+          }
+        }, true);
+      }
+      if (options.onContext) {
+        let menupopup = doc.createElementNS(NS_XUL, "menupopup");
+        let menuitem = doc.createElementNS(NS_XUL, "menuitem");
+        let menuseparator = doc.createElementNS(NS_XUL, "menuseparator");
+        tbb.addEventListener("contextmenu", function (e) {
+          e.stopPropagation(); //Prevent Firefox context menu
+          e.preventDefault();
+          options.onContext(e, menupopup, menuitem, menuseparator);
+          menupopup.openPopup(tbb , "after_end", 0, 0, false);
+        }, true);
+        tbb.appendChild(menupopup);
+      }
       // add toolbarbutton to palette
       ($("navigator-toolbox") || $("mail-toolbox")).palette.appendChild(tbb);
 
@@ -146,15 +175,19 @@ exports.ToolbarButton = function ToolbarButton(options) {
               if (b4) break;
             }
           }
+          if (!b4) b4 = $("home-button");
         }
 
         tb.insertItem(options.id, b4, null, false);
       }
-
+      
       var saveTBNodeInfo = function(e) {
         toolbarID = tbb.parentNode.getAttribute("id") || "";
         insertbefore = (tbb.nextSibling || "")
             && tbb.nextSibling.getAttribute("id").replace(/^wrapper-/i, "");
+
+        prefs.nextSibling = insertbefore;
+        prefs.toolbarID = toolbarID;  
       };
 
       window.addEventListener("aftercustomization", saveTBNodeInfo, false);
@@ -172,9 +205,34 @@ exports.ToolbarButton = function ToolbarButton(options) {
     },
     onUntrack: function (window) {}
   };
-  var winUtils = require("sdk/deprecated/window-utils");
-  var tracker = new winUtils.WindowTracker(delegate);
-
+  var tracker = winUtils.WindowTracker(delegate);
+  
+  function setProgress(aOptions) {
+    getToolbarButtons(function(tbb) {
+      if (!aOptions.progress) {
+        tbb.removeAttribute("progress");
+      }
+      else {
+        tbb.setAttribute("progress", (aOptions.progress * 8).toFixed(0));
+      }
+    }, options.id);
+    return aOptions.progress;
+  }
+  function setSaturate(aOptions) {
+    getToolbarButtons(function(tbb) {
+      if (!aOptions.value) {
+        tbb.setAttribute("type", "gray");
+      }
+      else {
+        tbb.removeAttribute("type");
+      }
+    }, options.id);
+    options.saturate = aOptions.value;
+    return aOptions.value;
+  }
+  
+  
+  
   return {
     destroy: function() {
       if (destroyed) return;
@@ -195,12 +253,17 @@ exports.ToolbarButton = function ToolbarButton(options) {
       if (destroyed) return;
 
       // record the new position for future windows
-      toolbarID = pos.toolbarID;
-      insertbefore = pos.insertbefore;
+      toolbarID = prefs.toolbarID || pos.toolbarID;
+      insertbefore = prefs.nextSibling || pos.insertbefore;
 
+      if (toolbarID == "BrowserToolbarPalette") {
+        toolbarID = "nav-bar";
+        insertbefore = "home-button";
+      }
+      
       // change the current position for open windows
-      for each (var window in winUtils.windowIterator()) {
-        if ("chrome://browser/content/browser.xul" != window.location) return;
+      for each (var window in utils.windows()) {
+        if (browserURL != window.location) return;
 
         let doc = window.document;
         let $ = function (id) doc.getElementById(id);
@@ -211,8 +274,6 @@ exports.ToolbarButton = function ToolbarButton(options) {
         var tb = $(toolbarID);
         var b4 = $(insertbefore);
 
-        // TODO: if b4 dne, but insertbefore is in currentset, then find toolbar to right
-
         if (tb) {
           tb.insertItem(options.id, b4, null, false);
           tb.setAttribute("currentset", tb.currentSet); 
@@ -220,11 +281,40 @@ exports.ToolbarButton = function ToolbarButton(options) {
         }
       };
     },
+    get label() options.label,
+    set label(value) {
+      options.label = value;
+      getToolbarButtons(function(tbb) {
+        tbb.label = value;
+      }, options.id);
+      return value;
+    },
+    set progress(value) setProgress({progress: value}),
+    set saturate(value) setSaturate({value: value}),
+    get saturate() options.saturate,
+    get tooltiptext() options.tooltiptext,
+    set tooltiptext(value) {
+      options.tooltiptext = value;
+      getToolbarButtons(function(tbb) {
+        tbb.setAttribute('tooltiptext', value);
+      }, options.id);
+    },
     get object () {
-      return winUtils.activeBrowserWindow.document.getElementById(options.id);
+      return utils.getMostRecentBrowserWindow().document.getElementById(options.id);
     }
   };
 };
+
+function getToolbarButtons(callback, id) {
+  let buttons = [];
+  for each (var window in utils.windows()) {
+    if (browserURL != window.location) continue;
+    let tbb = window.document.getElementById(id);
+    if (tbb) buttons.push(tbb);
+  }
+  if (callback) buttons.forEach(callback);
+  return buttons;
+}
 
 function toolbarbuttonExists(doc, id) {
   var toolbars = doc.getElementsByTagNameNS(NS_XUL, "toolbar");

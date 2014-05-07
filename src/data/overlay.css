@@ -1,3 +1,71 @@
 #igshortcuts {
   list-style-image: url('icon16.png') !important;
 }
+#igshortcuts[cui-areatype="menu-panel"],
+toolbarpaletteitem[place="palette"] > #igshortcuts {
+  list-style-image: url('icon32.png') !important;
+}
+
+
+#igshortcuts-shopping {list-style-image: url('toolbar/shopping.png') !important;}
+#igshortcuts-inputtool {list-style-image: url('toolbar/inputtool.png') !important;}
+#igshortcuts-correlate {list-style-image: url('toolbar/correlate.png') !important;}
+#igshortcuts-search {list-style-image: url('toolbar/search.png') !important;}
+#igshortcuts-image {list-style-image: url('toolbar/image.png') !important;}
+#igshortcuts-contacts {list-style-image: url('toolbar/contacts.png') !important;}
+#igshortcuts-youtube {list-style-image: url('toolbar/youtube.png') !important;}
+#igshortcuts-scholar {list-style-image: url('toolbar/scholar.png') !important;}
+#igshortcuts-ideas {list-style-image: url('toolbar/ideas.png') !important;}
+#igshortcuts-code {list-style-image: url('toolbar/code.png') !important;}
+#igshortcuts-webpagetest {list-style-image: url('toolbar/webpagetest.png') !important;}
+#igshortcuts-print {list-style-image: url('toolbar/print.png') !important;}
+#igshortcuts-hotel {list-style-image: url('toolbar/hotel.png') !important;}
+#igshortcuts-cloudeplatform {list-style-image: url('toolbar/cloudeplatform.png') !important;}
+#igshortcuts-webmaster {list-style-image: url('toolbar/webmaster.png') !important;}
+#igshortcuts-plus {list-style-image: url('toolbar/plus.png') !important;}
+#igshortcuts-history {list-style-image: url('toolbar/history.png') !important;}
+#igshortcuts-chromium {list-style-image: url('toolbar/chromium.png') !important;}
+#igshortcuts-webhistory {list-style-image: url('toolbar/webhistory.png') !important;}
+#igshortcuts-play {list-style-image: url('toolbar/play.png') !important;}
+#igshortcuts-hangouts {list-style-image: url('toolbar/hangouts.png') !important;}
+#igshortcuts-chromebook {list-style-image: url('toolbar/chromebook.png') !important;}
+#igshortcuts-wdyl {list-style-image: url('toolbar/wdyl.png') !important;}
+#igshortcuts-picasa {list-style-image: url('toolbar/picasa.png') !important;}
+#igshortcuts-groups {list-style-image: url('toolbar/groups.png') !important;}
+#igshortcuts-calender {list-style-image: url('toolbar/calender.png') !important;}
+#igshortcuts-wallet {list-style-image: url('toolbar/wallet.png') !important;}
+#igshortcuts-patent {list-style-image: url('toolbar/patent.png') !important;}
+#igshortcuts-gmail {list-style-image: url('toolbar/gmail.png') !important;}
+#igshortcuts-bookmarks {list-style-image: url('toolbar/bookmarks.png') !important;}
+#igshortcuts-video {list-style-image: url('toolbar/video.png') !important;}
+#igshortcuts-panoramio {list-style-image: url('toolbar/panoramio.png') !important;}
+#igshortcuts-fusion {list-style-image: url('toolbar/fusion.png') !important;}
+#igshortcuts-book {list-style-image: url('toolbar/book.png') !important;}
+#igshortcuts-urlshortner {list-style-image: url('toolbar/urlshortner.png') !important;}
+#igshortcuts-offers {list-style-image: url('toolbar/offers.png') !important;}
+#igshortcuts-finance {list-style-image: url('toolbar/finance.png') !important;}
+#igshortcuts-blogger {list-style-image: url('toolbar/blogger.png') !important;}
+#igshortcuts-trends {list-style-image: url('toolbar/trends.png') !important;}
+#igshortcuts-note {list-style-image: url('toolbar/note.png') !important;}
+#igshortcuts-feedburner {list-style-image: url('toolbar/feedburner.png') !important;}
+#igshortcuts-blog {list-style-image: url('toolbar/blog.png') !important;}
+#igshortcuts-translate {list-style-image: url('toolbar/translate.png') !important;}
+#igshortcuts-news {list-style-image: url('toolbar/news.png') !important;}
+#igshortcuts-earth {list-style-image: url('toolbar/earth.png') !important;}
+#igshortcuts-android {list-style-image: url('toolbar/android.png') !important;}
+#igshortcuts-transit {list-style-image: url('toolbar/transit.png') !important;}
+#igshortcuts-music {list-style-image: url('toolbar/music.png') !important;}
+#igshortcuts-drive {list-style-image: url('toolbar/drive.png') !important;}
+#igshortcuts-analytics {list-style-image: url('toolbar/analytics.png') !important;}
+#igshortcuts-sky {list-style-image: url('toolbar/sky.png') !important;}
+#igshortcuts-mobile {list-style-image: url('toolbar/mobile.png') !important;}
+#igshortcuts-developersdashboard {list-style-image: url('toolbar/developersdashboard.png') !important;}
+#igshortcuts-alerts {list-style-image: url('toolbar/alerts.png') !important;}
+#igshortcuts-sketchup {list-style-image: url('toolbar/sketchup.png') !important;}
+#igshortcuts-mars {list-style-image: url('toolbar/mars.png') !important;}
+#igshortcuts-dashboard {list-style-image: url('toolbar/dashboard.png') !important;}
+#igshortcuts-adwords {list-style-image: url('toolbar/adwords.png') !important;}
+#igshortcuts-site {list-style-image: url('toolbar/site.png') !important;}
+#igshortcuts-maps {list-style-image: url('toolbar/maps.png') !important;}
+#igshortcuts-currents {list-style-image: url('toolbar/currents.png') !important;}
+#igshortcuts-adsense {list-style-image: url('toolbar/adsense.png') !important;}

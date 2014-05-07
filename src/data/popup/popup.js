@@ -65,8 +65,8 @@ Titles['webmaster'] = 'Google Webmaster';               Titles['currents'] = 'Go
 Titles['chromebook'] = 'Google Chromebook';             Titles['correlate'] = 'Google Correlate';
 Titles['chromium'] = 'Chromium';                        Titles['contacts'] = 'Google Contacts';
 Titles['adwords'] = 'Google Adwords';                   Titles['adsense'] = 'Google Adsense';
-Titles[''] = '';
-
+Titles['video'] = 'Google Videos';                      Titles[''] = '';
+ 
 function calculateHeight(name) {
   var nActiveTrs = 0;
   var table = document.getElementById(name);
