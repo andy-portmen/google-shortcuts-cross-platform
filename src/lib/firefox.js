@@ -316,7 +316,7 @@ var icons = [
   },
   {
     label: "Google Offers",
-    icon: "offer",
+    icon: "offers",
     url: 'https://www.google.com/offers/'
   },
   {
@@ -420,21 +420,6 @@ var icons = [
     url: 'https://www.google.com/videohp'
   }
 ];
-
-
-/* NEW ITEMS
-  'android', 'bookmarks', 'feedburner', 'fusion', 'offer', 'urlshortner', 
-  'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
-  'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
-  'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 'video'
-*/
-
-
-
-
-
-
-
 
 icons.forEach(function (obj) {
   var button;

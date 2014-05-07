@@ -1,21 +1,49 @@
+var MT, BT, startId_G, startType_G;
+var dragIconContent = './icons/emptyCell.png';
+var dragIcon = document.createElement('img');
+dragIcon.src = dragIconContent;
+function setDragIcon(dragIconContent) {dragIcon.src = dragIconContent;}
+
+$('main-div').addEventListener('mouseover', function (e) {
+  var target = e.target || e.originalTarget;
+  $('status-td').textContent = target.getAttribute('title') || 'Google Shortcuts';
+}, false);
+
+$('main-div').addEventListener('mousedown', function (e) {
+  var target = e.target || e.originalTarget;
+  var type = target.getAttribute('type');
+  if (target.localName == 'td' && type) {
+    dragIconContent = './icons/' + target.getAttribute('type') + '.png';
+    setDragIcon(dragIconContent);
+  }
+}, false);
+
 function onDragStart(e) {
   isDraging = true;
   var target = e.target || e.originalTarget;
+  
+  MT = mainTypes.concat();
+  BT = backupTypes.concat();
   e.dataTransfer.effectAllowed = 'move';
-  e.dataTransfer.setData('gshortcuts/x-application', target.getAttribute('id'));
-  var tds = document.getElementsByTagName('td');
-  for (var i = 0; i < tds.length; i++) {
-    tds[i].style.opacity = 0.2;
+  startId_G = target.getAttribute('id');
+  
+  startType_G = target.getAttribute('type');
+  e.dataTransfer.setDragImage(dragIcon, 15, 15);  
+  if (startId_G.charAt(0) == 'm') {
+    MT.splice(parseInt(startId_G.substring(1)), 1);
   }
+  if (startId_G.charAt(0) == 'b') {
+    BT.splice(parseInt(startId_G.substring(1)), 1);
+  }
+  e.dataTransfer.setData('gshortcuts/x-application', startId_G);
+  tempDrop(e);
 }
 
 function onDragEnter(e) {
   if (!isDraging) return;
   var target = e.target || e.originalTarget;
   if (e.preventDefault) {e.preventDefault();}
-  if (target.getAttribute('id'))
-    if (parseInt(target.getAttribute('id').substring(1)) >= 0)
-      target.style.opacity = 1.0;
+  tempDrop(e);
 }
 
 function onDragOver(e) {
@@ -25,13 +53,7 @@ function onDragOver(e) {
   e.dataTransfer.dropEffect = 'move';
 }
 
-function onDragLeave(e) {
-  if (!isDraging) return;
-  var target = e.target || e.originalTarget;
-  if (target.getAttribute('id'))
-    if (parseInt(target.getAttribute('id').substring(1)) >= 0)
-    target.style.opacity = 0.2;
-}
+function onDragLeave(e) {}
 
 function onDrop(e) {
   if (!e.dataTransfer.getData("gshortcuts/x-application")) return;
@@ -42,19 +64,32 @@ function onDrop(e) {
 function onDragend(e) {
   isDraging = false;
   if (e.preventDefault) {e.preventDefault();}
-  var tds = document.getElementsByTagName('td');
-  for (var i = 0; i < tds.length; i++) {
-    tds[i].style.opacity = 1.0;
-  }
   init(mainTypes, 'shortcuts-table');
   init(backupTypes, 'backup-table');
 }
 
-function handleDrop(e, mainTypes, backupTypes) {
+function tempDrop(e) {
+  MT = MT.filter(function (e) {return e && e != 'emptyCell'});
+  BT = BT.filter(function (e) {return e && e != 'emptyCell'});
+  
   var target = e.target || e.originalTarget;
-  var startId = e.dataTransfer.getData("gshortcuts/x-application");
   var endId = target.getAttribute('id');
-  var startType = $(startId).getAttribute('type');
+  if (endId.charAt(0) == 'm') {
+    MT.splice(parseInt(endId.substring(1)), 0, 'emptyCell');
+  }
+  if (endId.charAt(0) == 'b') {
+    BT.splice(parseInt(endId.substring(1)), 0, 'emptyCell');
+  }
+  init(MT, 'shortcuts-table');
+  init(BT, 'backup-table');
+}
+
+function handleDrop(e, mainTypes, backupTypes) {
+  var startId = startId_G; startId_G = '';
+  var startType = startType_G; startType_G = '';
+  
+  var target = e.target || e.originalTarget;
+  var endId = target.getAttribute('id');
   var endType = target.getAttribute('type');
   
   var condition_1 = (startId.charAt(0) == 'm' && endId.charAt(0) == 'm'); // for main drag

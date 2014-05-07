@@ -2,7 +2,7 @@
   "name": "igshortcuts",
   "title": "Google™ Shortcuts",
   "id": "jid1-SVJwkBGCTt4PyQ@jetpack",
-  "description": "Display all Google services as a single space-saving dropdown panel.",
+  "description": "Display all Google services as a single space-saving dropdown panel",
   "author": "Andy Portmen",
   "license": "MPL 2.0",
   "version": "0.2.2",
@@ -14,286 +14,286 @@
     {
       "name": "alerts",
       "title": "Google Alerts individual toolbar icon:",
-      "description": "Get email updates on the topics of your choice.",
+      "description": "Get email updates on the topics of your choice (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "analytics",
       "title": "Google Analytics individual toolbar icon:",
-      "description": "Google Analytics lets you measure your advertising ROI as well as track your Flash, video and social networking sites and applications.",
+      "description": "Google Analytics lets you measure your advertising ROI as well as track your Flash, video and social networking sites and applications (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "blog",
       "title": "Blog Search individual toolbar icon:",
-      "description": "Find blogs on your favorite topics.",
+      "description": "Find blogs on your favorite topics (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "blogger",
       "title": "Blogger individual toolbar icon:",
-      "description": "Share your life online with a blog - its quick, easy and free.",
+      "description": "Share your life online with a blog - its quick, easy and free (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "books",
       "title": "Google Books individual toolbar icon:",
-      "description": "Search the full text of books.",
+      "description": "Search the full text of books (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "calender",
       "title": "Google Calendar individual toolbar icon:",
-      "description": "Organize your schedule and share events with friends.",
+      "description": "Organize your schedule and share events with friends (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "code",
       "title": "Google Code individual toolbar icon:",
-      "description": "Developer tools, APIs and resources.",
+      "description": "Developer tools, APIs and resources (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "dashboard",
       "title": "Google Dashboard individual toolbar icon:",
-      "description": "Google Dashboard offers transparency and control over the data associated with your Google Account.",
+      "description": "Google Dashboard offers transparency and control over the data associated with your Google Account (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "drive",
       "title": "Google Drive individual toolbar icon:",
-      "description": "Create, share and keep all your stuff in one place.",
+      "description": "Create, share and keep all your stuff in one place (restart required).",
       "type": "bool",
       "value": false
     },    
     {
       "name": "earth",
       "title": "Google Earth individual toolbar icon:",
-      "description": "Explore the world from your computer.",
+      "description": "Explore the world from your computer (restart required).",
       "type": "bool",
       "value": false
     },  
     {
       "name": "finance",
       "title": "Google Finance individual toolbar icon:",
-      "description": "Business info, news and interactive charts.",
+      "description": "Business info, news and interactive charts (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "gmail",
       "title": "Gmail individual toolbar icon:",
-      "description": "Fast, searchable email with less spam.",
+      "description": "Fast, searchable email with less spam (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "groups",
       "title": "Google Groups individual toolbar icon:",
-      "description": "Create mailing lists and discussion groups.",
+      "description": "Create mailing lists and discussion groups (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "image",
       "title": "Google Image Search individual toolbar icon:",
-      "description": "Search for images on the web.",
+      "description": "Search for images on the web (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "maps",
       "title": "Google Maps individual toolbar icon:",
-      "description": "View maps and directions.",
+      "description": "View maps and directions (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "mobile",
       "title": "Google Mobile individual toolbar icon:",
-      "description": "Get Google products on your mobile phone.",
+      "description": "Get Google products on your mobile phone (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "music",
       "title": "Google Music individual toolbar icon:",
-      "description": "Google Play gives you one place to find, enjoy, & share Apps, Music, Movies & Books instantly anywhere across the web.",
+      "description": "Google Play gives you one place to find, enjoy, & share Apps, Music, Movies & Books instantly anywhere across the web (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "news",
       "title": "Google News individual toolbar icon:",
-      "description": "Search thousands of news stories.",
+      "description": "Search thousands of news stories (restart required).",
       "type": "bool",
       "value": false
     }, 
     {
       "name": "note",
       "title": "Google Keep (notes) individual toolbar icon:",
-      "description": "Quickly capture what's on your mind and recall it easily wherever you are.",
+      "description": "Quickly capture what's on your mind and recall it easily wherever you are (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "panoramio",
       "title": "Google Panoramio individual toolbar icon:",
-      "description": "Explore and share photos of the world.",
+      "description": "Explore and share photos of the world (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "picasa",
       "title": "Google Picasa individual toolbar icon:",
-      "description": "Find, edit and share your photos.",
+      "description": "Find, edit and share your photos (restart required).",
       "type": "bool",
       "value": false
     },  
     {
       "name": "play",
       "title": "Google Play individual toolbar icon:",
-      "description": "Shop Google Play on the web.",
+      "description": "Shop Google Play on the web (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "plus",
       "title": "Google Plus individual toolbar icon:",
-      "description": "Meet new people and stay in touch with friends.",
+      "description": "Meet new people and stay in touch with friends (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "print",
       "title": "Google Cloud Print individual toolbar icon:",
-      "description": "Print anywhere, from any device.",
+      "description": "Print anywhere, from any device (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "scholar",
       "title": "Google Scholar Search individual toolbar icon:",
-      "description": "Search scholarly papers.",
+      "description": "Search scholarly papers (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "serach",
       "title": "Google Web Search individual toolbar icon:",
-      "description": "Search billions of web pages.",
+      "description": "Search billions of web pages (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "sites",
       "title": "Google Sites individual toolbar icon:",
-      "description": "A free and easy way to create and share webpages.",
+      "description": "A free and easy way to create and share webpages (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "sketchup",
       "title": "Google SketchUp individual toolbar icon:",
-      "description": "Build 3D models quickly and easily.",
+      "description": "Build 3D models quickly and easily (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "hangouts",
       "title": "Google Hangouts individual toolbar icon:",
-      "description": "Hangouts bring conversations to life with photos, emoji, and even group video calls for free.",
+      "description": "Hangouts bring conversations to life with photos, emoji, and even group video calls for free (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "translate",
       "title": "Google Translate individual toolbar icon:",
-      "description": "Instantly translate text, web pages, and files between over 50 languages.",
+      "description": "Instantly translate text, web pages, and files between over 50 languages (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "trends",
       "title": "Google Trends individual toolbar icon:",
-      "description": "Explore past and present search trends.",
+      "description": "Explore past and present search trends (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "wallet",
       "title": "Google Wallet individual toolbar icon:",
-      "description": "a smart, virtual wallet that saves you time and money. With the Google Wallet mobile app, you can make your phone your wallet.",
+      "description": "a smart, virtual wallet that saves you time and money. With the Google Wallet mobile app, you can make your phone your wallet (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "youtube",
       "title": "YouTube individual toolbar icon:",
-      "description": "Watch, upload and share videos.",
+      "description": "Watch, upload and share videos (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "hotel",
       "title": "YouTube Hotel Search individual toolbar icon:",
-      "description": "Browse hotel photo galleries, read visitor reviews, and discover the popular areas of the city with Google Hotel Finder.",
+      "description": "Browse hotel photo galleries, read visitor reviews, and discover the popular areas of the city with Google Hotel Finder (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "patent",
       "title": "Google Patent Search individual toolbar icon:",
-      "description": "Search more than seven million U.S. patents.",
+      "description": "Search more than seven million U.S. patents (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "shopping",
       "title": "Google Shopping individual toolbar icon:",
-      "description": "Google Shopping helps shoppers find and buy products across online and brick and mortar retailers.",
+      "description": "Google Shopping helps shoppers find and buy products across online and brick and mortar retailers (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "android",
       "title": "Android individual toolbar icon:",
-      "description": "",
+      "description": "(restart required)",
       "type": "bool",
       "value": false
     },
     {
       "name": "bookmarks",
       "title": "Google Bookmarks individual toolbar icon:",
-      "description": "With Google Bookmarks, you can save shortcuts to your favorite webpages and navigate to them in seconds from anywhere.",
+      "description": "With Google Bookmarks, you can save shortcuts to your favorite webpages and navigate to them in seconds from anywhere (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "feedburner",
       "title": "Google Feedburner individual toolbar icon:",
-      "description": "",
+      "description": "(restart required)",
       "type": "bool",
       "value": false
     },
     {
       "name": "fusion",
       "title": "Google Fusion individual toolbar icon:",
-      "description": "Bust your data out of its silo! Get more from data with Fusion Tables.",
+      "description": "Bust your data out of its silo! Get more from data with Fusion Tables (restart required).",
       "type": "bool",
       "value": false
     },
     {
-      "name": "offer",
-      "title": "Google Offer individual toolbar icon:",
+      "name": "offers",
+      "title": "Google Offers individual toolbar icon:",
       "description": "",
       "type": "bool",
       "value": false
@@ -301,155 +301,142 @@
     {
       "name": "urlshortner",
       "title": "Google urlshortner individual toolbar icon:",
-      "description": "All goo.gl URLs and click analytics are public and can be accessed by anyone.",
+      "description": "All goo.gl URLs and click analytics are public and can be accessed by anyone (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "webhistory",
       "title": "Google Web History individual toolbar icon:",
-      "description": "You get better search results and recommendations across Google's products when your Web History is turned on.",
+      "description": "You get better search results and recommendations across Google's products when your Web History is turned on (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "webmaster",
       "title": "Google Webmaster individual toolbar icon:",
-      "description": "Get data, tools and diagnostics for a healthy, Google-friendly site. Sign in to Webmaster Tools.",
+      "description": "Get data, tools and diagnostics for a healthy, Google-friendly site. Sign in to Webmaster Tools (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "chromebook",
       "title": "Google Chromebook individual toolbar icon:",
-      "description": "The Chromebook is a new, faster computer.",
+      "description": "The Chromebook is a new, faster computer (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "chromium",
       "title": "Google Chromium individual toolbar icon:",
-      "description": "The Chromium projects include Chromium and Chromium OS, the open-source projects behind the Google Chrome browser and Google Chrome OS.",
+      "description": "The Chromium projects include Chromium and Chromium OS, the open-source projects behind the Google Chrome browser and Google Chrome OS (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "cloudeplatform",
       "title": "Google Cloude Platform individual toolbar icon:",
-      "description": "Google Cloud Platform lets you build and host applications and websites, store data, and analyze data on Google's scalable infrastructure.",
+      "description": "Google Cloud Platform lets you build and host applications and websites, store data, and analyze data on Google's scalable infrastructure (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "contacts",
       "title": "Google Contacts individual toolbar icon:",
-      "description": "Google Contacts is your online address book, integrated with Gmail, Calendar, Drive, and other Google products.",
+      "description": "Google Contacts is your online address book, integrated with Gmail, Calendar, Drive, and other Google products (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "correlate",
       "title": "Google Correlate individual toolbar icon:",
-      "description": "Google Correlate finds search patterns which correspond with real-world trends.",
+      "description": "Google Correlate finds search patterns which correspond with real-world trends (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "currents",
       "title": "Google Currents individual toolbar icon:",
-      "description": "Favorite publications, tuned for your tablet and smartphone.",
+      "description": "Favorite publications, tuned for your tablet and smartphone (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "developersdashboard",
       "title": "Google Developers Dashboard individual toolbar icon:",
-      "description": "",
+      "description": "(restart required)",
       "type": "bool",
       "value": false
     },
     {
       "name": "inputtool",
       "title": "Google Input Tools individual toolbar icon:",
-      "description": "Online, offline, on the go. Whether at home, at work, or somewhere in between—communicate in the language you need, when you need it.",
+      "description": "Online, offline, on the go. Whether at home, at work, or somewhere in between—communicate in the language you need, when you need it (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "ideas",
       "title": "Google Ideas individual toolbar icon:",
-      "description": "Google Ideas explores how technology can enable people to confront threats in the face of conflict, instability or repression. ",
+      "description": "Google Ideas explores how technology can enable people to confront threats in the face of conflict, instability or repression (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "mars",
       "title": "Google Mars individual toolbar icon:",
-      "description": "Google Mars was at first an in-browser version of Google Maps which provides a visible imagery view, like Google Moon, as well as infrared imagery.",
+      "description": "Google Mars was at first an in-browser version of Google Maps which provides a visible imagery view, like Google Moon, as well as infrared imagery (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "sky",
       "title": "Google Sky individual toolbar icon:",
-      "description": "Allows you to view celestial objects, including stars, constellations, galaxies, planets and the Earth's moon.",
+      "description": "Allows you to view celestial objects, including stars, constellations, galaxies, planets and the Earth's moon (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "transit",
       "title": "Google Transit individual toolbar icon:",
-      "description": "",
+      "description": "(restart required)",
       "type": "bool",
       "value": false
     },
     {
       "name": "webpagetest",
       "title": "Google Webpage Test individual toolbar icon:",
-      "description": "Evaluates the performance of web pages and get suggestions on how to improve them.",
+      "description": "Evaluates the performance of web pages and get suggestions on how to improve them (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "wdyl",
       "title": "Google What Do You Love individual toolbar icon:",
-      "description": "Get more of what you love by searching across numerous Google products with one click.",
+      "description": "Get more of what you love by searching across numerous Google products with one click (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "adwords",
       "title": "Google Adwords individual toolbar icon:",
-      "description": "Advertise with Google AdWords ads next to Google search results to boost website traffic and sales.",
+      "description": "Advertise with Google AdWords ads next to Google search results to boost website traffic and sales (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "adsense",
       "title": "Google Adsense individual toolbar icon:",
-      "description": "With Google AdSense, you can earn money from your online content.",
+      "description": "With Google AdSense, you can earn money from your online content (restart required).",
       "type": "bool",
       "value": false
     },
     {
       "name": "video",
       "title": "Google video individual toolbar icon:",
-      "description": "Search and watch millions of videos. Includes forum and personalized recommendations.",
+      "description": "Search and watch millions of videos. Includes forum and personalized recommendations (restart required).",
       "type": "bool",
       "value": false
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    ]
+  ]
 }

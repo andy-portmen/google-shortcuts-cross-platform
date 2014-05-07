@@ -58,15 +58,16 @@ Titles['bookmarks'] = 'Google Bookmarks';               Titles['webpagetest'] = 
 Titles['cloudeplatform'] = 'Google Cloude Platform';    Titles['transit'] = 'Google Transit';
 Titles['feedburner'] = 'Google Feedburner';             Titles['sky'] = 'Google Sky';
 Titles['fusion'] = 'Google Fusion Tables';              Titles['mars'] = 'Google Mars';
-Titles['offer'] = 'Google Offers';                      Titles['ideas'] = 'Google Ideas';
+Titles['offers'] = 'Google Offers';                     Titles['ideas'] = 'Google Ideas';
 Titles['urlshortner'] = 'Google URL Shortner';          Titles['inputtool'] = 'Google Input Tool';
 Titles['webhistory'] = 'Google Web History';            Titles['developersdashboard'] = 'Google Developement Dash';
 Titles['webmaster'] = 'Google Webmaster';               Titles['currents'] = 'Google Currents';
 Titles['chromebook'] = 'Google Chromebook';             Titles['correlate'] = 'Google Correlate';
 Titles['chromium'] = 'Chromium';                        Titles['contacts'] = 'Google Contacts';
 Titles['adwords'] = 'Google Adwords';                   Titles['adsense'] = 'Google Adsense';
-Titles['video'] = 'Google Videos';                      Titles[''] = '';
- 
+Titles['video'] = 'Google Videos';                      Titles['emptyCell'] = ''; 
+Titles[''] = '';
+
 function calculateHeight(name) {
   var nActiveTrs = 0;
   var table = document.getElementById(name);
@@ -79,65 +80,51 @@ function calculateHeight(name) {
   var height = nActiveTrs * 43;
   return height;
 }
-  
-function emptyTable(table) { 
-  var trs = table.getElementsByTagName('tr');
-  for (var i = 0; i < trs.length; i++) {
-  var tds = trs[i].getElementsByTagName('td');
-  for (var j = 0; j < tds.length; j++) {
-    var td = tds[j];
-    var id = 'undefined';
-    td.setAttribute('id', id);
-    td.removeAttribute('type'); 
-    td.removeAttribute('title');
-    td.removeAttribute('status');
-    }
-  }
-} 
  
 function init(data, name) { 
-  var id_pref, count = 0;;
-  if (name == 'shortcuts-table') {mainTypes = data; id_pref = 'm';}
-  if (name == 'backup-table')    {backupTypes = data; id_pref = 'b';}
-  var table = document.getElementById(name); emptyTable(table);
+  var id_pref, count = 0;
+  if (name == 'shortcuts-table') id_pref = 'm';
+  if (name == 'backup-table') id_pref = 'b';
+  var table = document.getElementById(name);
   var trs = table.getElementsByTagName('tr');
   for (var i = 0; i < trs.length; i++) {
     var tds = trs[i].getElementsByTagName('td');
     for (var j = 0; j < tds.length; j++) {
-      var td = tds[j];
       var id = id_pref + count.toString();
+      var td = tds[j];
       td.setAttribute('id', id);
+      td.removeAttribute('status');
+      td.removeAttribute('type'); 
+      td.removeAttribute('title');
       if (count < data.length && data[count]) {
         td.draggable = true;
         td.setAttribute('type', data[count]); 
         td.setAttribute('title', Titles[data[count]]);
-        count++;
       }
       else {
+        td.draggable = false;
         td.setAttribute('status', 'empty');
-        td.removeAttribute('type'); 
-        td.removeAttribute('title');
       }
+      count++;
     }
   }
-  if (name == 'shortcuts-table') {height_1 = calculateHeight(name);}
-  if (name == 'backup-table')    {height_2 = calculateHeight(name);}
-
-  if (total_drag) { 
-    $('main-div').style.height = height_1 + height_2 + 55 + 'px';
-    document.body.style.height = height_1 + height_2 + 55 + 45 + 'px';
-  }
-  else {
-    $('main-div').style.height = height_1 + 'px';
-    document.body.style.height = height_1 + 45 + 'px';
-  }
+  
+  height_1 = $('shortcuts-table').getBoundingClientRect().height;
+  height_2 = $('backup-table').getBoundingClientRect().height;
+  document.body.style.height = (height_1 + (height_2 ? height_2 + 23 : 0) + 45) + 'px';
   doResize();
 }
 
 background.send('request-inits');
 background.send('request-backup-inits');
-background.receive('request-inits', function (data) {init(data, 'shortcuts-table');});
-background.receive('request-backup-inits', function (data) {init(data, 'backup-table');});
+background.receive('request-inits', function (data) {
+  mainTypes = data; 
+  init(mainTypes, 'shortcuts-table');
+});
+background.receive('request-backup-inits', function (data) {
+  backupTypes = data; 
+  init(backupTypes, 'backup-table');
+});
 
 $('more-td').addEventListener('click', function (e) {
   var target = e.target || e.originalTarget;
@@ -146,6 +133,7 @@ $('more-td').addEventListener('click', function (e) {
     $('backup-table').style.display = 'table';
     $('separator-table').style.display = 'table';
     target.setAttribute('status', 'active');
+    target.setAttribute("title", "Click to hide more icons");
     toggle = false;
   }
   else {
@@ -153,35 +141,31 @@ $('more-td').addEventListener('click', function (e) {
     $('backup-table').style.display = 'none';
     $('separator-table').style.display = 'none';
     target.removeAttribute('status');
+    target.setAttribute("title", "Click to see hidden icons");
     toggle = true;
   }
   init(mainTypes, 'shortcuts-table');
   init(backupTypes, 'backup-table');
-  doResize();
 }, false);
 
-$('main-div').addEventListener('mouseover', function (e) {
-  var target = e.target || e.originalTarget;
+function onMouseup (e) {
+  if (isDraging) return;
+  var target = e.target || e.originalTarget;  
   var type = target.getAttribute('type');
+  if (type) {background.send('open-tab-request', {
+    type: type, 
+    inBackground: e.button == 1 || (e.ctrlKey && e.button == 0)
+  });} 
+}
+// onClick does not fire e.button == 1 on Firefox
+$('shortcuts-table').addEventListener('mouseup', onMouseup, false);
+$('backup-table').addEventListener('mouseup', onMouseup, false);
+
+$('reset-td').addEventListener('click', function (e) {
+  background.send('reset-history');
+});
+
+$('status-div').addEventListener('mouseover', function (e) {
+  var target = e.target || e.originalTarget;
   $('status-td').textContent = target.getAttribute('title') || 'Google Shortcuts';
 }, false);
-
-$('shortcuts-table').addEventListener('click', function (e) {
-  if (isDraging) return;
-  var target = e.target || e.originalTarget;  
-  var type = target.getAttribute('type');
-  if (type) {background.send('open-tab-request', {
-    type: type, 
-    inBackground: e.button == 1 || (e.ctrlKey && e.button == 0)
-  });} 
-})
-
-$('backup-table').addEventListener('click', function (e) {
-  if (isDraging) return;
-  var target = e.target || e.originalTarget;  
-  var type = target.getAttribute('type');
-  if (type) {background.send('open-tab-request', {
-    type: type, 
-    inBackground: e.button == 1 || (e.ctrlKey && e.button == 0)
-  });} 
-})
