@@ -6,18 +6,22 @@ html {
 }
 
 body {
-  width: 266px;
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   padding: 5px 5px 0 5px;
   margin: 0;
   overflow: hidden;
   background-color: #fff;
   -moz-user-select: none;
   -webkit-user-select: none;
+  width: 250px;
+  height: 211px;
 }
-::-webkit-scrollbar { 
+::-webkit-scrollbar {
   display: none; 
+}
+input[type=number] {
+    -moz-appearance:textfield;
 }
 #shortcuts-table, #backup-table {
   border-spacing: 0;
@@ -116,6 +120,7 @@ tr td[type='transit'] {background: url(./icons/transit.png) no-repeat center cen
 tr td[type='webpagetest'] {background: url(./icons/webpagetest.png) no-repeat center center;}
 tr td[type='wdyl'] {background: url(./icons/wdyl.png) no-repeat center center;}
 tr td[type='video'] {background: url(./icons/video.png) no-repeat center center;}
+tr td[type='voice'] {background: url(./icons/voice.png) no-repeat center center;}
 tr td[type='emptyCell'] {
   background: url(./icons/emptyCell.png) no-repeat center center;
   -webkit-transition: 0 background-image; 
@@ -153,14 +158,18 @@ tr td[type=''] {background-image: none;}
   border: 0;
 }
 #status-td {
-  width: 193px;
   height: 40px;
   background-color: #F5F5F5;
   text-align: center;
   vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 3px;
+  direction: rtl;
 }
 #more-td {
-  width: 32px;
+  width: 40px;
   height: 40px;
   text-align: center;
   vertical-align: middle;
@@ -174,7 +183,7 @@ tr td[type=''] {background-image: none;}
   opacity: 1.0;
 }
 #reset-td {
-  width: 32px;
+  width: 40px;
   height: 40px;
   text-align: center;
   vertical-align: middle;
@@ -183,4 +192,27 @@ tr td[type=''] {background-image: none;}
 }
 #reset-td:hover {
   opacity: 1.0;
+}
+#resize-td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  background: #F5F5F5 url(reset.png) no-repeat center center;
+  opacity: 0.7;
+}
+#resize-td:hover {
+  opacity: 1.0;
+}
+
+#nc-input {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle; 
+  text-align: center; 
+  background-color: #F5F5F5
 }

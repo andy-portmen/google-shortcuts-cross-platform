@@ -1,11 +1,10 @@
 #igshortcuts {
-  list-style-image: url('icon16.png') !important;
+  list-style-image: url('../icon16.png') !important;
 }
 #igshortcuts[cui-areatype="menu-panel"],
 toolbarpaletteitem[place="palette"] > #igshortcuts {
-  list-style-image: url('icon32.png') !important;
+  list-style-image: url('../icon32.png') !important;
 }
-
 
 #igshortcuts-shopping {list-style-image: url('toolbar/shopping.png') !important;}
 #igshortcuts-inputtool {list-style-image: url('toolbar/inputtool.png') !important;}
@@ -69,3 +68,4 @@ toolbarpaletteitem[place="palette"] > #igshortcuts {
 #igshortcuts-maps {list-style-image: url('toolbar/maps.png') !important;}
 #igshortcuts-currents {list-style-image: url('toolbar/currents.png') !important;}
 #igshortcuts-adsense {list-style-image: url('toolbar/adsense.png') !important;}
+#igshortcuts-voice {list-style-image: url('toolbar/voice.png') !important;}

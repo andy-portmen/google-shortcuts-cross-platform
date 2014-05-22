@@ -1,4 +1,4 @@
-var MT, BT, startId_G, startType_G;
+var MT, BT, startId_G, startType_G, isDraging;
 var dragIconContent = './icons/emptyCell.png';
 var dragIcon = document.createElement('img');
 dragIcon.src = dragIconContent;
@@ -53,16 +53,22 @@ function onDragOver(e) {
   e.dataTransfer.dropEffect = 'move';
 }
 
-function onDragLeave(e) {}
+function onDragLeave(e) {
+  if (!isDraging) return;
+}
 
 function onDrop(e) {
+  if (!isDraging) return;
   if (!e.dataTransfer.getData("gshortcuts/x-application")) return;
   handleDrop(e, mainTypes, backupTypes);
   if (e.stopPropagation) {e.stopPropagation();}
 }
 
 function onDragend(e) {
-  isDraging = false;
+  //In safari "onDragend" occurs before "onMouseup"
+  window.setTimeout(function () {
+    isDraging = false;
+  }, 500);
   if (e.preventDefault) {e.preventDefault();}
   init(mainTypes, 'shortcuts-table');
   init(backupTypes, 'backup-table');

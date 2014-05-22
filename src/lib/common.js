@@ -1,32 +1,26 @@
-var storage, get, popup, window, Deferred, content_script, tab, version;
-/*
-Storage Items:
-  "history"
-  "from"
-  "to"
-  "isTextSelection"
-  "isDblclick"
-  "enableHistory"
-  "numberHistoryItems"
-*/
-/********/
-if (typeof require !== 'undefined') {
-  var firefox = require("./firefox.js");
-  storage = firefox.storage;
-  popup = firefox.popup;
-  window = firefox.window;
-  tab = firefox.tab;
-  version = firefox.version;
-  Deferred = firefox.Promise.defer;
+var storage, popup, window, Deferred, tab, version;
+
+/**** wrapper (start) ****/
+if (typeof require !== 'undefined') { //Firefox
+  var firefox = require("./firefox/firefox.js");
+  ["storage", "popup", "window", "tab", "version", "Deferred"].forEach(function (id) {
+    this[id] = firefox[id];
+  });
 }
-else {
-  storage = _chrome.storage;
-  popup = _chrome.popup;
-  tab = _chrome.tab;
-  version = _chrome.version;
+else if (typeof safari !== 'undefined') {  // Safari
+  ["storage", "popup", "window", "tab", "version", "Deferred"].forEach(function (id) {
+    this[id] = _safari[id];
+  });
   Deferred = task.Deferred;
 }
-/********/
+else {  //Chrome
+  ["storage", "popup", "window", "tab", "version", "Deferred"].forEach(function (id) {
+    this[id] = _chrome[id];
+  });
+  Deferred = task.Deferred;
+}
+/**** wrapper (end) ****/
+
 if (storage.read("version") != version()) {
   storage.write("version", version());
   tab.open("http://add0n.com/google-shortcuts.html?version=" + version());
@@ -42,7 +36,7 @@ backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offers', 'urlsho
                'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
                'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 
                'image', 'mobile', 'earth', 'panoramio', 'site', 'hotel',
-               'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup', 'video'];
+               'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup', 'video', 'voice'];
              
 if (!storage.read("mainTypes")) {storage.write("mainTypes", JSON.stringify(mainTypes));}
 if (!storage.read("backupTypes")) {storage.write("backupTypes", JSON.stringify(backupTypes));}
@@ -50,6 +44,8 @@ if (!storage.read("backupTypes")) {storage.write("backupTypes", JSON.stringify(b
 popup.receive('request-inits', function () {
   var lStorage = storage.read("mainTypes");
   var lStorage_arr = JSON.parse(lStorage);
+  var popupWidth = storage.read("popupWidth") || "6";
+  popup.send('popup-width', popupWidth);
   popup.send('request-inits', lStorage_arr);
 });
 
@@ -65,6 +61,10 @@ popup.receive('store-mainTypes', function (data) {
 
 popup.receive('store-backupTypes', function (data) {
   storage.write("backupTypes", JSON.stringify(data));
+});
+
+popup.receive('store-popup-width', function (data) {
+  storage.write("popupWidth", data);
 });
 
 popup.receive('reset-history', function (data) {
@@ -258,6 +258,9 @@ popup.receive('open-tab-request', function (obj) {
     break;
   case 'video':
     tab.open('https://www.google.com/videohp', obj.inBackground, !obj.inBackground);
+    break;
+  case 'voice':
+    tab.open('https://www.google.com/voice', obj.inBackground, !obj.inBackground);
     break;
   default:
     tab.open('https://www.google.com/about/products/', obj.inBackground, !obj.inBackground);

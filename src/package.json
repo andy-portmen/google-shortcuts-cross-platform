@@ -5,7 +5,7 @@
   "description": "Display all Google services as a single space-saving dropdown panel",
   "author": "Andy Portmen",
   "license": "MPL 2.0",
-  "version": "0.2.2",
+  "version": "1.1.0",
   "main": "common",
   
   "permissions": {"private-browsing": true},
@@ -433,8 +433,15 @@
     },
     {
       "name": "video",
-      "title": "Google video individual toolbar icon:",
+      "title": "Google Video individual toolbar icon:",
       "description": "Search and watch millions of videos. Includes forum and personalized recommendations (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "voice",
+      "title": "Google Voice individual toolbar icon:",
+      "description": "Google Voice gives you one number for all your phones, voicemail as easy as email, free US long distance, low rates on international calls, and many more (restart required).",
       "type": "bool",
       "value": false
     }

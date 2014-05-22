@@ -1,5 +1,3 @@
-/** version 4 **/
-
 // Load Firefox based resources
 var self          = require("sdk/self"),
     data          = self.data,
@@ -20,13 +18,12 @@ var self          = require("sdk/self"),
 Cu.import("resource://gre/modules/Promise.jsm");
  
 // Load overlay styles
-require("./userstyles").load(data.url("overlay.css"));
+require("./userstyles").load(data.url("firefox/overlay.css"));
 //Install toolbar button
 var button = toolbarbutton.ToolbarButton({
   id: "igshortcuts",
-  label: "Google Shortcuts",
+  label: "Google™ Shortcuts",
   tooltiptext: "Shortcuts of Google Products",
-  insert: true,
   onCommand: function () {
     popup.show(button.object);
   },
@@ -42,10 +39,13 @@ if (self.loadReason == "install") {
 }
 
 var popup = require("sdk/panel").Panel({
-  width: 280,
-  height: 220,
+  width: 250,
+  height: 210,
   contentURL: data.url("./popup/popup.html"),
   contentScriptFile: [data.url("./popup/popup.js"), data.url("./popup/drag.js")]
+});
+popup.on('show', function() {
+  popup.port.emit('show', true);
 });
 popup.port.on("resize", function(obj) {
   popup.resize(obj.w, obj.h + 2);
@@ -98,6 +98,7 @@ exports.version = function () {
 
 exports.window = require('sdk/window/utils').getMostRecentBrowserWindow();
 exports.Promise = Promise;
+exports.Deferred = Promise.defer;
 
 /**************************************************************************************************/
 var onCmd = function (url) {
@@ -418,6 +419,11 @@ var icons = [
     label: "Google Videos",
     icon: "video",
     url: 'https://www.google.com/videohp'
+  },
+  {
+    label: "Google Voice",
+    icon: "voice",
+    url: 'https://www.google.com/voice'
   }
 ];
 

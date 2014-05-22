@@ -1,5 +1,3 @@
-/** version 4 **/
-
 var _chrome = {
   storage: {
     read: function (id) {
@@ -15,7 +13,7 @@ var _chrome = {
     },
     receive: function (id, callback) {
       chrome.extension.onRequest.addListener(function(request, sender, callback2) {
-        if (request.method == id) {
+        if (request.method == id && !sender.tab) {
           callback(request.data);
         }
       });
@@ -32,6 +30,9 @@ var _chrome = {
           active: typeof inBackground == 'undefined' ? true : !inBackground
         });
       }
+    },
+    openOptions: function () {
+      chrome.tabs.create({url: "./data/chrome/options/options.html"});
     }
   },
   version: function () {

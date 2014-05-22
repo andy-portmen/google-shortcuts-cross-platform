@@ -1,7 +1,7 @@
-/********/
-var doResize;
 var background = {};
-if (typeof chrome !== 'undefined') {
+var doResize;
+/**** wrapper (start) ****/
+if (typeof chrome !== 'undefined') {  // Chrome
   background.send = function (id, data) {
     chrome.extension.sendRequest({method: id, data: data});
   }
@@ -14,26 +14,49 @@ if (typeof chrome !== 'undefined') {
   }
   doResize = function () {}
 }
-else {
+else if (typeof safari !== 'undefined') { // Safari
+  background = (function () {
+    var callbacks = {};
+    return {
+      send: function (id, data) {
+        safari.extension.globalPage.contentWindow.popup.dispatchMessage(id, data);
+      },
+      receive: function (id, callback) {
+        callbacks[id] = callback;
+      },
+      dispatchMessage: function (id, data) {
+        if (callbacks[id]) {
+          callbacks[id](data);
+        }
+      }
+    }
+  })();
+  doResize = function () {
+    safari.self.width = document.body.getBoundingClientRect().width;
+    safari.self.height = document.body.getBoundingClientRect().height;
+  }
+  window.addEventListener("resize", doResize, false);
+}
+else {  // Firefox
   background.send = function (id, data) {
     self.port.emit(id, data);
   }
   background.receive = function (id, callback) {
     self.port.on(id, callback);
   }
-  
   doResize = function () {
     self.port.emit("resize", {
-      w: document.body.getBoundingClientRect().width, 
-      h: document.body.getBoundingClientRect().height}
-    );
+      w: document.body.getBoundingClientRect().width,
+      h: document.body.getBoundingClientRect().height
+    });
   }
   window.addEventListener("resize", doResize, false);
 }
-/********/
+/**** wrapper (end) ****/
+
 function $ (id) {return document.getElementById(id);}
 var mainTypes, backupTypes, Titles = {}, total_drag = false, isDraging = false, toggle = true;
-var height_1 = 0, height_2 = 0;
+var height_1 = 0, height_2 = 0, width = 0;
 
 Titles['alerts'] = 'Google Alerts';                     Titles['analytics'] = 'Google Analytics';
 Titles['blog'] = 'Google Blog Search';                  Titles['blogger'] = 'Google Blogger';
@@ -65,31 +88,23 @@ Titles['webmaster'] = 'Google Webmaster';               Titles['currents'] = 'Go
 Titles['chromebook'] = 'Google Chromebook';             Titles['correlate'] = 'Google Correlate';
 Titles['chromium'] = 'Chromium';                        Titles['contacts'] = 'Google Contacts';
 Titles['adwords'] = 'Google Adwords';                   Titles['adsense'] = 'Google Adsense';
-Titles['video'] = 'Google Videos';                      Titles['emptyCell'] = ''; 
-Titles[''] = '';
-
-function calculateHeight(name) {
-  var nActiveTrs = 0;
-  var table = document.getElementById(name);
-  var trs = table.getElementsByTagName('tr');
-  for (var i = 0; i < trs.length; i++) {
-    var tds = trs[i].getElementsByTagName('td');
-    if (tds[0].getAttribute('status') == 'empty') break;
-    nActiveTrs++;
-  }
-  var height = nActiveTrs * 43;
-  return height;
-}
+Titles['video'] = 'Google Videos';                      Titles['voice'] = 'Google Voice'; 
+Titles[''] = '';                                        Titles['emptyCell'] = ''; 
  
-function init(data, name) { 
+function init(data, name) {
   var id_pref, count = 0;
   if (name == 'shortcuts-table') id_pref = 'm';
   if (name == 'backup-table') id_pref = 'b';
+  var nc = parseInt($('nc-input').value);
   var table = document.getElementById(name);
   var trs = table.getElementsByTagName('tr');
   for (var i = 0; i < trs.length; i++) {
     var tds = trs[i].getElementsByTagName('td');
-    for (var j = 0; j < tds.length; j++) {
+    for (var k = 0; k < tds.length; k++) { // first reset icons
+      tds[k].draggable = false;
+      tds[k].setAttribute('status', 'empty');
+    }
+    for (var j = 0; j < nc; j++) {
       var id = id_pref + count.toString();
       var td = tds[j];
       td.setAttribute('id', id);
@@ -109,22 +124,31 @@ function init(data, name) {
     }
   }
   
+  width = $('shortcuts-table').getBoundingClientRect().width;
   height_1 = $('shortcuts-table').getBoundingClientRect().height;
   height_2 = $('backup-table').getBoundingClientRect().height;
   document.body.style.height = (height_1 + (height_2 ? height_2 + 23 : 0) + 45) + 'px';
+  document.body.style.width = (nc * 40) + 'px';
+  $('status-td').style.width = ((nc - 3) * 40) + 'px'; 
+  $('status-td').style.minWidth = ((nc - 3) * 40) + 'px'; 
+  $('status-td').style.maxWidth = ((nc - 3) * 40) + 'px'; 
   doResize();
 }
 
-background.send('request-inits');
-background.send('request-backup-inits');
 background.receive('request-inits', function (data) {
   mainTypes = data; 
   init(mainTypes, 'shortcuts-table');
 });
+background.receive('popup-width', function (data) {
+  $('nc-input').value = data;
+});
+background.send('request-inits');
+
 background.receive('request-backup-inits', function (data) {
   backupTypes = data; 
   init(backupTypes, 'backup-table');
 });
+background.send('request-backup-inits');
 
 $('more-td').addEventListener('click', function (e) {
   var target = e.target || e.originalTarget;
@@ -154,7 +178,7 @@ function onMouseup (e) {
   var type = target.getAttribute('type');
   if (type) {background.send('open-tab-request', {
     type: type, 
-    inBackground: e.button == 1 || (e.ctrlKey && e.button == 0)
+    inBackground: (e.ctrlKey && e.button == 0) || (e.metaKey && e.button == 0) || e.button == 1
   });} 
 }
 // onClick does not fire e.button == 1 on Firefox
@@ -163,6 +187,17 @@ $('backup-table').addEventListener('mouseup', onMouseup, false);
 
 $('reset-td').addEventListener('click', function (e) {
   background.send('reset-history');
+});
+
+$('nc-input').addEventListener('change', function (e) {
+  var target = e.target || e.originalTarget;  
+  var nc = parseInt(target.value) || 6;
+  if (nc > 19) nc = 19;
+  if (nc < 5) nc = 5;
+  target.value = nc;
+  background.send('store-popup-width', nc);
+  init(mainTypes, 'shortcuts-table');
+  init(backupTypes, 'backup-table');
 });
 
 $('status-div').addEventListener('mouseover', function (e) {
