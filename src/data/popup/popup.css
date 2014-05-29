@@ -37,12 +37,12 @@ input[type=number] {
   -webkit-transition: 600ms background-image; 
   -moz-transition: 600ms background-image;
   border-bottom: 1px solid transparent;
+  background-color: white;
   padding: 0;
   margin: 0;
 }
 #shortcuts-table  tr td:hover,
 #backup-table tr td:hover {
-  background-color: white;
   border-bottom: 1px solid #d14836;
   cursor: pointer;
   -webkit-transition: 0s; 
@@ -121,6 +121,7 @@ tr td[type='webpagetest'] {background: url(./icons/webpagetest.png) no-repeat ce
 tr td[type='wdyl'] {background: url(./icons/wdyl.png) no-repeat center center;}
 tr td[type='video'] {background: url(./icons/video.png) no-repeat center center;}
 tr td[type='voice'] {background: url(./icons/voice.png) no-repeat center center;}
+tr td[type='catalogs'] {background: url(./icons/catalogs.png) no-repeat center center;}
 tr td[type='emptyCell'] {
   background: url(./icons/emptyCell.png) no-repeat center center;
   -webkit-transition: 0 background-image; 
@@ -166,7 +167,6 @@ tr td[type=''] {background-image: none;}
   overflow: hidden;
   white-space: nowrap;
   padding: 0 3px;
-  direction: rtl;
 }
 #more-td {
   width: 40px;

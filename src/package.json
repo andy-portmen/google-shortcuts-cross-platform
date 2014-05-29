@@ -5,7 +5,7 @@
   "description": "Display all Google services as a single space-saving dropdown panel",
   "author": "Andy Portmen",
   "license": "MPL 2.0",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "common",
   
   "permissions": {"private-browsing": true},
@@ -385,7 +385,7 @@
     {
       "name": "mars",
       "title": "Google Mars individual toolbar icon:",
-      "description": "Google Mars was at first an in-browser version of Google Maps which provides a visible imagery view, like Google Moon, as well as infrared imagery (restart required).",
+      "description": "Google Mars is in-browser version of Google Maps which provides a visible imagery view, like Google Moon (restart required).",
       "type": "bool",
       "value": false
     },
@@ -441,7 +441,14 @@
     {
       "name": "voice",
       "title": "Google Voice individual toolbar icon:",
-      "description": "Google Voice gives you one number for all your phones, voicemail as easy as email, free US long distance, low rates on international calls, and many more (restart required).",
+      "description": "Google Voice gives you one number for all your phones, voicemail and many more (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "catalogs",
+      "title": "Google Catalogs individual toolbar icon:",
+      "description": "Google Catalogs allows shoppers to browse and shop all their favorite catalogs (restart required).",
       "type": "bool",
       "value": false
     }

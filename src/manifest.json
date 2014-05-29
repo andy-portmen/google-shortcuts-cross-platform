@@ -1,6 +1,6 @@
 {
   "name": "Shortcuts for Google™ Products",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "manifest_version": 2,
   "short_name": "igshortcuts",
   "description": "Display all Google services as a single space-saving dropdown panel.",

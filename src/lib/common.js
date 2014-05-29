@@ -36,7 +36,7 @@ backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offers', 'urlsho
                'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
                'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 
                'image', 'mobile', 'earth', 'panoramio', 'site', 'hotel',
-               'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup', 'video', 'voice'];
+               'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup', 'video', 'voice', 'catalogs'];
              
 if (!storage.read("mainTypes")) {storage.write("mainTypes", JSON.stringify(mainTypes));}
 if (!storage.read("backupTypes")) {storage.write("backupTypes", JSON.stringify(backupTypes));}
@@ -44,7 +44,7 @@ if (!storage.read("backupTypes")) {storage.write("backupTypes", JSON.stringify(b
 popup.receive('request-inits', function () {
   var lStorage = storage.read("mainTypes");
   var lStorage_arr = JSON.parse(lStorage);
-  var popupWidth = storage.read("popupWidth") || "6";
+  var popupWidth = storage.read("popupWidth") || "7";
   popup.send('popup-width', popupWidth);
   popup.send('request-inits', lStorage_arr);
 });
@@ -261,6 +261,9 @@ popup.receive('open-tab-request', function (obj) {
     break;
   case 'voice':
     tab.open('https://www.google.com/voice', obj.inBackground, !obj.inBackground);
+    break;
+  case 'catalogs':
+    tab.open('https://www.google.com/catalogs/', obj.inBackground, !obj.inBackground);
     break;
   default:
     tab.open('https://www.google.com/about/products/', obj.inBackground, !obj.inBackground);

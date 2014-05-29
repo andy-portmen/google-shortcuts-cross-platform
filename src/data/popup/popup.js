@@ -12,6 +12,10 @@ if (typeof chrome !== 'undefined') {  // Chrome
       }
     });
   }
+  window.setTimeout(function () {
+    $('more-td').focus();
+    $('nc-input').blur();
+  }, 100);
   doResize = function () {}
 }
 else if (typeof safari !== 'undefined') { // Safari
@@ -36,20 +40,30 @@ else if (typeof safari !== 'undefined') { // Safari
     safari.self.height = document.body.getBoundingClientRect().height;
   }
   window.addEventListener("resize", doResize, false);
+  safari.application.addEventListener("popover", function (){
+    window.setTimeout(function () {
+      $('more-td').focus();
+      $('nc-input').blur();
+    }, 100);
+  }, false);
 }
 else {  // Firefox
   background.send = function (id, data) {
     self.port.emit(id, data);
-  }
+  };
   background.receive = function (id, callback) {
     self.port.on(id, callback);
-  }
+  };
   doResize = function () {
     self.port.emit("resize", {
       w: document.body.getBoundingClientRect().width,
       h: document.body.getBoundingClientRect().height
     });
-  }
+  };
+  self.port.on("show", function () {
+    $('more-td').focus();
+    $('nc-input').blur();
+  });
   window.addEventListener("resize", doResize, false);
 }
 /**** wrapper (end) ****/
@@ -89,7 +103,8 @@ Titles['chromebook'] = 'Google Chromebook';             Titles['correlate'] = 'G
 Titles['chromium'] = 'Chromium';                        Titles['contacts'] = 'Google Contacts';
 Titles['adwords'] = 'Google Adwords';                   Titles['adsense'] = 'Google Adsense';
 Titles['video'] = 'Google Videos';                      Titles['voice'] = 'Google Voice'; 
-Titles[''] = '';                                        Titles['emptyCell'] = ''; 
+Titles['catalogs'] = 'Google Catalogs';  
+Titles[''] = '';                                        Titles['emptyCell'] = '';
  
 function init(data, name) {
   var id_pref, count = 0;

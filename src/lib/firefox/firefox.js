@@ -424,6 +424,11 @@ var icons = [
     label: "Google Voice",
     icon: "voice",
     url: 'https://www.google.com/voice'
+  },
+  {
+    label: "Google Catalogs",
+    icon: "catalogs",
+    url: 'https://www.google.com/catalogs/'
   }
 ];
 

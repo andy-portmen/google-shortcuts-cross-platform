@@ -60,6 +60,7 @@ function onDragLeave(e) {
 function onDrop(e) {
   if (!isDraging) return;
   if (!e.dataTransfer.getData("gshortcuts/x-application")) return;
+  if (e.preventDefault) {e.preventDefault();}
   handleDrop(e, mainTypes, backupTypes);
   if (e.stopPropagation) {e.stopPropagation();}
 }
