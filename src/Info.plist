@@ -61,6 +61,8 @@
 		<key>Website Access</key>
 		<dict/>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://raw.githubusercontent.com/andy-portmen/google-shortcuts-cross-platform/master/src/update.plist</string>
 	<key>Website</key>
 	<string>http://add0n.com/google-shortcuts.html</string>
 </dict>
