@@ -5,7 +5,7 @@
 	<key>Author</key>
 	<string>Mike Avilov</string>
 	<key>Builder Version</key>
-	<string>534.57.2</string>
+	<string>9537.76.4</string>
 	<key>CFBundleDisplayName</key>
 	<string>Shortcuts for Google™ Products</string>
 	<key>CFBundleIdentifier</key>
@@ -19,7 +19,7 @@
 	<key>Chrome</key>
 	<dict>
 		<key>Database Quota</key>
-		<real>10485760</real>
+		<real>5242880</real>
 		<key>Global Page</key>
 		<string>lib/safari/safari.html</string>
 		<key>Popovers</key>
