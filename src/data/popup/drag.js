@@ -4,11 +4,6 @@ var dragIcon = document.createElement('img');
 dragIcon.src = dragIconContent;
 function setDragIcon(dragIconContent) {dragIcon.src = dragIconContent;}
 
-$('main-div').addEventListener('mouseover', function (e) {
-  var target = e.target || e.originalTarget;
-  $('status-td').textContent = target.getAttribute('title') || 'Google Shortcuts';
-}, false);
-
 $('main-div').addEventListener('mousedown', function (e) {
   var target = e.target || e.originalTarget;
   var type = target.getAttribute('type');
@@ -28,7 +23,7 @@ function onDragStart(e) {
   startId_G = target.getAttribute('id');
   
   startType_G = target.getAttribute('type');
-  e.dataTransfer.setDragImage(dragIcon, 15, 15);  
+  e.dataTransfer.setDragImage(dragIcon, 32, 32);  
   if (startId_G.charAt(0) == 'm') {
     MT.splice(parseInt(startId_G.substring(1)), 1);
   }
@@ -81,10 +76,10 @@ function tempDrop(e) {
   
   var target = e.target || e.originalTarget;
   var endId = target.getAttribute('id');
-  if (endId.charAt(0) == 'm') {
+  if (endId && endId.charAt(0) == 'm') {
     MT.splice(parseInt(endId.substring(1)), 0, 'emptyCell');
   }
-  if (endId.charAt(0) == 'b') {
+  if (endId && endId.charAt(0) == 'b') {
     BT.splice(parseInt(endId.substring(1)), 0, 'emptyCell');
   }
   init(MT, 'shortcuts-table');
@@ -98,6 +93,8 @@ function handleDrop(e, mainTypes, backupTypes) {
   var target = e.target || e.originalTarget;
   var endId = target.getAttribute('id');
   var endType = target.getAttribute('type');
+  
+  if (!startId || !endId) return;
   
   var condition_1 = (startId.charAt(0) == 'm' && endId.charAt(0) == 'm'); // for main drag
   var condition_2 = (startId.charAt(0) == 'b' && endId.charAt(0) == 'b'); // for main drag

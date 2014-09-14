@@ -1,5 +1,5 @@
-var background = {};
-var doResize;
+var background = {}, doResize;
+
 /**** wrapper (start) ****/
 if (typeof chrome !== 'undefined') {  // Chrome
   background.send = function (id, data) {
@@ -12,10 +12,7 @@ if (typeof chrome !== 'undefined') {  // Chrome
       }
     });
   }
-  window.setTimeout(function () {
-    $('more-td').focus();
-    $('nc-input').blur();
-  }, 100);
+  window.setTimeout(function () {}, 100);
   doResize = function () {}
 }
 else if (typeof safari !== 'undefined') { // Safari
@@ -41,10 +38,7 @@ else if (typeof safari !== 'undefined') { // Safari
   }
   window.addEventListener("resize", doResize, false);
   safari.application.addEventListener("popover", function (){
-    window.setTimeout(function () {
-      $('more-td').focus();
-      $('nc-input').blur();
-    }, 100);
+    window.setTimeout(function () {}, 100);
   }, false);
 }
 else {  // Firefox
@@ -60,17 +54,15 @@ else {  // Firefox
       h: document.body.getBoundingClientRect().height
     });
   };
-  self.port.on("show", function () {
-    $('more-td').focus();
-    $('nc-input').blur();
-  });
+  self.port.on("show", function () {});
   window.addEventListener("resize", doResize, false);
 }
 /**** wrapper (end) ****/
 
 function $ (id) {return document.getElementById(id);}
-var mainTypes, backupTypes, Titles = {}, total_drag = false, isDraging = false, toggle = true;
-var height_1 = 0, height_2 = 0, width = 0;
+var mainTypes, iconSize, popupWidth, panelColor, fontColor, backupTypes, Titles = {}, total_drag = false, isDraging = false, toggle = true;
+var height_1 = 0, height_2 = 0, width = 0, iconPadding = 10;
+var isFirefox = (typeof self !== 'undefined' && self.port);
 
 Titles['alerts'] = 'Google Alerts';                     Titles['analytics'] = 'Google Analytics';
 Titles['blog'] = 'Google Blog Search';                  Titles['blogger'] = 'Google Blogger';
@@ -103,67 +95,106 @@ Titles['chromebook'] = 'Google Chromebook';             Titles['correlate'] = 'G
 Titles['chromium'] = 'Chromium';                        Titles['contacts'] = 'Google Contacts';
 Titles['adwords'] = 'Google Adwords';                   Titles['adsense'] = 'Google Adsense';
 Titles['video'] = 'Google Videos';                      Titles['voice'] = 'Google Voice'; 
-Titles['catalogs'] = 'Google Catalogs';  
+Titles['catalogs'] = 'Google Catalogs';                 Titles['authenticator'] = 'Google Authenticator';
+Titles['business'] = 'Google Business';                 Titles['computeengine'] = 'Google Compute Engine';
+Titles['coordinate'] = 'Google Maps Coordinate';        Titles['earthengine'] = 'Google Earth Engine';
+Titles['fonts'] = 'Google Fonts';                       Titles['forms'] = 'Google Forms';
+Titles['glass'] = 'Google Glass';                       Titles['goggles'] = 'Google Goggles';
+Titles['help'] = 'Google Help';                         Titles['partnerdash'] = 'Google Partnerdash';
+Titles['photos'] = 'Google Photos';                     Titles['local'] = 'Google Local';
+Titles['presentation'] = 'Google Presentation';         Titles['script'] = 'Google App Script';
+Titles['streetview'] = 'Google Street View';            Titles['sync'] = 'Google Sync';
+Titles['tagmanager'] = 'Google Tag Manager';            Titles['tasks'] = 'Google Tasks';
+Titles['webstore'] = 'Chrome Web Store';                Titles['mapsengine'] = 'Google Maps Engine';
 Titles[''] = '';                                        Titles['emptyCell'] = '';
- 
+
 function init(data, name) {
   var id_pref, count = 0;
   if (name == 'shortcuts-table') id_pref = 'm';
   if (name == 'backup-table') id_pref = 'b';
-  var nc = parseInt($('nc-input').value);
+  var nc = parseInt($('panel-size-input').value);
   var table = document.getElementById(name);
   var trs = table.getElementsByTagName('tr');
+  document.body.style.color = fontColor;
+  document.body.style.backgroundColor = '#' + panelColor; 
+  if (fontColor == '#444444') {
+    $('more-td').setAttribute('type', 'black');
+    $('settings-td').setAttribute('type', 'black');
+  }
+  else {
+    $('more-td').setAttribute('type', 'white');
+    $('settings-td').setAttribute('type', 'white');
+  }
+  var inputs = document.getElementsByTagName('input');
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].style.color = fontColor;
+  }
   for (var i = 0; i < trs.length; i++) {
     var tds = trs[i].getElementsByTagName('td');
     for (var k = 0; k < tds.length; k++) { // first reset icons
       tds[k].draggable = false;
+      tds[k].removeAttribute('id'); 
+      tds[k].removeAttribute('type'); 
+      tds[k].removeAttribute('title');
       tds[k].setAttribute('status', 'empty');
     }
+  }
+  for (var i = 0; i < trs.length; i++) {
+    var tds = trs[i].getElementsByTagName('td');
     for (var j = 0; j < nc; j++) {
       var id = id_pref + count.toString();
       var td = tds[j];
       td.setAttribute('id', id);
-      td.removeAttribute('status');
-      td.removeAttribute('type'); 
-      td.removeAttribute('title');
       if (count < data.length && data[count]) {
         td.draggable = true;
+        td.removeAttribute('status');
         td.setAttribute('type', data[count]); 
         td.setAttribute('title', Titles[data[count]]);
-      }
-      else {
-        td.draggable = false;
-        td.setAttribute('status', 'empty');
+        var wIC = parseInt($('icon-size-input').value) + "px";
+        var wTD = parseInt($('icon-size-input').value) + iconPadding + "px";
+        td.style.width = wTD;
+        td.style.minWidth = wTD; 
+        td.style.maxWidth = wTD;
+        td.style.height = wTD; 
+        td.style.minHeight = wTD; 
+        td.style.maxHeight = wTD;
+        td.style.backgroundSize = wIC;
       }
       count++;
     }
   }
+  var width = nc * (parseInt($('icon-size-input').value) + iconPadding);
+  var height_1 = $('shortcuts-table').getBoundingClientRect().height;
+  var height_2 = $('backup-table').getBoundingClientRect().height;
+  var height_3 = $('status-div').getBoundingClientRect().height;
+  var height_4 = $('settings-div').getBoundingClientRect().height;
+  var height_5 = $('separator-table').getBoundingClientRect().height;
+  var height = height_1 + height_2 + height_3 + height_4 + height_5 + 20;
+  if (isFirefox && height_4) height += 3;
   
-  width = $('shortcuts-table').getBoundingClientRect().width;
-  height_1 = $('shortcuts-table').getBoundingClientRect().height;
-  height_2 = $('backup-table').getBoundingClientRect().height;
-  document.body.style.height = (height_1 + (height_2 ? height_2 + 23 : 0) + 45) + 'px';
-  document.body.style.width = (nc * 40) + 'px';
-  $('status-td').style.width = ((nc - 3) * 40) + 'px'; 
-  $('status-td').style.minWidth = ((nc - 3) * 40) + 'px'; 
-  $('status-td').style.maxWidth = ((nc - 3) * 40) + 'px'; 
+  document.body.style.height = height + 'px';
+  document.body.style.width = width + 'px';
   doResize();
 }
 
-background.receive('request-inits', function (data) {
-  mainTypes = data; 
+function initAll() {
   init(mainTypes, 'shortcuts-table');
-});
-background.receive('popup-width', function (data) {
-  $('nc-input').value = data;
+  init(backupTypes, 'backup-table');
+}
+
+background.receive('request-inits', function (data) {
+  mainTypes = data.mainTypes; 
+  backupTypes = data.backupTypes; 
+  iconSize = data.iconSize;
+  popupWidth = data.popupWidth;
+  panelColor = data.panelColor;
+  fontColor = data.fontColor;
+  $('icon-size-input').value = iconSize;
+  $('panel-size-input').value = popupWidth;
+  $('panel-color-input').value = panelColor;
+  initAll();
 });
 background.send('request-inits');
-
-background.receive('request-backup-inits', function (data) {
-  backupTypes = data; 
-  init(backupTypes, 'backup-table');
-});
-background.send('request-backup-inits');
 
 $('more-td').addEventListener('click', function (e) {
   var target = e.target || e.originalTarget;
@@ -172,7 +203,7 @@ $('more-td').addEventListener('click', function (e) {
     $('backup-table').style.display = 'table';
     $('separator-table').style.display = 'table';
     target.setAttribute('status', 'active');
-    target.setAttribute("title", "Click to hide more icons");
+    target.setAttribute("title", "Click to collapse hidden section");
     toggle = false;
   }
   else {
@@ -180,42 +211,78 @@ $('more-td').addEventListener('click', function (e) {
     $('backup-table').style.display = 'none';
     $('separator-table').style.display = 'none';
     target.removeAttribute('status');
-    target.setAttribute("title", "Click to see hidden icons");
+    target.setAttribute("title", "Click to see all products");
     toggle = true;
   }
-  init(mainTypes, 'shortcuts-table');
-  init(backupTypes, 'backup-table');
+  initAll();
 }, false);
 
 function onMouseup (e) {
   if (isDraging) return;
   var target = e.target || e.originalTarget;  
   var type = target.getAttribute('type');
-  if (type) {background.send('open-tab-request', {
-    type: type, 
-    inBackground: (e.ctrlKey && e.button == 0) || (e.metaKey && e.button == 0) || e.button == 1
-  });} 
+  if (type) {
+    background.send('open-tab-request', {
+      type: type, 
+      inBackground: (e.ctrlKey && e.button == 0) || (e.metaKey && e.button == 0) || e.button == 1
+    });
+  }
 }
 // onClick does not fire e.button == 1 on Firefox
 $('shortcuts-table').addEventListener('mouseup', onMouseup, false);
 $('backup-table').addEventListener('mouseup', onMouseup, false);
 
-$('reset-td').addEventListener('click', function (e) {
+$('settings-td').addEventListener('click', function (e) {
+  if (!$('settings-table').style.display || $('settings-table').style.display == "none") {
+    $('settings-table').style.display = "block";
+  }
+  else {
+    $('settings-table').style.display = "none";
+  }
+  initAll();
+});
+
+$('reset-button').addEventListener('click', function (e) {
   background.send('reset-history');
 });
 
-$('nc-input').addEventListener('change', function (e) {
+$('panel-size-input').addEventListener('change', function (e) {
   var target = e.target || e.originalTarget;  
-  var nc = parseInt(target.value) || 6;
-  if (nc > 19) nc = 19;
-  if (nc < 5) nc = 5;
+  var nc = parseInt(target.value) || 10;
   target.value = nc;
+  popupWidth = nc;
   background.send('store-popup-width', nc);
-  init(mainTypes, 'shortcuts-table');
-  init(backupTypes, 'backup-table');
+  initAll();
 });
 
-$('status-div').addEventListener('mouseover', function (e) {
+$('icon-size-input').addEventListener('change', function (e) {
+  var target = e.target || e.originalTarget;  
+  var is = parseInt(target.value) || 32;
+  target.value = is;
+  iconSize = is;
+  background.send('store-icon-size', is);
+  initAll();
+});
+
+$('panel-color-input').addEventListener('change', function (e) {
+  var target = e.target || e.originalTarget;  
+  var pc = target.value || 'FFFFFF';
+  target.value = pc;
+  panelColor = pc;
+  fontColor = window.getComputedStyle(target).color;
+  if (fontColor == 'rgb(0, 0, 0)' || fontColor == '000000' || fontColor == '#000000' || 
+      fontColor == '000' || fontColor == '#000' || fontColor == 'black') {
+    fontColor = '#444444';
+  }
+  else {
+    fontColor = '#FFFFFF';
+  }
+  background.send('store-panel-color', pc);
+  background.send('store-font-color', fontColor);
+  initAll();
+});
+
+document.body.addEventListener('mouseover', function (e) {
   var target = e.target || e.originalTarget;
   $('status-td').textContent = target.getAttribute('title') || 'Google Shortcuts';
 }, false);

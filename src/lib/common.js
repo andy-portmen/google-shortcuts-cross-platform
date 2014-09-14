@@ -2,7 +2,7 @@ var storage, popup, window, Deferred, tab, version;
 
 /**** wrapper (start) ****/
 if (typeof require !== 'undefined') { //Firefox
-  var firefox = require("./firefox/firefox.js");
+  var firefox = require("./firefox/firefox");
   ["storage", "popup", "window", "tab", "version", "Deferred"].forEach(function (id) {
     this[id] = firefox[id];
   });
@@ -26,34 +26,42 @@ if (storage.read("version") != version()) {
   tab.open("http://add0n.com/google-shortcuts.html?version=" + version());
 }
 
-mainTypes = ['search', 'youtube', 'maps', 'play', 'gmail', 'calender', 
-             'plus', 'drive', 'shopping', 'wallet', 'note', 'translate', 
-             'picasa', 'blogger', 'music', 'news', 'book', 'groups', 
-             'blog', 'print', 'alerts', 'analytics', 'hangouts', 'dashboard'];
+/* Default Variables */
+var mainTypes = ['search', 'youtube', 'maps', 'play', 'gmail', 'calender', 
+                 'plus', 'drive', 'shopping', 'wallet', 'note', 'translate', 
+                 'picasa', 'blogger', 'music', 'news', 'book', 'groups', 
+                 'blog', 'print', 'alerts', 'analytics', 'hangouts', 'dashboard'];
 
-backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offers', 'urlshortner', 
-               'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
-               'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
-               'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 
-               'image', 'mobile', 'earth', 'panoramio', 'site', 'hotel',
-               'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup', 'video', 'voice', 'catalogs'];
-             
+var backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offers', 'urlshortner', 
+                   'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
+                   'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
+                   'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 
+                   'image', 'mobile', 'earth', 'panoramio', 'site', 'hotel',
+                   'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup', 
+                   'video', 'voice', 'catalogs', 'authenticator', 'business', 'computeengine',
+                   'coordinate', 'earthengine', 'fonts', 'forms', 'glass', 'goggles',
+                   'help', 'partnerdash', 'photos', 'local', 'presentation', 'script',
+                   'streetview', 'sync', 'tagmanager', 'tasks', 'webstore', 'mapsengine'];
+
+var popupWidth = "10";
+var iconSize = "32";
+var panelColor = "FFFFFF";
+var fontColor = "#444444";
+
 if (!storage.read("mainTypes")) {storage.write("mainTypes", JSON.stringify(mainTypes));}
 if (!storage.read("backupTypes")) {storage.write("backupTypes", JSON.stringify(backupTypes));}
 
-popup.receive('request-inits', function () {
-  var lStorage = storage.read("mainTypes");
-  var lStorage_arr = JSON.parse(lStorage);
-  var popupWidth = storage.read("popupWidth") || "7";
-  popup.send('popup-width', popupWidth);
-  popup.send('request-inits', lStorage_arr);
-});
-
-popup.receive('request-backup-inits', function () {
-  var lStorage = storage.read("backupTypes");
-  var lStorage_arr = JSON.parse(lStorage);
-  popup.send('request-backup-inits', lStorage_arr);
-});
+function inits() {
+  popup.send('request-inits', {
+    mainTypes: JSON.parse(storage.read("mainTypes")),
+    backupTypes: JSON.parse(storage.read("backupTypes")),
+    popupWidth: storage.read("popupWidth") || popupWidth,
+    iconSize: storage.read("iconSize") || iconSize,
+    panelColor: storage.read("panelColor") || panelColor,
+    fontColor: storage.read("fontColor") || fontColor,
+  });
+}
+popup.receive('request-inits', inits);
 
 popup.receive('store-mainTypes', function (data) {
   storage.write("mainTypes", JSON.stringify(data));
@@ -67,17 +75,32 @@ popup.receive('store-popup-width', function (data) {
   storage.write("popupWidth", data);
 });
 
-popup.receive('reset-history', function (data) {
+popup.receive('store-icon-size', function (data) {
+  storage.write("iconSize", data);
+});
+
+popup.receive('store-panel-color', function (data) {
+  storage.write("panelColor", data);
+});
+
+popup.receive('store-font-color', function (data) {
+  storage.write("fontColor", data);
+});
+
+popup.receive('reset-history', function () {
   storage.write("mainTypes", JSON.stringify(mainTypes));
   storage.write("backupTypes", JSON.stringify(backupTypes));
-  popup.send('request-inits', mainTypes);
-  popup.send('request-backup-inits', backupTypes);
+  storage.write("popupWidth", popupWidth);
+  storage.write("iconSize", iconSize);
+  storage.write("panelColor", panelColor);
+  storage.write("fontColor", fontColor);
+  inits();
 });
 
 popup.receive('open-tab-request', function (obj) {
   switch (obj.type) {
   case 'alerts':
-    tab.open('https://www.google.com/alerts/', obj.inBackground, !obj.inBackground);
+    tab.open('https://www.google.com/alerts', obj.inBackground, !obj.inBackground);
     break;
   case 'analytics':
     tab.open('https://www.google.com/analytics/', obj.inBackground, !obj.inBackground);
@@ -264,6 +287,69 @@ popup.receive('open-tab-request', function (obj) {
     break;
   case 'catalogs':
     tab.open('https://www.google.com/catalogs/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'authenticator':
+    tab.open('https://support.google.com/accounts/answer/1066447/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'business':
+    tab.open('https://www.google.com/business/', obj.inBackground, !obj.inBackground);
+    break;  
+  case 'computeengine':
+    tab.open('https://console.developers.google.com/project?getstarted/', obj.inBackground, !obj.inBackground);
+    break;  
+  case 'coordinate':
+    tab.open('https://www.google.com/enterprise/mapsearth/products/coordinate.html', obj.inBackground, !obj.inBackground);
+    break;
+  case 'earthengine':
+    tab.open('https://earthengine.google.org/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'fonts':
+    tab.open('https://www.google.com/fonts/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'forms':
+    tab.open('http://www.google.com/drive', obj.inBackground, !obj.inBackground);
+    break;
+  case 'glass':
+    tab.open('https://www.google.com/glass/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'goggles':
+    tab.open('https://support.google.com/websearch/topic/25275?hl=en&ref_topic=1733205', obj.inBackground, !obj.inBackground);
+    break;
+  case 'help':
+    tab.open('https://support.google.com/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'partnerdash':
+    tab.open('https://partnerdash.google.com/partnerdash/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'photos':
+    tab.open('https://plus.google.com/photos/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'local':
+    tab.open('https://plus.google.com/u/0/local/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'presentation':
+    tab.open('https://docs.google.com/presentation/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'script':
+    tab.open('https://developers.google.com/apps-script/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'streetview':
+    tab.open('https://www.google.com/maps/views/streetview/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'sync':
+    tab.open('https://www.google.com/sync/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'tagmanager':
+    tab.open('https://www.google.com/tagmanager/web/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'tasks':
+    tab.open('https://mail.google.com/tasks/canvas', obj.inBackground, !obj.inBackground);
+    break;
+  case 'webstore':
+    tab.open('https://chrome.google.com/webstore/category/apps', obj.inBackground, !obj.inBackground);
+    break;
+  case 'mapsengine':
+    tab.open('https://mapsengine.google.com/map/', obj.inBackground, !obj.inBackground);
     break;
   default:
     tab.open('https://www.google.com/about/products/', obj.inBackground, !obj.inBackground);

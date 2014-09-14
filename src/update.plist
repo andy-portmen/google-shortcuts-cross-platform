@@ -6,13 +6,13 @@
    <array>
      <dict>
        <key>CFBundleIdentifier</key>
-       <string>com.add0n.dictionary</string>
+       <string>com.add0n.shortcuts</string>
        <key>Developer Identifier</key>
        <string>2C3W8RZ8ND</string>
        <key>CFBundleVersion</key>
        <string>1</string>
        <key>CFBundleShortVersionString</key>
-       <string>0.2.7</string>
+       <string>1.1.3</string>
        <key>URL</key>
        <string>https://github.com/andy-portmen/google-shortcuts-cross-platform/blob/master/src/shortcuts.safariextz?raw=true</string>
      </dict>

@@ -1,11 +1,11 @@
 {
   "name": "igshortcuts",
-  "title": "Google™ Shortcuts",
+  "title": "Shortcuts for Google™ Products",
   "id": "jid1-SVJwkBGCTt4PyQ@jetpack",
   "description": "Display all Google services as a single space-saving dropdown panel",
-  "author": "Andy Portmen",
+  "author": "Sarah Avilov",
   "license": "MPL 2.0",
-  "version": "1.1.1",
+  "version": "1.1.3",
   "main": "common",
   
   "permissions": {"private-browsing": true},
@@ -187,7 +187,7 @@
       "value": false
     },
     {
-      "name": "serach",
+      "name": "search",
       "title": "Google Web Search individual toolbar icon:",
       "description": "Search billions of web pages (restart required).",
       "type": "bool",
@@ -449,6 +449,153 @@
       "name": "catalogs",
       "title": "Google Catalogs individual toolbar icon:",
       "description": "Google Catalogs allows shoppers to browse and shop all their favorite catalogs (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "authenticator",
+      "title": "Google Authenticator individual toolbar icon:",
+      "description": "If you set up 2-Step Verification using SMS text message or Voice call and also want to be able to generate codes using the Android, iPhone or a Blackberry, you can use the Google Authenticator (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "business",
+      "title": "Google Business individual toolbar icon:",
+      "description": "Get your business on Google for free with Google Business (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "computeengine",
+      "title": "Google Compute Engine individual toolbar icon:",
+      "description": "Compute Engine's Linux VMs are consistently performant, scalable, highly secure and reliable (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "coordinate",
+      "title": "Google Maps Coordinate individual toolbar icon:",
+      "description": "Google Maps Coordinate is a workforce management tool that improves the efficiency of your mobile teams (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "earthengine",
+      "title": "Google Earth Engine individual toolbar icon:",
+      "description": "Google Earth Engine brings together the world's satellite imagery and many more (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "fonts",
+      "title": "Google Fonts individual toolbar icon:",
+      "description": "Hundreds of free, open-source fonts optimized for the web (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "forms",
+      "title": "Google Forms individual toolbar icon:",
+      "description": "Create a form and collect the responses (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "glass",
+      "title": "Google Glass individual toolbar icon:",
+      "description": "Glass is smart eye-wear that helps you get exactly what you want (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "goggles",
+      "title": "Google Goggles individual toolbar icon:",
+      "description": "There are some things that are hard to put in words, like a painting that you want to find out the artist of. For searches like that, try Google Goggles (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "help",
+      "title": "Google Help individual toolbar icon:",
+      "description": "Help Forums. Post questions and get advice from other people using the same Google products as you (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "partnerdash",
+      "title": "Google Partner Dash individual toolbar icon:",
+      "description": "Partner Dash is a service that hosts several applications used by Google's partners to manage their relationships with us (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "photos",
+      "title": "Google Photos individual toolbar icon:",
+      "description": "Share beautiful, full-resolution photos with just the right people (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "local",
+      "title": "Google Local individual toolbar icon:",
+      "description": "Google Local helps users discover and share places (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "presentation",
+      "title": "Google Presentation individual toolbar icon:",
+      "description": "Create a new presentation and edit with others at the same time (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "script",
+      "title": "Google App Script individual toolbar icon:",
+      "description": "Google Apps Script is a scripting language based on JavaScript (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "streetview",
+      "title": "Google Street View individual toolbar icon:",
+      "description": "Explore world landmarks, discover natural wonders, and step inside locations (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "sync",
+      "title": "Google Sync individual toolbar icon:",
+      "description": "Sync your Google services to your phone, tablet, and desktop programs so that you can always access what's important to you (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "tagmanager",
+      "title": "Google Tag Manager individual toolbar icon:",
+      "description": "Google Tag Manager makes it easy for marketers to add and update website tags -- including analytics, remarketing, and more (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "tasks",
+      "title": "Google Tasks individual toolbar icon:",
+      "description": "Just click and type to add new tasks, set due dates or add notes, and (most satisfyingly) check them off as you're done (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "webstore",
+      "title": "Google Web Store individual toolbar icon:",
+      "description": "Discover great apps, games, extensions and themes for Google Chrome (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "mapsengine",
+      "title": "Google Maps Engine individual toolbar icon:",
+      "description": "Maps Engine makes it easy to create and share maps online (restart required).",
       "type": "bool",
       "value": false
     }

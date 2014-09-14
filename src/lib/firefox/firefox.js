@@ -4,6 +4,8 @@ var self          = require("sdk/self"),
     sp            = require("sdk/simple-prefs"),
     Request       = require("sdk/request").Request,
     prefs         = sp.prefs,
+    buttons       = require('sdk/ui/button/action'),
+    system        = require("sdk/system"),
     pageMod       = require("sdk/page-mod"),
     tabs          = require("sdk/tabs"),
     {Cc, Ci, Cu}  = require('chrome'),
@@ -11,44 +13,40 @@ var self          = require("sdk/self"),
       get active () { // Chrome window
         return require('sdk/window/utils').getMostRecentBrowserWindow()
       }
-    },
-    isAustralis   = "gCustomizeMode" in windows.active,
-    toolbarbutton = isAustralis ? require("./toolbarbutton/new") : require("./toolbarbutton/old");
+    };
     
 Cu.import("resource://gre/modules/Promise.jsm");
  
-// Load overlay styles
-require("./userstyles").load(data.url("firefox/overlay.css"));
-//Install toolbar button
-var button = toolbarbutton.ToolbarButton({
+var button = buttons.ActionButton({
   id: "igshortcuts",
-  label: "Google™ Shortcuts",
-  tooltiptext: "Shortcuts of Google Products",
-  onCommand: function () {
-    popup.show(button.object);
+  label: "Shortcuts for Google™ Products",
+  icon: {
+    "16": "./icon16.png",
+    "32": "./icon32.png",
+    "64": "./icon64.png"
   },
-  onClick: function () {
+  onClick: function (state) {
+    popup.show({
+      position: button
+    });
   }
 });
-if (self.loadReason == "install") {
-  button.moveTo({
-    toolbarID: "nav-bar", 
-    insertbefore: "home-button", 
-    forceMove: false
-  });
-}
 
 var popup = require("sdk/panel").Panel({
   width: 250,
   height: 210,
   contentURL: data.url("./popup/popup.html"),
-  contentScriptFile: [data.url("./popup/popup.js"), data.url("./popup/drag.js")]
+  contentScriptFile: [data.url("./popup/popup.js"), data.url("./popup/drag.js"), data.url("./popup/jscolor/jscolor.js")]
 });
 popup.on('show', function() {
   popup.port.emit('show', true);
 });
 popup.port.on("resize", function(obj) {
-  popup.resize(obj.w, obj.h + 2);
+  var padding = 0;
+  var isMozilla = system.vendor.indexOf('Mozilla') != -1;
+  var isDarwin = system.platform.indexOf('darwin') != -1;
+  if (isMozilla && isDarwin) padding = 2;
+  popup.resize(obj.w + padding, obj.h + padding);
 });
 
 exports.storage = {
@@ -101,24 +99,12 @@ exports.Promise = Promise;
 exports.Deferred = Promise.defer;
 
 /**************************************************************************************************/
-var onCmd = function (url) {
-  return function () {
-    tabs.open(url);
-  }
-}
-var onClk = function (url) {
-  return function (e) {
-    if (e.button == 1) {
-      tabs.open({url: url, inBackground: true});
-    }
-  }
-}
 
 var icons = [
   {
     label: "Google Alerts",
     icon: "alerts",
-    url: "https://www.google.com/alerts/"
+    url: "https://www.google.com/alerts"
   },
   {
     label: "Google Analytics",
@@ -429,20 +415,125 @@ var icons = [
     label: "Google Catalogs",
     icon: "catalogs",
     url: 'https://www.google.com/catalogs/'
+  },
+  {
+    label: "Google Authenticator",
+    icon: "authenticator",
+    url: 'https://support.google.com/accounts/answer/1066447/'
+  },
+  {
+    label: "Google Business",
+    icon: "business",
+    url: 'https://www.google.com/business/'
+  }, 
+  {
+    label: "Google Compute Engine",
+    icon: "computeengine",
+    url: 'https://console.developers.google.com/project?getstarted/'
+  },
+  {
+    label: "Google Maps Coordinate",
+    icon: "coordinate",
+    url: 'https://www.google.com/enterprise/mapsearth/products/coordinate.html'
+  },
+  {
+    label: "Google Earth Engine",
+    icon: "earthengine",
+    url: 'https://earthengine.google.org/'
+  },
+  {
+    label: "Google Fonts",
+    icon: "fonts",
+    url: 'https://www.google.com/fonts/'
+  },
+  {
+    label: "Google Forms",
+    icon: "forms",
+    url: 'http://www.google.com/drive'
+  },
+  {
+    label: "Google Glass",
+    icon: "glass",
+    url: 'https://www.google.com/glass/'
+  },
+  {
+    label: "Google Goggles",
+    icon: "goggles",
+    url: 'https://support.google.com/websearch/topic/25275?hl=en&ref_topic=1733205'
+  },
+  {
+    label: "Google Help",
+    icon: "help",
+    url: 'https://support.google.com/'
+  },
+  {
+    label: "Google Partner Dash",
+    icon: "partnerdash",
+    url: 'https://partnerdash.google.com/partnerdash/'
+  },
+  {
+    label: "Google Photos",
+    icon: "photos",
+    url: 'https://plus.google.com/photos/'
+  },
+  {
+    label: "Google Local",
+    icon: "local",
+    url: 'https://plus.google.com/u/0/local/'
+  },
+  {
+    label: "Google Presentation",
+    icon: "presentation",
+    url: 'https://docs.google.com/presentation/'
+  },
+  {
+    label: "Google App Script",
+    icon: "script",
+    url: 'https://developers.google.com/apps-script/'
+  },
+  {
+    label: "Google Street View",
+    icon: "streetview",
+    url: 'https://www.google.com/maps/views/streetview/'
+  },
+  {
+    label: "Google Sync",
+    icon: "sync",
+    url: 'https://www.google.com/sync/'
+  },
+  {
+    label: "Google Tag Manager",
+    icon: "tagmanager",
+    url: 'https://www.google.com/tagmanager/web/'
+  },
+  {
+    label: "Google Tasks",
+    icon: "tasks",
+    url: 'https://mail.google.com/tasks/canvas'
+  },
+  {
+    label: "Google Web Store",
+    icon: "webstore",
+    url: 'https://chrome.google.com/webstore/category/apps'
+  },
+  {
+    label: "Google Maps Engine",
+    icon: "mapsengine",
+    url: 'https://mapsengine.google.com/map/'
   }
 ];
 
 icons.forEach(function (obj) {
-  var button;
   if (prefs[obj.icon]) {
-    button = toolbarbutton.ToolbarButton({
+    buttons.ActionButton({
       id: "igshortcuts-" + obj.icon,
       label: obj.label,
-      tooltiptext: obj.label,
-      onCommand: new onCmd(obj.url),
-      onClick: new onClk(obj.url)
+      icon: {
+        "16": "./firefox/toolbar/" + obj.icon + ".png"
+      },
+      onClick: function (state) {
+        tabs.open(obj.url);
+      }
     });
   }
 });
-  
-  
