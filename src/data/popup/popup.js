@@ -1,21 +1,23 @@
 var background = {}, doResize;
 
 /**** wrapper (start) ****/
-if (typeof chrome !== 'undefined') {  // Chrome
+if (typeof chrome !== 'undefined') {  /* Chrome */
   background.send = function (id, data) {
-    chrome.extension.sendRequest({method: id, data: data});
+    chrome.runtime.sendMessage({path: 'popup-to-background', method: id, data: data});
   }
   background.receive = function (id, callback) {
-    chrome.extension.onRequest.addListener(function(request, sender, callback2) {
-      if (request.method == id) {
-        callback(request.data);
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+      if (request.path == 'background-to-popup') {
+        if (request.method == id) {
+          callback(request.data);
+        }
       }
     });
   }
   window.setTimeout(function () {}, 100);
   doResize = function () {}
 }
-else if (typeof safari !== 'undefined') { // Safari
+else if (typeof safari !== 'undefined') { /* Safari */
   background = (function () {
     var callbacks = {};
     return {
@@ -41,7 +43,7 @@ else if (typeof safari !== 'undefined') { // Safari
     window.setTimeout(function () {}, 100);
   }, false);
 }
-else {  // Firefox
+else { /* Firefox */
   background.send = function (id, data) {
     self.port.emit(id, data);
   };
@@ -49,20 +51,28 @@ else {  // Firefox
     self.port.on(id, callback);
   };
   doResize = function () {
-    self.port.emit("resize", {
-      w: document.body.getBoundingClientRect().width,
-      h: document.body.getBoundingClientRect().height
+    self.port.emit("resize", { /* (+1) is for a bug in Firefox for Mac */
+      w: document.body.getBoundingClientRect().width + 1,
+      h: document.body.getBoundingClientRect().height + 1
     });
   };
-  self.port.on("show", function () {});
   window.addEventListener("resize", doResize, false);
+  self.port.on("hide", function () {
+    /* close more section */
+    if ($('backup-table').style.display && $('backup-table').style.display !== "none") {
+      showMore({
+        target: $('more-td')
+      });
+    }
+  });
 }
 /**** wrapper (end) ****/
 
 function $ (id) {return document.getElementById(id);}
-var mainTypes, iconSize, popupWidth, panelColor, fontColor, backupTypes, Titles = {}, total_drag = false, isDraging = false, toggle = true;
+var mainTypes, iconSize, popupWidth, closePanel, panelColor, fontColor, backupTypes, Titles = {}, total_drag = false, isDraging = false, toggle = true;
 var height_1 = 0, height_2 = 0, width = 0, iconPadding = 10;
 var isFirefox = (typeof self !== 'undefined' && self.port);
+var isSafari = (typeof safari !== 'undefined');
 
 Titles['alerts'] = 'Google Alerts';                     Titles['analytics'] = 'Google Analytics';
 Titles['blog'] = 'Google Blog Search';                  Titles['blogger'] = 'Google Blogger';
@@ -94,7 +104,7 @@ Titles['webmaster'] = 'Google Webmaster';               Titles['currents'] = 'Go
 Titles['chromebook'] = 'Google Chromebook';             Titles['correlate'] = 'Google Correlate';
 Titles['chromium'] = 'Chromium';                        Titles['contacts'] = 'Google Contacts';
 Titles['adwords'] = 'Google Adwords';                   Titles['adsense'] = 'Google Adsense';
-Titles['video'] = 'Google Videos';                      Titles['voice'] = 'Google Voice'; 
+Titles['video'] = 'Google Videos';                      Titles['voice'] = 'Google Voice';
 Titles['catalogs'] = 'Google Catalogs';                 Titles['authenticator'] = 'Google Authenticator';
 Titles['business'] = 'Google Business';                 Titles['computeengine'] = 'Google Compute Engine';
 Titles['coordinate'] = 'Google Maps Coordinate';        Titles['earthengine'] = 'Google Earth Engine';
@@ -106,6 +116,14 @@ Titles['presentation'] = 'Google Presentation';         Titles['script'] = 'Goog
 Titles['streetview'] = 'Google Street View';            Titles['sync'] = 'Google Sync';
 Titles['tagmanager'] = 'Google Tag Manager';            Titles['tasks'] = 'Google Tasks';
 Titles['webstore'] = 'Chrome Web Store';                Titles['mapsengine'] = 'Google Maps Engine';
+Titles['chrome'] = 'Google Chrome';                     Titles['slides'] = 'Google Slides';
+Titles['sheets'] = 'Google Sheets';                     Titles['privacy'] = 'Google Privacy Checkup';
+Titles['admin'] = 'Google Admin';                       Titles['apps'] = 'Google Apps for Work';
+Titles['flights'] = 'Google Flights';                   Titles['domains'] = 'Google Domains';
+Titles['security'] = 'Google Security Checkup';         Titles['docs'] = 'Google Docs';
+Titles['drawings'] = 'Google Drawings';                 Titles['inbox'] = 'Inbox by Gmail';
+Titles['support'] = 'Google Support';                   Titles['account'] = 'Google My Account';
+Titles['admob'] = 'Google AdMob';                       Titles['store'] = 'Google Store';
 Titles[''] = '';                                        Titles['emptyCell'] = '';
 
 function init(data, name) {
@@ -116,7 +134,7 @@ function init(data, name) {
   var table = document.getElementById(name);
   var trs = table.getElementsByTagName('tr');
   document.body.style.color = fontColor;
-  document.body.style.backgroundColor = '#' + panelColor; 
+  document.body.style.backgroundColor = '#' + panelColor;
   if (fontColor == '#444444') {
     $('more-td').setAttribute('type', 'black');
     $('settings-td').setAttribute('type', 'black');
@@ -133,8 +151,8 @@ function init(data, name) {
     var tds = trs[i].getElementsByTagName('td');
     for (var k = 0; k < tds.length; k++) { // first reset icons
       tds[k].draggable = false;
-      tds[k].removeAttribute('id'); 
-      tds[k].removeAttribute('type'); 
+      tds[k].removeAttribute('id');
+      tds[k].removeAttribute('type');
       tds[k].removeAttribute('title');
       tds[k].setAttribute('status', 'empty');
     }
@@ -148,15 +166,15 @@ function init(data, name) {
       if (count < data.length && data[count]) {
         td.draggable = true;
         td.removeAttribute('status');
-        td.setAttribute('type', data[count]); 
+        td.setAttribute('type', data[count]);
         td.setAttribute('title', Titles[data[count]]);
         var wIC = parseInt($('icon-size-input').value) + "px";
         var wTD = parseInt($('icon-size-input').value) + iconPadding + "px";
         td.style.width = wTD;
-        td.style.minWidth = wTD; 
+        td.style.minWidth = wTD;
         td.style.maxWidth = wTD;
-        td.style.height = wTD; 
-        td.style.minHeight = wTD; 
+        td.style.height = wTD;
+        td.style.minHeight = wTD;
         td.style.maxHeight = wTD;
         td.style.backgroundSize = wIC;
       }
@@ -170,8 +188,9 @@ function init(data, name) {
   var height_4 = $('settings-div').getBoundingClientRect().height;
   var height_5 = $('separator-table').getBoundingClientRect().height;
   var height = height_1 + height_2 + height_3 + height_4 + height_5 + 20;
+  /* for panel width bug in safari and firefox */
   if (isFirefox && height_4) height += 3;
-  
+  if (isSafari && height_4) height += 2;
   document.body.style.height = height + 'px';
   document.body.style.width = width + 'px';
   doResize();
@@ -183,20 +202,22 @@ function initAll() {
 }
 
 background.receive('request-inits', function (data) {
-  mainTypes = data.mainTypes; 
-  backupTypes = data.backupTypes; 
+  mainTypes = data.mainTypes;
+  backupTypes = data.backupTypes;
   iconSize = data.iconSize;
   popupWidth = data.popupWidth;
+  closePanel = data.closePanel;
   panelColor = data.panelColor;
   fontColor = data.fontColor;
   $('icon-size-input').value = iconSize;
   $('panel-size-input').value = popupWidth;
   $('panel-color-input').value = panelColor;
+  $('close-panel').setAttribute('state', closePanel);
   initAll();
 });
 background.send('request-inits');
 
-$('more-td').addEventListener('click', function (e) {
+function showMore(e) {
   var target = e.target || e.originalTarget;
   if (toggle) {
     total_drag = true;
@@ -215,23 +236,37 @@ $('more-td').addEventListener('click', function (e) {
     toggle = true;
   }
   initAll();
-}, false);
+}
 
-function onMouseup (e) {
+$('more-td').addEventListener('click', showMore, false);
+
+function onMouseup(e) {
   if (isDraging) return;
-  var target = e.target || e.originalTarget;  
+  var target = e.target || e.originalTarget;
   var type = target.getAttribute('type');
   if (type) {
     background.send('open-tab-request', {
-      type: type, 
+      type: type,
       inBackground: (e.ctrlKey && e.button == 0) || (e.metaKey && e.button == 0) || e.button == 1
     });
+    /* close the panel after clicking on any icon */
+    if (closePanel === 'close') {
+      if (isFirefox) background.send('close-panel');
+      else if (isSafari) safari.extension.popovers[0].hide();
+      else window.close();
+    }
   }
 }
-// onClick does not fire e.button == 1 on Firefox
+
+/* onClick does not fire (e.button == 1) on Firefox */
 $('shortcuts-table').addEventListener('mouseup', onMouseup, false);
 $('backup-table').addEventListener('mouseup', onMouseup, false);
-
+$('shortcuts-table').addEventListener("click", function (e) {  //prevent post-click on ubuntu
+    e.preventDefault();
+}, true);
+$('backup-table').addEventListener("click", function (e) { //prevent post-click on ubuntu
+    e.preventDefault();
+}, true);
 $('settings-td').addEventListener('click', function (e) {
   if (!$('settings-table').style.display || $('settings-table').style.display == "none") {
     $('settings-table').style.display = "block";
@@ -246,8 +281,18 @@ $('reset-button').addEventListener('click', function (e) {
   background.send('reset-history');
 });
 
+$('close-panel').addEventListener('click', function (e) {
+  var target = e.target || e.originalTarget;
+  var state = target.getAttribute('state');
+  if (state === 'close') state = '';
+  else state = 'close';
+  closePanel = state;
+  target.setAttribute('state', state);
+  background.send('store-close-panel', state);
+});
+
 $('panel-size-input').addEventListener('change', function (e) {
-  var target = e.target || e.originalTarget;  
+  var target = e.target || e.originalTarget;
   var nc = parseInt(target.value) || 10;
   target.value = nc;
   popupWidth = nc;
@@ -256,7 +301,7 @@ $('panel-size-input').addEventListener('change', function (e) {
 });
 
 $('icon-size-input').addEventListener('change', function (e) {
-  var target = e.target || e.originalTarget;  
+  var target = e.target || e.originalTarget;
   var is = parseInt(target.value) || 32;
   target.value = is;
   iconSize = is;
@@ -265,12 +310,12 @@ $('icon-size-input').addEventListener('change', function (e) {
 });
 
 $('panel-color-input').addEventListener('change', function (e) {
-  var target = e.target || e.originalTarget;  
+  var target = e.target || e.originalTarget;
   var pc = target.value || 'FFFFFF';
   target.value = pc;
   panelColor = pc;
   fontColor = window.getComputedStyle(target).color;
-  if (fontColor == 'rgb(0, 0, 0)' || fontColor == '000000' || fontColor == '#000000' || 
+  if (fontColor == 'rgb(0, 0, 0)' || fontColor == '000000' || fontColor == '#000000' ||
       fontColor == '000' || fontColor == '#000' || fontColor == 'black') {
     fontColor = '#444444';
   }

@@ -1,23 +1,15 @@
-var storage, popup, window, Deferred, tab, version;
+var storage, popup, tab, version;
 
 /**** wrapper (start) ****/
-if (typeof require !== 'undefined') { //Firefox
+if (typeof require !== 'undefined') { /* Firefox */
   var firefox = require("./firefox/firefox");
-  ["storage", "popup", "window", "tab", "version", "Deferred"].forEach(function (id) {
-    this[id] = firefox[id];
-  });
+  ["storage", "popup", "tab", "version"].forEach(function (id) {this[id] = firefox[id];});
 }
-else if (typeof safari !== 'undefined') {  // Safari
-  ["storage", "popup", "window", "tab", "version", "Deferred"].forEach(function (id) {
-    this[id] = _safari[id];
-  });
-  Deferred = task.Deferred;
+else if (typeof safari !== 'undefined') {  /* Safari */
+  ["storage", "popup", "tab", "version"].forEach(function (id) {this[id] = _safari[id];});
 }
-else {  //Chrome
-  ["storage", "popup", "window", "tab", "version", "Deferred"].forEach(function (id) {
-    this[id] = _chrome[id];
-  });
-  Deferred = task.Deferred;
+else {  /* Chrome */
+  ["storage", "popup", "tab", "version"].forEach(function (id) {this[id] = _chrome[id];});
 }
 /**** wrapper (end) ****/
 
@@ -41,10 +33,14 @@ var backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offers', 'ur
                    'video', 'voice', 'catalogs', 'authenticator', 'business', 'computeengine',
                    'coordinate', 'earthengine', 'fonts', 'forms', 'glass', 'goggles',
                    'help', 'partnerdash', 'photos', 'local', 'presentation', 'script',
-                   'streetview', 'sync', 'tagmanager', 'tasks', 'webstore', 'mapsengine'];
+                   'streetview', 'sync', 'tagmanager', 'tasks', 'webstore', 'mapsengine',
+                   'chrome', 'slides', 'sheets', 'privacy', 'admin', 'apps', 'flights',
+                   'domains', 'security', 'drawings', 'inbox', 'support', 'account', 
+                   'admob', 'store'];
 
-var popupWidth = "10";
+var closePanel = '';
 var iconSize = "32";
+var popupWidth = "10";
 var panelColor = "FFFFFF";
 var fontColor = "#444444";
 
@@ -57,6 +53,7 @@ function inits() {
     backupTypes: JSON.parse(storage.read("backupTypes")),
     popupWidth: storage.read("popupWidth") || popupWidth,
     iconSize: storage.read("iconSize") || iconSize,
+    closePanel: storage.read("closePanel") || closePanel,
     panelColor: storage.read("panelColor") || panelColor,
     fontColor: storage.read("fontColor") || fontColor,
   });
@@ -87,13 +84,19 @@ popup.receive('store-font-color', function (data) {
   storage.write("fontColor", data);
 });
 
+popup.receive('store-close-panel', function (data) {
+  storage.write("closePanel", data);
+});
+
 popup.receive('reset-history', function () {
-  storage.write("mainTypes", JSON.stringify(mainTypes));
   storage.write("backupTypes", JSON.stringify(backupTypes));
+  storage.write("mainTypes", JSON.stringify(mainTypes));
   storage.write("popupWidth", popupWidth);
-  storage.write("iconSize", iconSize);
+  storage.write("closePanel", closePanel);
   storage.write("panelColor", panelColor);
   storage.write("fontColor", fontColor);
+  storage.write("iconSize", iconSize);
+  /* inits */
   inits();
 });
 
@@ -351,6 +354,51 @@ popup.receive('open-tab-request', function (obj) {
   case 'mapsengine':
     tab.open('https://mapsengine.google.com/map/', obj.inBackground, !obj.inBackground);
     break;
+  case 'chrome':
+    tab.open('https://www.google.com/chrome/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'slides':
+    tab.open('https://docs.google.com/presentation/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'sheets':
+    tab.open('https://docs.google.com/spreadsheets/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'privacy':
+    tab.open('https://myaccount.google.com/privacycheckup/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'admin':
+    tab.open('https://admin.google.com/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'apps':
+    tab.open('https://www.google.com/work/apps/business/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'flights':
+    tab.open('https://www.google.com/flights/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'domains':
+    tab.open('https://domains.google.com/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'security':
+    tab.open('https://myaccount.google.com/security/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'drawings':
+    tab.open('https://docs.google.com/drawings/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'inbox':
+    tab.open('https://inbox.google.com/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'support':
+    tab.open('https://support.google.com/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'account':
+    tab.open('https://myaccount.google.com/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'admob':
+    tab.open('https://www.google.com/admob/', obj.inBackground, !obj.inBackground);
+    break;    
+  case 'store':
+    tab.open('https://store.google.com/', obj.inBackground, !obj.inBackground);
+    break;     
   default:
     tab.open('https://www.google.com/about/products/', obj.inBackground, !obj.inBackground);
     break;

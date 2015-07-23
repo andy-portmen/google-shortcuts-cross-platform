@@ -2,15 +2,32 @@
   "name": "igshortcuts",
   "title": "Shortcuts for Google™ Products",
   "id": "jid1-SVJwkBGCTt4PyQ@jetpack",
-  "description": "Display all Google services as a single space-saving dropdown panel",
-  "author": "Sarah Avilov",
+  "description": "Display all Google services in a single space-saving drop-down panel",
   "license": "MPL 2.0",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "main": "common",
-  
   "permissions": {"private-browsing": true},
-  
   "preferences": [
+    {
+      "name": "individualAction",
+      "title": "Click on individual icons should",
+      "type": "menulist",
+      "value": 0,
+      "options": [
+        {
+          "value": "0",
+          "label": "Open in a new tab"
+        },
+        {
+          "value": "1",
+          "label": "Open in a new background tab"
+        },
+        {
+          "value": "2",
+          "label": "Open in the current tab"
+        }
+      ]
+    },
     {
       "name": "alerts",
       "title": "Google Alerts individual toolbar icon:",
@@ -73,14 +90,14 @@
       "description": "Create, share and keep all your stuff in one place (restart required).",
       "type": "bool",
       "value": false
-    },    
+    },
     {
       "name": "earth",
       "title": "Google Earth individual toolbar icon:",
       "description": "Explore the world from your computer (restart required).",
       "type": "bool",
       "value": false
-    },  
+    },
     {
       "name": "finance",
       "title": "Google Finance individual toolbar icon:",
@@ -136,7 +153,7 @@
       "description": "Search thousands of news stories (restart required).",
       "type": "bool",
       "value": false
-    }, 
+    },
     {
       "name": "note",
       "title": "Google Keep (notes) individual toolbar icon:",
@@ -157,7 +174,7 @@
       "description": "Find, edit and share your photos (restart required).",
       "type": "bool",
       "value": false
-    },  
+    },
     {
       "name": "play",
       "title": "Google Play individual toolbar icon:",
@@ -596,6 +613,118 @@
       "name": "mapsengine",
       "title": "Google Maps Engine individual toolbar icon:",
       "description": "Maps Engine makes it easy to create and share maps online (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "chrome",
+      "title": "Google Chrome individual toolbar icon:",
+      "description": "Google Chrome is a browser that combines a minimal design with sophisticated technology (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "slides",
+      "title": "Google Slides individual toolbar icon:",
+      "description": "Create a new presentation and edit with others at the same time (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "sheets",
+      "title": "Google Sheets individual toolbar icon:",
+      "description": "Google Sheets makes your data pop with colorful charts and graphs (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "privacy",
+      "title": "Google Privacy Checkup individual toolbar icon:",
+      "description": "Control privacy settings and personalize your Google experience (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "admin",
+      "title": "Google Admin individual toolbar icon:",
+      "description": "Google Admin lets you manage your Google (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "apps",
+      "title": "Google Apps for Work individual toolbar icon:",
+      "description": "Get email, cloud storage, collaboration tools and other business apps (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "flights",
+      "title": "Google Flights individual toolbar icon:",
+      "description": "Choose your flight from a simple list of results (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "domains",
+      "title": "Google Domains individual toolbar icon:",
+      "description": "Search for and register a domain, get hosting, and build a site (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "security",
+      "title": "Google Security Checkup individual toolbar icon:",
+      "description": "Review your account activity and update settings to strengthen your account protection (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "docs",
+      "title": "Google Docs individual toolbar icon:",
+      "description": "Create and edit web-based documents, spreadsheets, and presentations (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "drawings",
+      "title": "Google Drawings individual toolbar icon:",
+      "description": "Paint and create charts and diagrams (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "inbox",
+      "title": "Google Inbox individual toolbar icon:",
+      "description": "Inbox is an organized place to get things done and get back to what matters (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "support",
+      "title": "Google Support individual toolbar icon:",
+      "description": "Get support on all Google products (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "account",
+      "title": "Google My Account individual toolbar icon:",
+      "description": "My Account gives you quick access to settings and tools for managing your Google experience (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "admob",
+      "title": "Google AdMob individual toolbar icon:",
+      "description": "Learn how to grow your app business with AdMob tools designed to help you with app monetization (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "store",
+      "title": "Google Store individual toolbar icon:",
+      "description": "Shop at the Google Store for Android phones, tablets, plus a selection of accessories (restart required).",
       "type": "bool",
       "value": false
     }

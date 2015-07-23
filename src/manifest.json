@@ -1,26 +1,30 @@
 {
   "name": "Shortcuts for Google™ Products",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "manifest_version": 2,
   "short_name": "igshortcuts",
-  "description": "Display all Google services as a single space-saving dropdown panel.",
-  "author": "Sarah Avilov",
+  "description": "Display all Google services in a single space-saving drop-down panel",
   "permissions": [
+    "tabs",
     "storage",
-    "tabs", 
     "<all_urls>"
   ],
   "browser_action": {
-    "default_icon": "data/icon16.png",
+    "default_icon": {
+      "16": "data/icon16.png",
+      "32": "data/icon32.png"
+    },
     "default_popup": "data/popup/popup.html",
     "default_title": "Shortcuts for Google™ Products"
   },
   "background": {
-    "scripts": ["lib/chrome/task.js", "lib/chrome/chrome.js", "lib/common.js"]
+    "page": "lib/chrome/background.html"
   },
   "icons": {
     "16": "data/icon16.png",
+    "32": "data/icon32.png",
     "48": "data/icon48.png",
-    "128": "data/icon128.png" 
+    "64": "data/icon64.png",
+    "128": "data/icon128.png"
   }
 }

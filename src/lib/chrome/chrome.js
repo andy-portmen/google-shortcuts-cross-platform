@@ -1,24 +1,38 @@
 var _chrome = {
-  storage: {
-    read: function (id) {
-      return localStorage[id] || null;
-    },
-    write: function (id, data) {
-      localStorage[id] = data + "";
+  storage: (function () {
+    var objs = {};
+    chrome.storage.local.get(null, function (o) {
+      objs = o;
+      document.getElementById("common").src = "../common.js";
+    });
+    return {
+      read : function (id) {
+        return objs[id];
+      },
+      write : function (id, data) {
+        objs[id] = data;
+        var tmp = {};
+        tmp[id] = data;
+        chrome.storage.local.set(tmp, function () {});
+      }
     }
-  },
+  })(),
+  
   popup: {
     send: function (id, data) {
-      chrome.extension.sendRequest({method: id, data: data});
+      chrome.runtime.sendMessage({path: 'background-to-popup', method: id, data: data});
     },
     receive: function (id, callback) {
-      chrome.extension.onRequest.addListener(function(request, sender, callback2) {
-        if (request.method == id && !sender.tab) {
-          callback(request.data);
+      chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+        if (request.path == 'popup-to-background') {
+          if (request.method == id) {
+            callback(request.data);
+          }
         }
       });
     }
   },
+  
   tab: {
     open: function (url, inBackground, inCurrent) {
       if (inCurrent) {   
@@ -30,11 +44,9 @@ var _chrome = {
           active: typeof inBackground == 'undefined' ? true : !inBackground
         });
       }
-    },
-    openOptions: function () {
-      chrome.tabs.create({url: "./data/chrome/options/options.html"});
     }
   },
+  
   version: function () {
     return chrome[chrome.runtime && chrome.runtime.getManifest ? "runtime" : "extension"].getManifest().version;
   }

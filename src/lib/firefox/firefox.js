@@ -10,13 +10,13 @@ var self          = require("sdk/self"),
     tabs          = require("sdk/tabs"),
     {Cc, Ci, Cu}  = require('chrome'),
     windows          = {
-      get active () { // Chrome window
+      get active () { /* Chrome window */
         return require('sdk/window/utils').getMostRecentBrowserWindow()
       }
     };
-    
+
 Cu.import("resource://gre/modules/Promise.jsm");
- 
+
 var button = buttons.ActionButton({
   id: "igshortcuts",
   label: "Shortcuts for Google™ Products",
@@ -41,12 +41,18 @@ var popup = require("sdk/panel").Panel({
 popup.on('show', function() {
   popup.port.emit('show', true);
 });
-popup.port.on("resize", function(obj) {
+popup.on('hide', function() {
+  popup.port.emit('hide', true);
+});
+popup.port.on('resize', function(obj) {
   var padding = 0;
   var isMozilla = system.vendor.indexOf('Mozilla') != -1;
   var isDarwin = system.platform.indexOf('darwin') != -1;
   if (isMozilla && isDarwin) padding = 2;
   popup.resize(obj.w + padding, obj.h + padding);
+});
+popup.port.on('close-panel', function () {
+  popup.hide();
 });
 
 exports.storage = {
@@ -95,8 +101,6 @@ exports.version = function () {
 }
 
 exports.window = require('sdk/window/utils').getMostRecentBrowserWindow();
-exports.Promise = Promise;
-exports.Deferred = Promise.defer;
 
 /**************************************************************************************************/
 
@@ -255,7 +259,7 @@ var icons = [
     label: "Google Trends",
     icon: "trends",
     url: 'https://www.google.com/trends/'
-  }, 
+  },
   {
     label: "Google Wallet",
     icon: "wallet",
@@ -425,7 +429,7 @@ var icons = [
     label: "Google Business",
     icon: "business",
     url: 'https://www.google.com/business/'
-  }, 
+  },
   {
     label: "Google Compute Engine",
     icon: "computeengine",
@@ -520,6 +524,81 @@ var icons = [
     label: "Google Maps Engine",
     icon: "mapsengine",
     url: 'https://mapsengine.google.com/map/'
+  },
+  {
+    label: "Google Chrome",
+    icon: "chrome",
+    url: 'https://www.google.com/chrome/'
+  },
+  {
+    label: "Google Slides",
+    icon: "slides",
+    url: 'https://docs.google.com/presentation/'
+  },
+  {
+    label: "Google Sheets",
+    icon: "sheets",
+    url: 'https://docs.google.com/spreadsheets/'
+  },
+  {
+    label: "Google Privacy Checkup",
+    icon: "privacy",
+    url: 'https://myaccount.google.com/privacycheckup/'
+  },
+  {
+    label: "Google Admin",
+    icon: "admin",
+    url: 'https://admin.google.com/'
+  },
+  {
+    label: "Google Apps for Works",
+    icon: "apps",
+    url: 'https://www.google.com/work/apps/business/'
+  },
+  {
+    label: "Google Flights",
+    icon: "flights",
+    url: 'https://www.google.com/flights/'
+  },
+  {
+    label: "Google Domains",
+    icon: "domains",
+    url: 'https://domains.google.com/'
+  },
+  {
+    label: "Google Security Checkup",
+    icon: "security",
+    url: 'https://myaccount.google.com/security/'
+  },
+  {
+    label: "Google Drawings",
+    icon: "drawings",
+    url: 'https://docs.google.com/drawings/'
+  },
+  {
+    label: "Google Inbox",
+    icon: "inbox",
+    url: 'https://inbox.google.com/'
+  },
+  {
+    label: "Google Support",
+    icon: "support",
+    url: 'https://support.google.com/'
+  },
+  {
+    label: "Google My Account",
+    icon: "account",
+    url: 'https://myaccount.google.com/'
+  },
+  {
+    label: "Google AdMob",
+    icon: "admob",
+    url: 'https://www.google.com/admob/'
+  },
+  {
+    label: "Google Store",
+    icon: "store",
+    url: 'https://store.google.com/'
   }
 ];
 
@@ -532,7 +611,18 @@ icons.forEach(function (obj) {
         "16": "./firefox/toolbar/" + obj.icon + ".png"
       },
       onClick: function (state) {
-        tabs.open(obj.url);
+        if (prefs.individualAction == 0) {
+          tabs.open(obj.url);
+        }
+        if (prefs.individualAction == 1) {
+          tabs.open({
+            url: obj.url,
+            inBackground: true
+          });
+        }
+        if (prefs.individualAction == 2) {
+          tabs.activeTab.url = obj.url;
+        }
       }
     });
   }

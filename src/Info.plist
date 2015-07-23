@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>Author</key>
-	<string>Mike Avilov</string>
+	<string>Andy Portmen</string>
 	<key>Builder Version</key>
-	<string>9537.78.2</string>
+	<string>10600.7.12</string>
 	<key>CFBundleDisplayName</key>
 	<string>Shortcuts for Google™ Products</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.3</string>
+	<string>1.1.4</string>
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>Chrome</key>
@@ -54,6 +54,8 @@
 	</dict>
 	<key>Description</key>
 	<string>Display all Google services as a single space-saving dropdown panel.</string>
+	<key>DeveloperIdentifier</key>
+	<string>2F69STTEPB</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>

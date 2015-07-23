@@ -1,10 +1,10 @@
 var _safari = {
   storage: {
     read: function (id) {
-      return localStorage[id] || null;
+      return safari.extension.settings[id] || null;
     },
     write: function (id, data) {
-      localStorage[id] = data + "";
+      safari.extension.settings[id] = data + '';
     }
   },
 
@@ -27,7 +27,7 @@ var _safari = {
 
   tab: {
     open: function (url, inBackground, inCurrent) {
-      if (inCurrent) {   
+      if (inCurrent) {
         safari.application.activeBrowserWindow.activeTab.url = url;
       }
       else {
