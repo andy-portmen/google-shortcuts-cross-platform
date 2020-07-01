@@ -28,7 +28,7 @@ var backupTypes = ['android', 'bookmarks', 'feedburner', 'fusion', 'offers', 'ur
                    'webhistory', 'webmaster', 'chromebook', 'chromium', 'cloudeplatform', 'contacts', 
                    'correlate', 'currents', 'developersdashboard', 'inputtool', 'ideas', 'mars', 
                    'sky', 'transit', 'webpagetest', 'wdyl', 'adwords', 'adsense', 
-                   'image', 'mobile', 'earth', 'panoramio', 'site', 'hotel',
+                   'image', 'meet', 'mobile', 'earth', 'panoramio', 'site', 'hotel',
                    'finance', 'code', 'scholar', 'patent', 'trends', 'sketchup', 
                    'video', 'voice', 'catalogs', 'authenticator', 'business', 'computeengine',
                    'coordinate', 'earthengine', 'fonts', 'forms', 'glass', 'goggles',
@@ -146,6 +146,9 @@ popup.receive('open-tab-request', function (obj) {
     break;
   case 'maps':
     tab.open('https://www.google.com/maps/', obj.inBackground, !obj.inBackground);
+    break;
+  case 'meet':
+    tab.open('https://meet.google.com/', obj.inBackground, !obj.inBackground);
     break;
   case 'mobile':
     tab.open('https://www.google.com/mobile/', obj.inBackground, !obj.inBackground);

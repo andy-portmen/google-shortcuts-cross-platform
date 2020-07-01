@@ -124,6 +124,7 @@ Titles['security'] = 'Google Security Checkup';         Titles['docs'] = 'Google
 Titles['drawings'] = 'Google Drawings';                 Titles['inbox'] = 'Inbox by Gmail';
 Titles['support'] = 'Google Support';                   Titles['account'] = 'Google My Account';
 Titles['admob'] = 'Google AdMob';                       Titles['store'] = 'Google Store';
+Titles['meet'] = 'Google Meet';                         Titles[''] = '';
 Titles[''] = '';                                        Titles['emptyCell'] = '';
 
 function init(data, name) {

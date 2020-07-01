@@ -134,6 +134,13 @@
       "value": false
     },
     {
+      "name": "meet",
+      "title": "Google meet individual toolbar icon:",
+      "description": "Real-time meetings by Google (restart required).",
+      "type": "bool",
+      "value": false
+    },
+    {
       "name": "mobile",
       "title": "Google Mobile individual toolbar icon:",
       "description": "Get Google products on your mobile phone (restart required).",
